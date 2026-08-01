@@ -1,0 +1,12 @@
+# Secrets — mai committare (vedi briefing "Vincoli")
+.env
+.env.*
+!.env.example
+
+# Artefatti di deploy generati dagli script
+payload.json
+backup-home-*.json
+
+# Sistema
+.DS_Store
+*.log
