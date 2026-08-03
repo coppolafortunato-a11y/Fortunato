@@ -10,6 +10,7 @@ ma la home pubblica usa solo i dati indicati come "pubblici".
 - Telefono / WhatsApp: 320 611 6711  (+39 320 611 6711)
 - Email: coppola.fortunato@gmail.com
 - P.IVA: 02520960804
+- Orari: Lun–Ven 9:00–18:00 · Sab 9:00–13:00
 
 ## Dati fiscali (NON in home — solo per fatture/adempimenti)
 - PEC: coppola.fortunato@pec.it

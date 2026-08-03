@@ -14,6 +14,22 @@ Password applicazione dedicata). Sito verificato online dopo ogni passo.
 | 3.3 | Footer con dati reali, sfondo #0f1d3f | sostituito template part `footer` | ✓ aggiornato |
 | 3.4 | Permalink | verificati vs slug reali; corretto `/ledwall-digital-signage/` → `/ledwall/` (era 404) | ✓ corretti |
 
+## Aggiornamento — restyle di tutte le pagine interne
+
+Tutte le pagine ridisegnate con lo stile della home (navy/oro, Instrument
+Serif + Manrope, niente emoji), contenuti reali mantenuti:
+
+| Pagina | ID | Preservato |
+|--------|----|-----------|
+| Servizi | 10 | 7 aree di servizio con elenchi |
+| LEDWALL & Digital Signage | 12 | prodotti, Grenke, CTA calcolatore |
+| Chi Siamo | 14 | missione, valori, numeri |
+| Contatti | 16 | **form email funzionante**, orari, dati fiscali |
+| Preventivi LEDWALL | 27 | **calcolatore JS intatto** (prezzi, coeff. Grenke) |
+
+Sorgenti generati in `wp-pages/*.html`, builder in `scripts/build-pages.py`.
+Backup pre-restyle in `backup-*.json` / scratchpad di sessione.
+
 ## Contenuti reali usati (fonte: ideamarketing.me)
 - Clienti in "Ci hanno scelto" e "Risultati recenti": Torrefazione Due Zero,
   Mamas, Pilone by Rare, Barber Srl (con i loro risultati reali).
