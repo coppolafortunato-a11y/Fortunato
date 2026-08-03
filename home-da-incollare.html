@@ -1,0 +1,240 @@
+<!-- wp:html -->
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#ik-home{--navy:#1E2235;--gold:#C9A961;--paper:#f8f7f4;--rule:#e0ddd6;--muted:#6b6b73;font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1E2235;line-height:1.6;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);overflow-x:hidden}
+#ik-home *{box-sizing:border-box}
+#ik-home p,#ik-home h2,#ik-home h3{margin:0}
+#ik-home a{color:inherit;text-decoration:none}
+#ik-home .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+#ik-home .ph{position:relative;background:repeating-linear-gradient(135deg,#eceae4,#eceae4 10px,#e4e1d9 10px,#e4e1d9 20px);display:flex;align-items:center;justify-content:center;color:#9a978d;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;text-align:center;padding:12px}
+#ik-home .tag-todo{display:inline-block;background:#fff3d6;color:#7a5c11;border:1px solid #e6cf95;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:3px;margin-bottom:14px}
+#ik-home .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:22px}
+#ik-home .btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;padding:13px 24px;border-radius:3px;transition:transform .18s ease,background .2s ease;white-space:nowrap}
+#ik-home .btn--gold{background:var(--gold);color:#33270a}
+#ik-home .btn--gold:hover{background:#d8ba73;transform:translateY(-2px)}
+#ik-home .btn--ghost{border:1px solid rgba(255,255,255,.45);color:#fff}
+#ik-home .btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+#ik-home .btn--wa{background:#25D366;color:#083b1c}
+#ik-home .btn--wa:hover{background:#38e07a;transform:translateY(-2px)}
+#ik-home .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+#ik-home .hero::after{content:'';position:absolute;right:-140px;top:-140px;width:460px;height:460px;border:1px solid rgba(201,169,97,.16);border-radius:50%}
+#ik-home .hero::before{content:'';position:absolute;right:-40px;top:60px;width:280px;height:280px;border:1px solid rgba(201,169,97,.1);border-radius:50%}
+#ik-home .hero .wrap{padding-top:96px;position:relative;z-index:1}
+#ik-home .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,5.6vw,68px);line-height:1.08;letter-spacing:-.02em;max-width:16ch;margin-bottom:22px;color:#fff}
+#ik-home .hero h1 em{font-style:italic;color:var(--gold)}
+#ik-home .hero .lead{font-size:18px;line-height:1.65;color:rgba(255,255,255,.68);max-width:52ch;margin-bottom:36px}
+#ik-home .hero__actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:80px}
+#ik-home .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.12);padding:34px 0 42px}
+#ik-home .stats div{padding-right:20px}
+#ik-home .stats .n{font-family:'Instrument Serif',serif;font-size:44px;line-height:1;color:var(--gold);margin-bottom:8px}
+#ik-home .stats .l{font-size:13px;color:rgba(255,255,255,.55);line-height:1.4}
+#ik-home .clients{background:#fff;border-bottom:1px solid var(--rule)}
+#ik-home .clients .wrap{padding-top:34px;padding-bottom:34px}
+#ik-home .clients__label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a3a099;font-weight:700;text-align:center;margin-bottom:24px}
+#ik-home .clients__row{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;align-items:center}
+#ik-home .clients__row .ph{height:46px;font-size:11px}
+#ik-home .services{background:var(--paper)}
+#ik-home .services .wrap{padding-top:88px;padding-bottom:88px}
+#ik-home .sec-head{margin-bottom:48px;max-width:60ch}
+#ik-home .sec-head h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.8vw,44px);line-height:1.14;letter-spacing:-.02em;margin-bottom:14px}
+#ik-home .sec-head p{color:var(--muted);font-size:16px;max-width:52ch}
+#ik-home .grid8{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+#ik-home .card{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:30px 26px 26px;min-height:216px;display:flex;flex-direction:column;transition:background .25s ease}
+#ik-home .card:hover{background:#fff}
+#ik-home .card .num{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--gold);margin-bottom:22px}
+#ik-home .card h3{font-size:17px;font-weight:600;line-height:1.3;margin-bottom:10px;letter-spacing:-.01em}
+#ik-home .card p{font-size:14px;color:var(--muted);line-height:1.6}
+#ik-home .card .arrow{margin-top:auto;align-self:flex-end;font-size:19px;color:#c4c1b9;transition:color .2s ease,transform .2s ease}
+#ik-home .card:hover .arrow{color:var(--gold);transform:translateX(4px)}
+#ik-home .card--flag{background:var(--navy);color:#fff}
+#ik-home .card--flag:hover{background:#262b42}
+#ik-home .card--flag p{color:rgba(255,255,255,.6)}
+#ik-home .card--flag .arrow{color:rgba(255,255,255,.4)}
+#ik-home .ledwall{background:#171a2a;color:#fff}
+#ik-home .ledwall .wrap{padding-top:88px;padding-bottom:88px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+#ik-home .ledwall h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.8vw,44px);line-height:1.14;margin-bottom:18px;letter-spacing:-.02em;color:#fff}
+#ik-home .ledwall h2 em{font-style:italic;color:var(--gold)}
+#ik-home .ledwall p{color:rgba(255,255,255,.66);font-size:16px;margin-bottom:26px;max-width:46ch}
+#ik-home .pills{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px}
+#ik-home .pill{border:1px solid rgba(201,169,97,.42);color:var(--gold);font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:100px}
+#ik-home .led{aspect-ratio:16/9;border-radius:6px;padding:12px;background:#0c0e18;border:1px solid rgba(255,255,255,.09)}
+#ik-home .led__screen{width:100%;height:100%;border-radius:3px;background-image:radial-gradient(circle,rgba(201,169,97,.55) 1px,transparent 1.6px);background-size:7px 7px;background-color:#12162a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
+#ik-home .led__screen strong{font-family:'Instrument Serif',serif;font-size:clamp(22px,3vw,34px);font-weight:400;color:#fff;letter-spacing:.02em}
+#ik-home .led__screen span{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700}
+#ik-home .portfolio{background:var(--paper)}
+#ik-home .portfolio .wrap{padding-top:88px;padding-bottom:88px}
+#ik-home .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+#ik-home .work{background:#fff;border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:transform .22s ease}
+#ik-home .work:hover{transform:translateY(-4px)}
+#ik-home .work .ph{aspect-ratio:4/3}
+#ik-home .work__body{padding:22px 22px 24px}
+#ik-home .work__cat{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
+#ik-home .work h3{font-size:17px;font-weight:600;margin-bottom:7px}
+#ik-home .work p{font-size:14px;color:var(--muted)}
+#ik-home .quotes{background:#fff;border-top:1px solid var(--rule)}
+#ik-home .quotes .wrap{padding-top:88px;padding-bottom:88px}
+#ik-home .quote{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:28px 26px;display:flex;flex-direction:column}
+#ik-home .quote .stars{color:var(--gold);font-size:14px;letter-spacing:3px;margin-bottom:16px}
+#ik-home .quote .txt{font-family:'Instrument Serif',serif;font-style:italic;font-size:19px;line-height:1.5;color:#3a3d4d;margin-bottom:24px;flex:1}
+#ik-home .quote__who{display:flex;align-items:center;gap:13px;border-top:1px solid var(--rule);padding-top:18px}
+#ik-home .avatar{width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+#ik-home .quote__who .nm{font-size:14px;font-weight:600;line-height:1.35}
+#ik-home .quote__who .rl{font-size:13px;color:var(--muted);line-height:1.35}
+#ik-home .cta{background:var(--navy);color:#fff;text-align:center}
+#ik-home .cta .wrap{padding-top:84px;padding-bottom:84px}
+#ik-home .cta h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,4.2vw,48px);line-height:1.14;margin-bottom:16px;letter-spacing:-.02em;color:#fff}
+#ik-home .cta h2 em{font-style:italic;color:var(--gold)}
+#ik-home .cta .sub{color:rgba(255,255,255,.66);font-size:17px;margin-bottom:34px}
+#ik-home .cta__actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+#ik-home .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+#ik-home .reveal.in{opacity:1;transform:none}
+@media (max-width:1000px){
+#ik-home .grid8{grid-template-columns:repeat(2,1fr)}
+#ik-home .ledwall .wrap{grid-template-columns:1fr;gap:40px}
+#ik-home .cards3{grid-template-columns:1fr}
+#ik-home .clients__row{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+#ik-home .grid8{grid-template-columns:1fr}
+#ik-home .stats{grid-template-columns:repeat(2,1fr);gap:26px}
+#ik-home .hero .wrap{padding-top:60px}
+#ik-home .hero__actions{margin-bottom:52px}
+}
+@media (prefers-reduced-motion:reduce){
+#ik-home *{transition:none!important}
+#ik-home .reveal{opacity:1;transform:none}
+}
+#ik-home a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+
+<div id="ik-home">
+
+<section class="hero">
+	<div class="wrap">
+		<p class="eyebrow">Agenzia di comunicazione dal 2011</p>
+		<h1>Diamo forma alla tua <em>immagine</em>.</h1>
+		<p class="lead">Stampa, insegne, siti web e ledwall per le aziende di Reggio Calabria. Un solo interlocutore dal progetto grafico all'installazione.</p>
+		<div class="hero__actions">
+			<a href="/contatti/" class="btn btn--gold">Chiedi un preventivo</a>
+			<a href="#ik-servizi" class="btn btn--ghost">Vedi i servizi</a>
+		</div>
+		<div class="stats">
+			<div><p class="n">15+</p><p class="l">anni di attività</p></div>
+			<div><p class="n">200+</p><p class="l">clienti seguiti</p></div>
+			<div><p class="n">500+</p><p class="l">progetti realizzati</p></div>
+			<div><p class="n">8</p><p class="l">servizi sotto lo stesso tetto</p></div>
+		</div>
+	</div>
+</section>
+
+<section class="clients">
+	<div class="wrap">
+		<p class="clients__label">Ci hanno scelto</p>
+		<div class="clients__row">
+			<div class="ph">Torrefazione Due Zero</div><div class="ph">Mamas</div><div class="ph">Pilone by Rare</div>
+			<div class="ph">Barber Srl</div><div class="ph">Il tuo logo</div><div class="ph">Il tuo logo</div>
+		</div>
+	</div>
+</section>
+
+<section class="services" id="ik-servizi">
+	<div class="wrap">
+		<div class="sec-head reveal">
+			<h2>Tutto quello che serve alla tua comunicazione</h2>
+			<p>Dalla grafica alla posa in opera, senza passare da tre fornitori diversi.</p>
+		</div>
+		<div class="grid8 reveal">
+			<a class="card" href="/servizi/"><p class="num">01</p><h3>Stampa digitale e grande formato</h3><p>Striscioni, poster, pannelli, vetrofanie e allestimenti fino a grandi dimensioni.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">02</p><h3>Insegne e segnaletica</h3><p>Insegne luminose, totem, lettere scatolate e targhe, con sopralluogo e installazione.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">03</p><h3>Grafica e brand identity</h3><p>Logo, immagine coordinata, menu e cataloghi curati fino all'ultimo dettaglio.</p><span class="arrow">&rarr;</span></a>
+			<a class="card card--flag" href="/ledwall/"><p class="num">04</p><h3>Ledwall e digital signage</h3><p>Schermi led indoor e outdoor, vendita o noleggio con canone mensile.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">05</p><h3>Siti web ed e-commerce</h3><p>Siti veloci e curati, negozi online e menu digitali pronti da usare.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">06</p><h3>Social e advertising</h3><p>Gestione delle pagine, contenuti e campagne su Meta e Google.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">07</p><h3>Etichette e packaging</h3><p>Etichette adesive personalizzate, anche in piccole tirature e private label.</p><span class="arrow">&rarr;</span></a>
+			<a class="card" href="/servizi/"><p class="num">08</p><h3>Gadget e abbigliamento</h3><p>Personalizzazione di magliette, cappellini e oggettistica promozionale.</p><span class="arrow">&rarr;</span></a>
+		</div>
+	</div>
+</section>
+
+<section class="ledwall">
+	<div class="wrap">
+		<div class="reveal">
+			<p class="eyebrow">Il nostro fiore all'occhiello</p>
+			<h2>Ledwall che si vedono <em>da lontano</em>.</h2>
+			<p>Progettiamo, installiamo e assistiamo schermi led per negozi, concessionarie, palestre e piazze. Puoi acquistarlo o prenderlo a noleggio con canone mensile e assistenza inclusa.</p>
+			<div class="pills">
+				<span class="pill">Pixel pitch P2 &ndash; P10</span>
+				<span class="pill">Indoor e outdoor</span>
+				<span class="pill">Controllo Novastar</span>
+				<span class="pill">Noleggio Grenke</span>
+				<span class="pill">Installazione e assistenza</span>
+			</div>
+			<a href="/preventivi-ledwall/" class="btn btn--gold">Calcola il tuo ledwall</a>
+		</div>
+		<div class="led reveal">
+			<div class="led__screen">
+				<span>Idea Marketing</span>
+				<strong>Il tuo messaggio, acceso</strong>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="portfolio">
+	<div class="wrap">
+		<div class="sec-head reveal">
+			<h2>Risultati recenti</h2>
+			<p>Numeri concreti ottenuti per i nostri clienti a Reggio Calabria e dintorni.</p>
+		</div>
+		<div class="cards3 reveal">
+			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Ristorazione</p><h3>Pilone by Rare</h3><p>Prenotazioni raddoppiate con social e campagne mirate.</p></div></a>
+			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Barber shop</p><h3>Barber Srl</h3><p>+50% di prenotazioni online in pochi mesi.</p></div></a>
+			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Food &amp; beverage</p><h3>Torrefazione Due Zero</h3><p>+40% di clienti abituali con contenuti e fidelizzazione.</p></div></a>
+		</div>
+	</div>
+</section>
+
+<section class="quotes">
+	<div class="wrap">
+		<div class="sec-head reveal">
+			<h2>Perché sceglierci</h2>
+			<p>Un partner solo, dalla strategia alla posa in opera.</p>
+		</div>
+		<div class="cards3 reveal">
+			<div class="quote"><p class="txt">Un unico interlocutore dal progetto grafico all'installazione: meno passaggi, meno errori, tempi più corti.</p><div class="quote__who"><span class="avatar">1</span><div><p class="nm">Un solo referente</p><p class="rl">Grafica, stampa, posa e web</p></div></div></div>
+			<div class="quote"><p class="txt">Sul territorio dal 2011: conosciamo Reggio Calabria, i suoi tempi e le sue esigenze, online e offline.</p><div class="quote__who"><span class="avatar">2</span><div><p class="nm">Esperienza locale</p><p class="rl">Reggio Calabria dal 2011</p></div></div></div>
+			<div class="quote"><p class="txt">Ci racconti il progetto e ti diamo un prezzo chiaro, di solito entro 24 ore e senza impegno.</p><div class="quote__who"><span class="avatar">3</span><div><p class="nm">Preventivo veloce</p><p class="rl">Gratuito, entro 24 ore</p></div></div></div>
+		</div>
+	</div>
+</section>
+
+<section class="cta">
+	<div class="wrap">
+		<h2>Raccontaci il progetto, ti diamo <em>un prezzo</em>.</h2>
+		<p class="sub">Preventivo gratuito, di solito entro 24 ore.</p>
+		<div class="cta__actions">
+			<a href="mailto:coppola.fortunato@gmail.com" class="btn btn--gold">Scrivici una mail</a>
+			<a href="https://wa.me/393206116711" class="btn btn--wa">Scrivici su WhatsApp</a>
+		</div>
+	</div>
+</section>
+
+</div>
+
+<script>
+(function(){
+	var root = document.getElementById('ik-home');
+	if(!root) return;
+	var els = root.querySelectorAll('.reveal');
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+		els.forEach(function(el){ el.classList.add('in'); });
+		return;
+	}
+	var io = new IntersectionObserver(function(entries){
+		entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+	}, {threshold:0.12});
+	els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- /wp:html -->
