@@ -5,7 +5,9 @@
 
 # Artefatti di deploy generati dagli script
 payload.json
-backup-home-*.json
+menu-payload.json
+part-payload.json
+backup-*.json
 
 # Sistema
 .DS_Store
