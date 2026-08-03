@@ -35,8 +35,15 @@ Vanno usati con l'etichetta giusta, non sotto categorie fisiche.
 - Pilone by Rare — prenotazioni raddoppiate
 - Barber Srl — +50% prenotazioni online
 
-## Da recuperare (mancano su ideamarketing.me)
-- Orari di apertura
-- Link social (Facebook, Instagram)
-- Foto reali dei lavori (insegne, ledwall, allestimenti) per il portfolio
-- Recensioni nominative (nome, ruolo, azienda) per la sezione testimonianze
+## Stato home (aggiornato 2026-08-03)
+- "Ci hanno scelto": 4 clienti reali + 2 slot liberi ("Il tuo logo").
+- "Risultati recenti": 3 casi reali con numeri veri (Pilone, Barber, Torrefazione).
+- "Perché sceglierci": 3 punti di forza reali (interlocutore unico, dal 2011,
+  preventivo 24h) al posto delle recensioni finte.
+
+## Migliorie future (opzionali, quando disponibili)
+- Loghi immagine dei clienti al posto del testo nella riga "Ci hanno scelto".
+- Foto reali dei lavori (insegne, ledwall, allestimenti).
+- Recensioni Google/WhatsApp vere (nome, ruolo, azienda): allora si puo'
+  rimettere una sezione testimonianze con virgolette reali.
+- Orari di apertura e link social (Facebook, Instagram).
