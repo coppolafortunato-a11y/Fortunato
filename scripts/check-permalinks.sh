@@ -21,11 +21,11 @@ curl -s "$WP_BASE/wp-json/wp/v2/pages?per_page=50&_fields=id,slug,title" \
 
 cat <<'NOTE'
 
-Href usati nella home (da confrontare con gli slug qui sopra):
-  /contatti/
-  /servizi/
-  /ledwall-digital-signage/
-  /preventivi-ledwall/
+Href usati nella home (verificati contro gli slug reali il 2026-08-03):
+  /contatti/             -> contatti (ID 16)            ok
+  /servizi/              -> servizi (ID 10)             ok
+  /ledwall/              -> ledwall (ID 12)             ok (era /ledwall-digital-signage/, corretto)
+  /preventivi-ledwall/   -> preventivi-ledwall (ID 27)  ok
   #ik-servizi            (ancora interna, ok)
 
 Se uno slug non combacia, correggi l'href in home-wordpress.html

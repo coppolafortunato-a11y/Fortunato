@@ -111,15 +111,20 @@ Queste vanno fatte a mano perché toccano tema, menu e footer:
 3. **Footer** — sostituisci "My WordPress Blog" con i dati veri:
    Idea Marketing di Coppola Fortunato, Via Campoli 34, 89134 Reggio Calabria,
    tel 320 611 6711, P.IVA 02520960804 — sfondo `#0f1d3f`.
-4. **Permalink** — verifica gli slug reali:
+4. **Permalink** — già verificati contro il sito live il 2026-08-03:
+
+   | href nella home | slug reale | esito |
+   |-----------------|------------|-------|
+   | `/contatti/` | contatti (ID 16) | ok |
+   | `/servizi/` | servizi (ID 10) | ok |
+   | `/ledwall/` | ledwall (ID 12) | corretto (era `/ledwall-digital-signage/`, andava in 404) |
+   | `/preventivi-ledwall/` | preventivi-ledwall (ID 27) | ok |
+
+   Per ricontrollarli in futuro:
 
    ```bash
    ./scripts/check-permalinks.sh
    ```
-
-   Se `/contatti/`, `/servizi/`, `/ledwall-digital-signage/`,
-   `/preventivi-ledwall/` non combaciano, correggi gli href in
-   `home-wordpress.html` e rilancia `deploy-home.sh`.
 
 ## Vincoli (dal briefing)
 
