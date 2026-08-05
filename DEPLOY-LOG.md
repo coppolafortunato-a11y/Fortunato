@@ -30,6 +30,21 @@ Serif + Manrope, niente emoji), contenuti reali mantenuti:
 Sorgenti generati in `wp-pages/*.html`, builder in `scripts/build-pages.py`.
 Backup pre-restyle in `backup-*.json` / scratchpad di sessione.
 
+## Aggiornamento — logo, favicon, motto, correzioni
+
+- **Logo** (da ideamarketing.me) caricato in media (#56) e messo nell'header
+  al posto del titolo testuale, su tutte le pagine. Copia in `assets/`.
+- **Favicon** ricavata dal monogramma del logo (512x512), impostata come
+  site_icon (#58). Copia in `assets/`.
+- **Motto sito** corretto: era ancora "My WordPress Blog" → ora
+  "Agenzia di comunicazione a Reggio Calabria — stampa, insegne, ledwall, siti web".
+- **Corsivi** (Instrument Serif italico) rimossi da tutto il sito.
+- **Chi Siamo**: aggiunta sezione "Il fondatore" (bio + spazio foto).
+
+Nota: le altre immagini su ideamarketing.me (1/2/3/4-1/5) sono foto STOCK
+generiche (codice, laptop), non lavori reali: NON usate come portfolio per
+non ingannare. Servono foto vere dei lavori dal cliente.
+
 ## Contenuti reali usati (fonte: ideamarketing.me)
 - Clienti in "Ci hanno scelto" e "Risultati recenti": Torrefazione Due Zero,
   Mamas, Pilone by Rare, Barber Srl (con i loro risultati reali).
