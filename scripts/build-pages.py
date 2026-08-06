@@ -71,6 +71,8 @@ CSS = """<style>
 #ik-page .founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
 #ik-page .founder-photo .ph{width:100%;height:100%;background:repeating-linear-gradient(135deg,#eceae4,#eceae4 10px,#e4e1d9 10px,#e4e1d9 20px);display:flex;align-items:center;justify-content:center;color:#9a978d;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;text-align:center;padding:14px}
 #ik-page .sign{font-family:'Instrument Serif',serif;font-size:22px;color:var(--navy);margin-top:18px}
+#ik-page .founder-block{max-width:780px;border-left:3px solid var(--gold);padding-left:30px}
+#ik-page .founder-block .eyebrow{margin-bottom:12px}
 #ik-page .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start}
 #ik-page .info-row{padding:14px 0;border-bottom:1px solid var(--rule)}
 #ik-page .info-row .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
@@ -179,13 +181,12 @@ body = (hero("Chi siamo","Un partner per la tua <em>crescita</em>.",
         + '<section><div class="wrap" style="max-width:820px"><h2>La nostra missione</h2>'
           '<p class="lead-p">Crediamo che ogni azienda meriti una comunicazione professionale ed efficace.</p>'
           '<p class="body-p">La nostra missione è rendere accessibile il marketing strategico alle imprese del Sud Italia, aiutandole a crescere, competere e affermarsi sul mercato. Affianchiamo imprenditori, professionisti e aziende del territorio calabrese e non solo, con soluzioni integrate di marketing, comunicazione e digital transformation.</p></div></section>'
-        + '<section class="alt"><div class="wrap"><div class="founder-grid">'
-          '<div class="founder-photo"><div class="ph">Foto di<br>Fortunato Coppola<br>(in arrivo)</div></div>'
-          '<div><p class="eyebrow">Il fondatore</p><h2>Fortunato Coppola</h2>'
+        + '<section class="alt"><div class="wrap founder-block">'
+          '<p class="eyebrow">Il fondatore</p><h2>Fortunato Coppola</h2>'
           '<p class="lead-p">Mi chiamo Fortunato Coppola e ho fondato Idea Marketing con un\'idea semplice: dare alle imprese del territorio una comunicazione curata e professionale, senza doversi rivolgere a tre fornitori diversi.</p>'
-          '<p class="body-p">Da allora seguo personalmente ogni progetto: dalla strategia alla grafica, dalla stampa ai ledwall, dai social ai siti web. Ci metto rapporto diretto, parola data e lavoro fatto bene, con un obiettivo che non cambia mai — risultati concreti e misurabili. Se hai un progetto in mente, mi trovi qui a Reggio Calabria, in Via Campoli 34.</p>'
+          '<p class="body-p">Da allora seguo personalmente ogni progetto: dalla strategia alla grafica, dalla stampa ai ledwall, dai social ai siti web. Ci metto rapporto diretto, parola data e lavoro fatto bene, con un obiettivo che non cambia mai: risultati concreti e misurabili. Se hai un progetto in mente, mi trovi qui a Reggio Calabria, in Via Campoli 34.</p>'
           '<p class="sign">Fortunato Coppola</p>'
-          '</div></div></div></section>'
+          '</div></section>'
         + f'<section><div class="wrap"><h2>I nostri valori</h2><p class="sec-lead">Come lavoriamo, ogni giorno.</p><div class="cards3">{cardset(valori)}</div></div></section>'
         + f'<section class="navy"><div class="wrap"><h2>I numeri di <em>Idea Marketing</em></h2><div class="stats" style="margin-top:26px">{stat_html}</div></div></section>'
         + cta("Vuoi lavorare con <em>noi</em>?","Raccontaci il tuo progetto: ti rispondiamo di solito entro 24 ore.",
