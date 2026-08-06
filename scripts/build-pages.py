@@ -26,6 +26,10 @@ CSS = """<style>
 #ik-page .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 18px;max-width:22ch}
 #ik-page .hero h1 em{font-style:normal;color:var(--gold)}
 #ik-page .hero .lead{font-size:18px;color:rgba(255,255,255,.7);max-width:58ch;line-height:1.6}
+#ik-page .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+#ik-page .hero-img{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.14);aspect-ratio:4/3;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#ik-page .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+#ik-page .map-embed{display:block;width:100%;height:380px;border:0;filter:grayscale(.2)}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
 #ik-page .navy{background:var(--navy);color:#fff}
@@ -75,14 +79,19 @@ CSS = """<style>
 #ik-page form.ik-form input,#ik-page form.ik-form textarea{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff}
 #ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
 #ik-page form.ik-form button{align-self:flex-start}
-@media (max-width:820px){#ik-page .grid2,#ik-page .cards3,#ik-page .contact-grid,#ik-page .founder-grid{grid-template-columns:1fr}#ik-page .stats{grid-template-columns:repeat(2,1fr)}#ik-page .founder-photo{max-width:280px}}
+@media (max-width:820px){#ik-page .grid2,#ik-page .cards3,#ik-page .contact-grid,#ik-page .founder-grid,#ik-page .hero-grid{grid-template-columns:1fr}#ik-page .stats{grid-template-columns:repeat(2,1fr)}#ik-page .founder-photo{max-width:280px}#ik-page .hero-img{display:none}}
 </style>
 """
 
 def wrap(inner):
     return "<!-- wp:html -->\n" + HEAD + CSS + '<div id="ik-page">\n' + inner + "\n</div>\n<!-- /wp:html -->"
 
-def hero(eyebrow, title_html, lead):
+def hero(eyebrow, title_html, lead, img=None):
+    if img:
+        return (f'<section class="hero"><div class="wrap"><div class="hero-grid">'
+                f'<div><p class="eyebrow">{eyebrow}</p><h1>{title_html}</h1><p class="lead">{lead}</p></div>'
+                f'<div class="hero-img"><img src="{img}" alt="" loading="lazy"></div>'
+                f'</div></div></section>')
     return (f'<section class="hero"><div class="wrap">'
             f'<p class="eyebrow">{eyebrow}</p><h1>{title_html}</h1>'
             f'<p class="lead">{lead}</p></div></section>')
@@ -116,7 +125,8 @@ for n,t,d,items in svc:
     li = "".join(f"<li>{i}</li>" for i in items)
     cards += f'<div class="svc"><p class="num">{n}</p><h3>{t}</h3><p>{d}</p><ul>{li}</ul></div>'
 body = (hero("Servizi","Tutto quello che serve alla tua <em>comunicazione</em>.",
-             "Idea Marketing è un'agenzia di comunicazione full-service a Reggio Calabria: dalla strategia alla posa in opera, con un solo interlocutore.")
+             "Idea Marketing è un'agenzia di comunicazione full-service a Reggio Calabria: dalla strategia alla posa in opera, con un solo interlocutore.",
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-servizi.webp")
         + f'<section class="alt"><div class="wrap"><div class="grid2">{cards}</div></div></section>'
         + cta("Raccontaci il progetto, ti diamo <em>un prezzo</em>.","Preventivo gratuito, di solito entro 24 ore.",
               '<a class="btn" href="/contatti/">Richiedi un preventivo</a>'))
@@ -164,7 +174,8 @@ valori = [
 stats = [("15+","Anni di esperienza"),("200+","Clienti soddisfatti"),("500+","Progetti completati"),("8","Aree di servizio")]
 stat_html = "".join(f'<div><p class="n">{n}</p><p class="l">{l}</p></div>' for n,l in stats)
 body = (hero("Chi siamo","Un partner per la tua <em>crescita</em>.",
-             "Idea Marketing è un'agenzia di comunicazione full-service con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola.")
+             "Idea Marketing è un'agenzia di comunicazione full-service con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola.",
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-partnership.webp")
         + '<section><div class="wrap" style="max-width:820px"><h2>La nostra missione</h2>'
           '<p class="lead-p">Crediamo che ogni azienda meriti una comunicazione professionale ed efficace.</p>'
           '<p class="body-p">La nostra missione è rendere accessibile il marketing strategico alle imprese del Sud Italia, aiutandole a crescere, competere e affermarsi sul mercato. Affianchiamo imprenditori, professionisti e aziende del territorio calabrese e non solo, con soluzioni integrate di marketing, comunicazione e digital transformation.</p></div></section>'
@@ -200,7 +211,10 @@ info = (
 body = (hero("Contatti","Parliamo del tuo <em>progetto</em>.",
              "Hai un'idea o vuoi un preventivo? Scrivici o chiamaci: rispondiamo di solito entro 24 ore.")
         + f'<section><div class="wrap"><div class="contact-grid"><div><h2>Scrivici</h2><p class="sec-lead">Compila il modulo, ti ricontattiamo noi.</p>{form}</div>'
-          f'<div><h2>Dove siamo</h2><div style="margin-top:8px">{info}</div></div></div></div></section>')
+          f'<div><h2>Dove siamo</h2><div style="margin-top:8px">{info}</div></div></div></div></section>'
+        + '<section style="padding:0"><iframe class="map-embed" title="Idea Marketing — Via Campoli 34, Reggio Calabria" '
+          'src="https://www.google.com/maps?q=Via+Campoli+34,+89134+Reggio+Calabria&output=embed" '
+          'loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>')
 pages[16] = wrap(body)
 
 # ---------------- PREVENTIVI LEDWALL (27) — preserva calcolatore ----------------
