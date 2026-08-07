@@ -36,6 +36,15 @@ CSS = """<style>
 #ik-page .step .n{font-family:'Space Grotesk',sans-serif;font-size:34px;color:var(--gold);line-height:1;margin-bottom:10px}
 #ik-page .step h3{font-size:17px;font-weight:600;margin:0 0 6px}
 #ik-page .step p{color:var(--muted);font-size:14px}
+#ik-page .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#ik-page .shot{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--rule);display:block}
+#ik-page .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+#ik-page .shot:hover img{transform:scale(1.05)}
+#ik-page .shot span{position:absolute;left:12px;bottom:11px;background:rgba(30,34,53,.86);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px}
+#ik-page .ik-note{background:#fff7e6;border:1px solid #e6cf95;color:#7a5c11;font-size:14px;padding:12px 16px;border-radius:4px;margin-bottom:26px}
+#ik-page .clients-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+#ik-page .clients-row .ph{aspect-ratio:3/1;border:1px dashed var(--rule);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#6b6b73;font-size:14px;font-weight:600;text-align:center;padding:8px}
+@media(max-width:820px){#ik-page .shots{grid-template-columns:1fr}#ik-page .clients-row{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
@@ -255,6 +264,23 @@ body = (hero("Preventivi LEDWALL","Calcola il tuo <em>ledwall</em> in un minuto.
              "Stima subito il costo del tuo LEDWALL e il canone mensile con noleggio operativo Grenke. Poi ti diamo un preventivo definitivo.")
         + f'<section class="alt"><div class="wrap">{calc}</div></section>')
 pages[27] = wrap(body)
+
+# ---------------- I NOSTRI LAVORI (nuova) ----------------
+works = [
+ ("Insegne","Insegna e comunicazione visiva","https://ideamkt.it/wp-content/uploads/2026/08/ik-insegne-2.jpg"),
+ ("LEDwall","Schermo LED e digital signage","https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-tile.jpg"),
+ ("Grafica","Grafica e materiale stampato","https://ideamkt.it/wp-content/uploads/2026/08/ik-grafica-2.jpg"),
+]
+works_html = "".join('<a class="shot" href="/contatti/"><img src="%s" alt="%s" loading="lazy"><span>%s</span></a>' % (u,t,cat) for cat,t,u in works)
+clients = "".join('<div class="ph">%s</div>' % c for c in ["Torrefazione Due Zero","Mamas","Pilone by Rare","Barber Srl"])
+body = (hero("I nostri lavori","I nostri lavori parlano <em>per noi</em>.",
+             "Una selezione di ciò che realizziamo per le attività del territorio: insegne, LEDwall, grafica, stampa e allestimenti.")
+        + '<section><div class="wrap"><div class="ik-note">Stiamo caricando le foto dei lavori reali: le immagini qui sotto sono esempi illustrativi delle categorie. A breve i progetti veri di Idea Marketing.</div>'
+          f'<div class="shots">{works_html}</div></div></section>'
+        + f'<section class="alt"><div class="wrap"><h2>Hanno scelto Idea Marketing</h2><p class="sec-lead">Alcune delle attività che seguiamo.</p><div class="clients-row">{clients}</div></div></section>'
+        + cta("Ti serve qualcosa di <em>simile</em>?","Raccontaci il progetto: ti diamo un preventivo, di solito entro 24 ore.",
+              '<a class="btn" href="/contatti/">Richiedi un preventivo</a>'))
+pages['lavori'] = wrap(body)
 
 # ---- scrivi payload e report ----
 for pid, content in pages.items():
