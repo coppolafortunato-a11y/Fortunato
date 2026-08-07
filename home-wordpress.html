@@ -70,6 +70,12 @@
 #ik-home .work__cat{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px}
 #ik-home .work h3{font-size:17px;font-weight:600;margin-bottom:7px}
 #ik-home .work p{font-size:14px;color:var(--muted)}
+#ik-home .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#ik-home .shot{border-radius:6px;overflow:hidden;border:1px solid var(--rule);position:relative;aspect-ratio:4/3;background:#eceae4}
+#ik-home .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+#ik-home .shot:hover img{transform:scale(1.05)}
+#ik-home .shot span{position:absolute;left:14px;bottom:13px;background:rgba(30,34,53,.86);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px}
+@media(max-width:820px){#ik-home .shots{grid-template-columns:1fr}}
 #ik-home .quotes{background:#fff;border-top:1px solid var(--rule)}
 #ik-home .quotes .wrap{padding-top:88px;padding-bottom:88px}
 #ik-home .quote{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:28px 26px;display:flex;flex-direction:column}
@@ -189,6 +195,20 @@
 			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Ristorazione</p><h3>Pilone by Rare</h3><p>Prenotazioni raddoppiate con social e campagne mirate.</p></div></a>
 			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Barber shop</p><h3>Barber Srl</h3><p>+50% di prenotazioni online in pochi mesi.</p></div></a>
 			<a class="work" href="/servizi/"><div class="work__body"><p class="work__cat">Food &amp; beverage</p><h3>Torrefazione Due Zero</h3><p>+40% di clienti abituali con contenuti e fidelizzazione.</p></div></a>
+		</div>
+	</div>
+</section>
+
+<section class="portfolio" style="border-top:1px solid var(--rule)">
+	<div class="wrap">
+		<div class="sec-head reveal">
+			<h2>Cosa realizziamo</h2>
+			<p>I servizi che seguiamo di persona, dalla grafica alla posa in opera. Immagini indicative.</p>
+		</div>
+		<div class="shots reveal">
+			<div class="shot"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-insegne.jpg" alt="Insegna luminosa" loading="lazy"><span>Insegne</span></div>
+			<div class="shot"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall.jpg" alt="Schermo led" loading="lazy"><span>Ledwall</span></div>
+			<div class="shot"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-grafica.jpg" alt="Studio grafico" loading="lazy"><span>Grafica &amp; stampa</span></div>
 		</div>
 	</div>
 </section>

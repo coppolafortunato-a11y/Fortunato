@@ -159,7 +159,8 @@ def cardset(items, kd=None):
 pills = "".join(f'<span class="pill">{p}</span>' for p in
         ["Pixel pitch P2.5 – P10","Indoor e outdoor","Controllo Novastar","Noleggio Grenke","Installazione e assistenza"])
 body = (hero("LEDWALL &amp; Digital Signage","Schermi led che si vedono <em>da lontano</em>.",
-             "Schermi LED professionali per negozi, aziende, eventi e spazi pubblici. Disponibili in vendita e in noleggio operativo Grenke.")
+             "Schermi LED professionali per negozi, aziende, eventi e spazi pubblici. Disponibili in vendita e in noleggio operativo Grenke.",
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall.jpg")
         + f'<section><div class="wrap"><h2>Perché scegliere un LEDWALL?</h2><p class="sec-lead">Uno strumento che lavora per te ogni giorno.</p><div class="cards3">{cardset(why)}</div><div class="pills">{pills}</div></div></section>'
         + f'<section class="alt"><div class="wrap"><h2>I nostri prodotti</h2><p class="sec-lead">La soluzione giusta per ogni ambiente.</p><div class="cards3">{cardset(prod)}</div></div></section>'
         + f'<section class="navy"><div class="wrap"><h2>Noleggio operativo <em>Grenke</em></h2><p class="sec-lead">Hai il tuo LEDWALL con un canone mensile fisso, senza immobilizzare capitali.</p><div class="cards3">{cardset(grenke)}</div></div></section>'
