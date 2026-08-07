@@ -194,29 +194,32 @@ body = (hero("LEDWALL &amp; Digital Signage","Schermi led che si vedono <em>da l
 pages[12] = wrap(body)
 
 # ---------------- CHI SIAMO (14) ----------------
-valori = [
- ("Risultati concreti","Ogni progetto è misurato sui risultati. Non ci accontentiamo del “bello”: vogliamo che funzioni."),
- ("Partnership vera","Non siamo un fornitore, siamo un partner. Il tuo successo è il nostro successo."),
- ("Innovazione continua","Investiamo costantemente nella formazione e nelle tecnologie più recenti."),
+distintivo = [
+ ("Un unico partner","Grafica, stampa, digitale, social, web e comunicazione visiva coordinati attraverso un unico interlocutore."),
+ ("Soluzioni su misura","Ogni attività è diversa: costruiamo la soluzione sulle reali esigenze del cliente, senza pacchetti standard."),
+ ("Esperienza e innovazione","Esperienza sul territorio e ricerca continua di nuove tecnologie, strumenti e soluzioni di comunicazione."),
+ ("Rapporto diretto","Seguiamo il cliente prima, durante e dopo la realizzazione del progetto, con un contatto semplice e diretto."),
 ]
-stats = [("15+","Anni di esperienza"),("200+","Clienti soddisfatti"),("500+","Progetti completati"),("8","Aree di servizio")]
+dist_html = "".join('<div class="card"><h3>%s</h3><p>%s</p></div>' % (t,d) for t,d in distintivo)
+stats = [("15+","anni di esperienza"),("200+","clienti che ci hanno scelto"),("500+","progetti realizzati"),("1","un solo partner per la tua comunicazione")]
 stat_html = "".join(f'<div><p class="n">{n}</p><p class="l">{l}</p></div>' for n,l in stats)
-body = (hero("Chi siamo","Un partner per la tua <em>crescita</em>.",
-             "Idea Marketing è un'agenzia di comunicazione full-service con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola.",
+body = (hero("Chi siamo","Idee e soluzioni che fanno crescere la tua <em>attività</em>.",
+             "Idea Marketing è un'agenzia di comunicazione con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola. Da oltre 15 anni trasformiamo idee ed esigenze in progetti concreti.",
              img="https://ideamkt.it/wp-content/uploads/2026/08/ik-chisiamo-2.jpg")
-        + '<section><div class="wrap" style="max-width:820px"><h2>La nostra missione</h2>'
-          '<p class="lead-p">Crediamo che ogni azienda meriti una comunicazione professionale ed efficace.</p>'
-          '<p class="body-p">La nostra missione è rendere accessibile il marketing strategico alle imprese del Sud Italia, aiutandole a crescere, competere e affermarsi sul mercato. Affianchiamo imprenditori, professionisti e aziende del territorio calabrese e non solo, con soluzioni integrate di marketing, comunicazione e digital transformation.</p></div></section>'
+        + '<section><div class="wrap" style="max-width:820px"><h2>Il nostro modo di lavorare</h2>'
+          '<p class="lead-p">Non ci interessa semplicemente realizzare qualcosa di bello.</p>'
+          "<p class=\"body-p\">Prima ascoltiamo il cliente, capiamo cosa vuole ottenere e poi troviamo la soluzione più adatta per comunicarlo nel modo giusto. Uniamo creatività, esperienza, tecnologia e produzione, seguendo il progetto dall'idea iniziale fino alla realizzazione finale.</p>"
+          '<p class="body-p">Dalla grafica alla stampa, dalla comunicazione digitale ai social, dai siti web ai LEDwall e alla pubblicità visiva: un unico punto di riferimento per tutta la tua comunicazione.</p></div></section>'
         + '<section class="alt"><div class="wrap founder-block">'
           '<p class="eyebrow">Il fondatore</p><h2>Fortunato Coppola</h2>'
-          '<p class="lead-p">Mi chiamo Fortunato Coppola e ho fondato Idea Marketing con un\'idea semplice: dare alle imprese del territorio una comunicazione curata e professionale, senza doversi rivolgere a tre fornitori diversi.</p>'
-          '<p class="body-p">Da allora seguo personalmente ogni progetto: dalla strategia alla grafica, dalla stampa ai ledwall, dai social ai siti web. Ci metto rapporto diretto, parola data e lavoro fatto bene, con un obiettivo che non cambia mai: risultati concreti e misurabili. Se hai un progetto in mente, mi trovi qui a Reggio Calabria, in Via Campoli 34.</p>'
+          '<p class="lead-p">Ho fondato Idea Marketing partendo da un principio semplice: un imprenditore dovrebbe poter trovare in un unico partner tutto ciò che serve per comunicare e promuovere bene la propria attività.</p>'
+          '<p class="body-p">Per questo negli anni abbiamo ampliato continuamente servizi, competenze e tecnologie. Seguo personalmente i progetti e il rapporto con i clienti, dalla prima idea alla realizzazione. Credo nel rapporto diretto, nella disponibilità e soprattutto nel mantenere gli impegni presi. Ogni cliente per noi non è un numero, ma un progetto da far crescere.</p>'
           '<p class="sign">Fortunato Coppola</p>'
           '</div></section>'
-        + f'<section><div class="wrap"><h2>I nostri valori</h2><p class="sec-lead">Come lavoriamo, ogni giorno.</p><div class="cards3">{cardset(valori)}</div></div></section>'
+        + f'<section><div class="wrap"><h2>Cosa ci distingue</h2><p class="sec-lead">Quattro cose su cui non transigiamo.</p><div class="cards2">{dist_html}</div></div></section>'
         + f'<section class="navy"><div class="wrap"><h2>I numeri di <em>Idea Marketing</em></h2><div class="stats" style="margin-top:26px">{stat_html}</div></div></section>'
-        + cta("Vuoi lavorare con <em>noi</em>?","Raccontaci il tuo progetto: ti rispondiamo di solito entro 24 ore.",
-              '<a class="btn" href="/contatti/">Lavora con noi</a>'))
+        + cta("Hai un progetto in <em>mente</em>?", "Rinnovare l'immagine, una campagna o partire da zero: raccontaci cosa vuoi realizzare e troviamo insieme la soluzione.",
+              '<a class="btn" href="/contatti/">Richiedi un preventivo</a>'))
 pages[14] = wrap(body)
 
 # ---------------- CONTATTI (16) ----------------
