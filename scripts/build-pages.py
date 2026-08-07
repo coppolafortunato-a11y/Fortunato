@@ -30,6 +30,13 @@ CSS = """<style>
 #ik-page .hero-img{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.14);aspect-ratio:4/3;box-shadow:0 20px 50px rgba(0,0,0,.3)}
 #ik-page .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
 #ik-page .map-embed{display:block;width:100%;height:380px;border:0;filter:grayscale(.2)}
+#ik-page .imgband{display:block;width:100%;height:clamp(220px,30vw,360px);object-fit:cover}
+#ik-page .cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+#ik-page .step{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:26px}
+#ik-page .step .n{font-family:'Space Grotesk',sans-serif;font-size:34px;color:var(--gold);line-height:1;margin-bottom:10px}
+#ik-page .step h3{font-size:17px;font-weight:600;margin:0 0 6px}
+#ik-page .step p{color:var(--muted);font-size:14px}
+@media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
 #ik-page .navy{background:var(--navy);color:#fff}
@@ -128,7 +135,7 @@ for n,t,d,items in svc:
     cards += f'<div class="svc"><p class="num">{n}</p><h3>{t}</h3><p>{d}</p><ul>{li}</ul></div>'
 body = (hero("Servizi","Tutto quello che serve alla tua <em>comunicazione</em>.",
              "Idea Marketing è un'agenzia di comunicazione full-service a Reggio Calabria: dalla strategia alla posa in opera, con un solo interlocutore.",
-             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-servizi.webp")
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-servizi-2.jpg")
         + f'<section class="alt"><div class="wrap"><div class="grid2">{cards}</div></div></section>'
         + cta("Raccontaci il progetto, ti diamo <em>un prezzo</em>.","Preventivo gratuito, di solito entro 24 ore.",
               '<a class="btn" href="/contatti/">Richiedi un preventivo</a>'))
@@ -150,6 +157,21 @@ grenke = [
  ("100% deducibile","Costo aziendale completamente deducibile."),
  ("Assistenza inclusa","Installazione, configurazione e supporto tecnico."),
 ]
+usecases = [
+ ("Negozi e vetrine","Promozioni e novità sempre aggiornate, anche a serranda abbassata."),
+ ("Concessionarie","Mostra modelli, allestimenti e offerte direttamente in showroom."),
+ ("Bar e ristoranti","Menu digitali, piatti del giorno e serate in evidenza."),
+ ("Palestre e centri","Corsi, orari e promozioni all'ingresso, aggiornati in un attimo."),
+ ("Eventi e fiere","Palchi e stand che catturano l'attenzione, anche a noleggio."),
+ ("Piazze e spazi pubblici","Comunicazioni e affissioni dinamiche per comuni e attività."),
+]
+steps = [
+ ("01","Sopralluogo e progetto","Veniamo da te, prendiamo le misure e progettiamo la soluzione giusta."),
+ ("02","Fornitura e installazione","Consegna, montaggio e configurazione Novastar a regola d'arte."),
+ ("03","Assistenza e contenuti","Ti seguiamo con supporto tecnico e aggiornamento dei contenuti."),
+]
+def stepset(items):
+    return "".join('<div class="step"><p class="n">%s</p><h3>%s</h3><p>%s</p></div>' % (n,t,d) for n,t,d in items)
 def cardset(items, kd=None):
     out=""
     for i,(t,d) in enumerate(items):
@@ -160,9 +182,12 @@ pills = "".join(f'<span class="pill">{p}</span>' for p in
         ["Pixel pitch P2.5 – P10","Indoor e outdoor","Controllo Novastar","Noleggio Grenke","Installazione e assistenza"])
 body = (hero("LEDWALL &amp; Digital Signage","Schermi led che si vedono <em>da lontano</em>.",
              "Schermi LED professionali per negozi, aziende, eventi e spazi pubblici. Disponibili in vendita e in noleggio operativo Grenke.",
-             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall.jpg")
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-hero.jpg")
         + f'<section><div class="wrap"><h2>Perché scegliere un LEDWALL?</h2><p class="sec-lead">Uno strumento che lavora per te ogni giorno.</p><div class="cards3">{cardset(why)}</div><div class="pills">{pills}</div></div></section>'
         + f'<section class="alt"><div class="wrap"><h2>I nostri prodotti</h2><p class="sec-lead">La soluzione giusta per ogni ambiente.</p><div class="cards3">{cardset(prod)}</div></div></section>'
+        + '<section style="padding:0"><img class="imgband" src="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-tile.jpg" alt="Schermo led installato" loading="lazy"></section>'
+        + f'<section><div class="wrap"><h2>Dove si usano</h2><p class="sec-lead">Un LEDWALL lavora ovunque ci sia qualcosa da comunicare.</p><div class="cards3">{cardset(usecases)}</div></div></section>'
+        + f'<section class="alt"><div class="wrap"><h2>Come funziona il <em>noleggio</em></h2><p class="sec-lead">Dal primo contatto allo schermo acceso, ti seguiamo noi in ogni passo.</p><div class="cards3">{stepset(steps)}</div></div></section>'
         + f'<section class="navy"><div class="wrap"><h2>Noleggio operativo <em>Grenke</em></h2><p class="sec-lead">Hai il tuo LEDWALL con un canone mensile fisso, senza immobilizzare capitali.</p><div class="cards3">{cardset(grenke)}</div></div></section>'
         + cta("Calcola il tuo <em>ledwall</em>.","Stima il costo e il canone mensile, poi ti diamo un preventivo definitivo.",
               '<a class="btn" href="/preventivi-ledwall/">Calcola il preventivo</a> <a class="btn btn--ghost" href="/contatti/">Contattaci</a>'))
@@ -178,7 +203,7 @@ stats = [("15+","Anni di esperienza"),("200+","Clienti soddisfatti"),("500+","Pr
 stat_html = "".join(f'<div><p class="n">{n}</p><p class="l">{l}</p></div>' for n,l in stats)
 body = (hero("Chi siamo","Un partner per la tua <em>crescita</em>.",
              "Idea Marketing è un'agenzia di comunicazione full-service con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola.",
-             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-partnership.webp")
+             img="https://ideamkt.it/wp-content/uploads/2026/08/ik-chisiamo-2.jpg")
         + '<section><div class="wrap" style="max-width:820px"><h2>La nostra missione</h2>'
           '<p class="lead-p">Crediamo che ogni azienda meriti una comunicazione professionale ed efficace.</p>'
           '<p class="body-p">La nostra missione è rendere accessibile il marketing strategico alle imprese del Sud Italia, aiutandole a crescere, competere e affermarsi sul mercato. Affianchiamo imprenditori, professionisti e aziende del territorio calabrese e non solo, con soluzioni integrate di marketing, comunicazione e digital transformation.</p></div></section>'
