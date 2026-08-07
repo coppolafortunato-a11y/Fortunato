@@ -10,7 +10,7 @@ def de(s):
     s = EMOJI.sub("", s)
     return re.sub(r"[ \t]{2,}", " ", s).replace(" ,", ",").strip()
 
-HEAD = ('<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1'
+HEAD = ('<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700'
         '&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">\n')
 
 CSS = """<style>
@@ -23,7 +23,7 @@ CSS = """<style>
 #ik-page .hero::after{content:'';position:absolute;right:-140px;top:-140px;width:420px;height:420px;border:1px solid rgba(201,169,97,.16);border-radius:50%}
 #ik-page .hero .wrap{padding:74px 24px;position:relative;z-index:1}
 #ik-page .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
-#ik-page .hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 18px;max-width:22ch}
+#ik-page .hero h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 18px;max-width:22ch}
 #ik-page .hero h1 em{font-style:normal;color:var(--gold)}
 #ik-page .hero .lead{font-size:18px;color:rgba(255,255,255,.7);max-width:58ch;line-height:1.6}
 #ik-page .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
@@ -33,7 +33,7 @@ CSS = """<style>
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
 #ik-page .navy{background:var(--navy);color:#fff}
-#ik-page h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(26px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px}
+#ik-page h2{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px}
 #ik-page h2 em{font-style:normal;color:var(--gold)}
 #ik-page .navy h2{color:#fff}
 #ik-page .sec-lead{color:var(--muted);font-size:16px;max-width:62ch;margin-bottom:38px}
@@ -54,7 +54,7 @@ CSS = """<style>
 #ik-page .card p{color:var(--muted);font-size:14px}
 #ik-page .navy .card p{color:rgba(255,255,255,.68)}
 #ik-page .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-#ik-page .stats .n{font-family:'Instrument Serif',serif;font-size:clamp(38px,5vw,52px);color:var(--gold);line-height:1;margin-bottom:8px}
+#ik-page .stats .n{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,5vw,52px);color:var(--gold);line-height:1;margin-bottom:8px}
 #ik-page .stats .l{font-size:14px;color:var(--muted);font-weight:600}
 #ik-page .btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;padding:13px 24px;border-radius:3px;background:var(--gold);color:#33270a;transition:transform .18s,background .2s;border:none;cursor:pointer}
 #ik-page .btn:hover{background:#d8ba73;transform:translateY(-2px)}
@@ -70,7 +70,7 @@ CSS = """<style>
 #ik-page .founder-photo{aspect-ratio:4/5;border-radius:6px;overflow:hidden;border:1px solid var(--rule)}
 #ik-page .founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
 #ik-page .founder-photo .ph{width:100%;height:100%;background:repeating-linear-gradient(135deg,#eceae4,#eceae4 10px,#e4e1d9 10px,#e4e1d9 20px);display:flex;align-items:center;justify-content:center;color:#9a978d;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;text-align:center;padding:14px}
-#ik-page .sign{font-family:'Instrument Serif',serif;font-size:22px;color:var(--navy);margin-top:18px}
+#ik-page .sign{font-family:'Space Grotesk',sans-serif;font-size:22px;color:var(--navy);margin-top:18px}
 #ik-page .founder-block{max-width:780px;border-left:3px solid var(--gold);padding-left:30px}
 #ik-page .founder-block .eyebrow{margin-bottom:12px}
 #ik-page .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start}
