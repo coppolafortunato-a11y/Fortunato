@@ -23,6 +23,25 @@
 #ik-page .step .n{font-family:'Space Grotesk',sans-serif;font-size:34px;color:var(--gold);line-height:1;margin-bottom:10px}
 #ik-page .step h3{font-size:17px;font-weight:600;margin:0 0 6px}
 #ik-page .step p{color:var(--muted);font-size:14px}
+#ik-page .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#ik-page .shot{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--rule);display:block}
+#ik-page .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+#ik-page .shot:hover img{transform:scale(1.05)}
+#ik-page .shot span{position:absolute;left:12px;bottom:11px;background:rgba(30,34,53,.86);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px}
+#ik-page .ik-note{background:#fff7e6;border:1px solid #e6cf95;color:#7a5c11;font-size:14px;padding:12px 16px;border-radius:4px;margin-bottom:26px}
+#ik-page .clients-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+#ik-page .clients-row .ph{aspect-ratio:3/1;border:1px dashed var(--rule);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#6b6b73;font-size:14px;font-weight:600;text-align:center;padding:8px}
+@media(max-width:820px){#ik-page .shots{grid-template-columns:1fr}#ik-page .clients-row{grid-template-columns:repeat(2,1fr)}}
+#ik-page .checklist{columns:2;column-gap:32px;list-style:none;padding:0;margin:0}
+#ik-page .checklist li{padding:8px 0 8px 26px;position:relative;color:#3a3d4d;font-size:15px;break-inside:avoid}
+#ik-page .checklist li::before{content:'';position:absolute;left:0;top:12px;width:11px;height:11px;border:2px solid var(--gold);border-radius:50%}
+#ik-page .faq details{border-bottom:1px solid var(--rule);padding:16px 0}
+#ik-page .faq summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+#ik-page .faq summary::-webkit-details-marker{display:none}
+#ik-page .faq summary::after{content:'+';color:var(--gold);font-size:22px;line-height:1;flex:none}
+#ik-page .faq details[open] summary::after{content:'3'}
+#ik-page .faq p{color:var(--muted);font-size:15px;margin-top:10px;max-width:72ch}
+@media(max-width:820px){#ik-page .checklist{columns:1}}
 @media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
@@ -72,12 +91,12 @@
 #ik-page .info-row .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
 #ik-page .info-row a{font-weight:600}
 #ik-page form.ik-form{display:flex;flex-direction:column;gap:14px;max-width:520px}
-#ik-page form.ik-form input,#ik-page form.ik-form textarea{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff}
-#ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+#ik-page form.ik-form input,#ik-page form.ik-form textarea,#ik-page form.ik-form select{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff;color:#1E2235}
+#ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus,#ik-page form.ik-form select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
 #ik-page form.ik-form button{align-self:flex-start}
 @media (max-width:820px){#ik-page .grid2,#ik-page .cards3,#ik-page .contact-grid,#ik-page .founder-grid,#ik-page .hero-grid{grid-template-columns:1fr}#ik-page .stats{grid-template-columns:repeat(2,1fr)}#ik-page .founder-photo{max-width:280px}#ik-page .hero-img{display:none}}
 </style>
 <div id="ik-page">
-<section class="hero"><div class="wrap"><p class="eyebrow">Contatti</p><h1>Parliamo del tuo <em>progetto</em>.</h1><p class="lead">Hai un'idea o vuoi un preventivo? Scrivici o chiamaci: rispondiamo di solito entro 24 ore.</p></div></section><section><div class="wrap"><div class="contact-grid"><div><h2>Scrivici</h2><p class="sec-lead">Compila il modulo, ti ricontattiamo noi.</p><form class="ik-form" action="mailto:coppola.fortunato@gmail.com" method="post" enctype="text/plain"><input type="text" name="nome" placeholder="Il tuo nome *" required><input type="email" name="email" placeholder="La tua email *" required><input type="tel" name="telefono" placeholder="Telefono"><input type="text" name="oggetto" placeholder="Oggetto"><textarea name="messaggio" placeholder="Il tuo messaggio *" rows="5" required></textarea><button type="submit" class="btn">Invia messaggio</button></form></div><div><h2>Dove siamo</h2><div style="margin-top:8px"><div class="info-row"><p class="k">Indirizzo</p><p>Via Campoli 34<br>89134 Reggio Calabria (RC)</p></div><div class="info-row"><p class="k">Telefono</p><p><a href="tel:+393206116711">320 611 6711</a></p></div><div class="info-row"><p class="k">Email</p><p><a href="mailto:coppola.fortunato@gmail.com">coppola.fortunato@gmail.com</a></p></div><div class="info-row"><p class="k">PEC</p><p><a href="mailto:coppola.fortunato@pec.it">coppola.fortunato@pec.it</a></p></div><div class="info-row"><p class="k">Orari</p><p>Lunedì – Venerdì: 9:00 – 18:00<br>Sabato: 9:00 – 13:00</p></div><div class="info-row" style="border-bottom:none"><p class="k">Dati aziendali</p><p>Idea Marketing di Coppola Fortunato<br>P.IVA 02520960804 · C.F. CPPFTN88L05H224S · SDI SU9YNJA</p></div></div></div></div></div></section><section style="padding:0"><iframe class="map-embed" title="Idea Marketing — Via Campoli 34, Reggio Calabria" src="https://www.google.com/maps?q=Via+Campoli+34,+89134+Reggio+Calabria&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
+<section class="hero"><div class="wrap"><p class="eyebrow">Contatti</p><h1>Parliamo del tuo <em>progetto</em>.</h1><p class="lead">Hai un'idea o vuoi un preventivo? Scrivici o chiamaci: rispondiamo di solito entro 24 ore.</p></div></section><section><div class="wrap"><div class="contact-grid"><div><h2>Scrivici</h2><p class="sec-lead">Compila il modulo, ti ricontattiamo noi.</p><form class="ik-form" action="mailto:coppola.fortunato@gmail.com" method="post" enctype="text/plain"><input type="text" name="nome" placeholder="Nome e cognome *" required><input type="text" name="azienda" placeholder="Azienda (facoltativo)"><input type="email" name="email" placeholder="La tua email *" required><input type="tel" name="telefono" placeholder="Telefono"><select name="servizio" required><option value="" selected disabled>Di cosa hai bisogno? *</option><option>Grafica</option><option>Stampa</option><option>Insegna</option><option>LEDwall</option><option>Sito web</option><option>Social Media</option><option>Abbigliamento/Gadget</option><option>Altro</option></select><textarea name="messaggio" placeholder="Descrivi il tuo progetto *" rows="5" required></textarea><button type="submit" class="btn">Richiedi informazioni</button></form></div><div><h2>Dove siamo</h2><div style="margin-top:8px"><div class="info-row"><p class="k">Indirizzo</p><p>Via Campoli 34<br>89134 Reggio Calabria (RC)</p></div><div class="info-row"><p class="k">Telefono</p><p><a href="tel:+393206116711">320 611 6711</a></p></div><div class="info-row"><p class="k">Email</p><p><a href="mailto:coppola.fortunato@gmail.com">coppola.fortunato@gmail.com</a></p></div><div class="info-row"><p class="k">PEC</p><p><a href="mailto:coppola.fortunato@pec.it">coppola.fortunato@pec.it</a></p></div><div class="info-row"><p class="k">Orari</p><p>Lunedì – Venerdì: 9:00 – 18:00<br>Sabato: 9:00 – 13:00</p></div><div class="info-row" style="border-bottom:none"><p class="k">Dati aziendali</p><p>Idea Marketing di Coppola Fortunato<br>P.IVA 02520960804 · C.F. CPPFTN88L05H224S · SDI SU9YNJA</p></div></div></div></div></div></section><section style="padding:0"><iframe class="map-embed" title="Idea Marketing — Via Campoli 34, Reggio Calabria" src="https://www.google.com/maps?q=Via+Campoli+34,+89134+Reggio+Calabria&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
 </div>
 <!-- /wp:html -->

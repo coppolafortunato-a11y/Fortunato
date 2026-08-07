@@ -104,8 +104,8 @@ CSS = """<style>
 #ik-page .info-row .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
 #ik-page .info-row a{font-weight:600}
 #ik-page form.ik-form{display:flex;flex-direction:column;gap:14px;max-width:520px}
-#ik-page form.ik-form input,#ik-page form.ik-form textarea{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff}
-#ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+#ik-page form.ik-form input,#ik-page form.ik-form textarea,#ik-page form.ik-form select{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff;color:#1E2235}
+#ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus,#ik-page form.ik-form select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
 #ik-page form.ik-form button{align-self:flex-start}
 @media (max-width:820px){#ik-page .grid2,#ik-page .cards3,#ik-page .contact-grid,#ik-page .founder-grid,#ik-page .hero-grid{grid-template-columns:1fr}#ik-page .stats{grid-template-columns:repeat(2,1fr)}#ik-page .founder-photo{max-width:280px}#ik-page .hero-img{display:none}}
 </style>
@@ -242,13 +242,16 @@ body = (hero("Chi siamo","Idee e soluzioni che fanno crescere la tua <em>attivit
 pages[14] = wrap(body)
 
 # ---------------- CONTATTI (16) ----------------
+_opts = "".join("<option>%s</option>" % o for o in
+        ["Grafica","Stampa","Insegna","LEDwall","Sito web","Social Media","Abbigliamento/Gadget","Altro"])
 form = ('<form class="ik-form" action="mailto:coppola.fortunato@gmail.com" method="post" enctype="text/plain">'
-        '<input type="text" name="nome" placeholder="Il tuo nome *" required>'
+        '<input type="text" name="nome" placeholder="Nome e cognome *" required>'
+        '<input type="text" name="azienda" placeholder="Azienda (facoltativo)">'
         '<input type="email" name="email" placeholder="La tua email *" required>'
         '<input type="tel" name="telefono" placeholder="Telefono">'
-        '<input type="text" name="oggetto" placeholder="Oggetto">'
-        '<textarea name="messaggio" placeholder="Il tuo messaggio *" rows="5" required></textarea>'
-        '<button type="submit" class="btn">Invia messaggio</button></form>')
+        '<select name="servizio" required><option value="" selected disabled>Di cosa hai bisogno? *</option>' + _opts + '</select>'
+        '<textarea name="messaggio" placeholder="Descrivi il tuo progetto *" rows="5" required></textarea>'
+        '<button type="submit" class="btn">Richiedi informazioni</button></form>')
 info = (
  '<div class="info-row"><p class="k">Indirizzo</p><p>Via Campoli 34<br>89134 Reggio Calabria (RC)</p></div>'
  '<div class="info-row"><p class="k">Telefono</p><p><a href="tel:+393206116711">320 611 6711</a></p></div>'
