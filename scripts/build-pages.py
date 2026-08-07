@@ -45,6 +45,16 @@ CSS = """<style>
 #ik-page .clients-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 #ik-page .clients-row .ph{aspect-ratio:3/1;border:1px dashed var(--rule);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#6b6b73;font-size:14px;font-weight:600;text-align:center;padding:8px}
 @media(max-width:820px){#ik-page .shots{grid-template-columns:1fr}#ik-page .clients-row{grid-template-columns:repeat(2,1fr)}}
+#ik-page .checklist{columns:2;column-gap:32px;list-style:none;padding:0;margin:0}
+#ik-page .checklist li{padding:8px 0 8px 26px;position:relative;color:#3a3d4d;font-size:15px;break-inside:avoid}
+#ik-page .checklist li::before{content:'';position:absolute;left:0;top:12px;width:11px;height:11px;border:2px solid var(--gold);border-radius:50%}
+#ik-page .faq details{border-bottom:1px solid var(--rule);padding:16px 0}
+#ik-page .faq summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+#ik-page .faq summary::-webkit-details-marker{display:none}
+#ik-page .faq summary::after{content:'+';color:var(--gold);font-size:22px;line-height:1;flex:none}
+#ik-page .faq details[open] summary::after{content:'\2013'}
+#ik-page .faq p{color:var(--muted);font-size:15px;margin-top:10px;max-width:72ch}
+@media(max-width:820px){#ik-page .checklist{columns:1}}
 @media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
@@ -281,6 +291,90 @@ body = (hero("I nostri lavori","I nostri lavori parlano <em>per noi</em>.",
         + cta("Ti serve qualcosa di <em>simile</em>?","Raccontaci il progetto: ti diamo un preventivo, di solito entro 24 ore.",
               '<a class="btn" href="/contatti/">Richiedi un preventivo</a>'))
 pages['lavori'] = wrap(body)
+
+# ---------------- PAGINE SERVIZIO SEO (nuove) ----------------
+GENERIC_STEPS = [
+ ("01","Ascolto e sopralluogo","Capiamo cosa ti serve e, dove utile, veniamo a vedere di persona."),
+ ("02","Progetto e preventivo","Ti proponiamo la soluzione e un preventivo chiaro, di solito entro 24 ore."),
+ ("03","Produzione e consegna","Realizziamo, consegniamo e — quando serve — installiamo e assistiamo."),
+]
+def faq_jsonld(faq):
+    import json as _j
+    data={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq]}
+    return '<script type="application/ld+json">'+_j.dumps(data,ensure_ascii=False)+'</script>'
+
+def service_page(eyebrow,h1,lead,realizziamo,perchi,faq,cta_label="Richiedi un preventivo"):
+    checklist="".join("<li>%s</li>"%x for x in realizziamo)
+    chips="".join('<span class="pill">%s</span>'%x for x in perchi)
+    faqs="".join('<div class="faq"><details><summary>%s</summary><p>%s</p></details></div>'%(q,a) for q,a in faq)
+    return (hero(eyebrow,h1,lead)
+        + f'<section><div class="wrap"><h2>Cosa realizziamo</h2><p class="sec-lead">Tutto ciò che ti serve, seguito da un unico interlocutore.</p><ul class="checklist">{checklist}</ul></div></section>'
+        + f'<section class="alt"><div class="wrap"><h2>Per chi è indicato</h2><div class="pills" style="margin-top:8px">{chips}</div></div></section>'
+        + f'<section><div class="wrap"><h2>Come lavoriamo</h2><div class="cards3">{stepset(GENERIC_STEPS)}</div></div></section>'
+        + f'<section class="alt"><div class="wrap" style="max-width:820px"><h2>Domande frequenti</h2>{faqs}</div></section>'
+        + faq_jsonld(faq)
+        + cta("Parliamo del tuo <em>progetto</em>.","Raccontaci cosa vuoi realizzare: ti ricontattiamo noi.",
+              f'<a class="btn" href="/contatti/">{cta_label}</a>'))
+
+SERVICES = {
+ "grafica-branding": dict(
+   eyebrow="Grafica e Branding · Reggio Calabria",
+   h1="Grafica e branding a Reggio <em>Calabria</em>",
+   lead="Diamo un'identità riconoscibile alla tua attività: dal logo all'immagine coordinata, fino a tutto il materiale che ti rappresenta.",
+   realizziamo=["Logo e restyling del marchio","Immagine coordinata (carta intestata, biglietti da visita)","Brand guidelines","Menu, cataloghi e listini","Locandine, flyer e brochure","Impaginazione e layout"],
+   perchi=["Nuove attività","Chi vuole rinnovare l'immagine","Ristoranti e locali","Negozi e professionisti"],
+   faq=[("Quanto costa un logo?","Dipende dal progetto: dal solo logo fino all'immagine coordinata completa. Ti diamo un preventivo chiaro dopo una breve chiacchierata."),
+        ("Consegnate i file per la stampa?","Sì, consegniamo i file pronti per la stampa e per l'uso digitale, nei formati che ti servono."),
+        ("Fate anche la stampa?","Sì: progettiamo e stampiamo internamente, così hai un unico interlocutore.")]),
+ "stampa-digitale-reggio-calabria": dict(
+   eyebrow="Stampa Digitale · Reggio Calabria",
+   h1="Stampa digitale, piccolo e grande <em>formato</em>",
+   lead="Stampa di qualità per la tua comunicazione: dai biglietti da visita ai grandi pannelli, con materiali e finiture professionali.",
+   realizziamo=["Biglietti da visita, volantini, brochure","Poster e locandine","Pannelli e cartelli (forex, dibond, PVC)","Striscioni e banner","Adesivi e vetrofanie","Etichette personalizzate"],
+   perchi=["Negozi e attività","Eventi e fiere","Ristoranti e locali","Aziende e uffici"],
+   faq=[("Che formati potete stampare?","Dal piccolo formato (biglietti, flyer) al grande formato (pannelli, striscioni). Contattaci per il tuo caso specifico."),
+        ("In quanto tempo è pronta la stampa?","Dipende da quantità e materiale: per molti prodotti pochi giorni lavorativi. Ti diamo tempi certi nel preventivo."),
+        ("Preparate voi la grafica?","Sì, possiamo occuparci noi della grafica oppure stampare i tuoi file già pronti.")]),
+ "insegne-reggio-calabria": dict(
+   eyebrow="Insegne · Reggio Calabria",
+   h1="Insegne e comunicazione visiva a Reggio <em>Calabria</em>",
+   lead="Facciamo vedere la tua attività: insegne, lettere e allestimenti progettati, prodotti e installati da noi.",
+   realizziamo=["Insegne luminose","Lettere scatolate","Cassonetti e pannelli","Insegne in dibond e PVC","Vetrofanie e decorazioni vetrine","Totem e segnaletica","Rivestimenti e allestimenti"],
+   perchi=["Negozi e vetrine","Uffici e studi","Ristoranti e bar","Attività che aprono o rinnovano"],
+   faq=[("Fate il sopralluogo?","Sì: veniamo a prendere le misure e a valutare il posto, così l'insegna è giusta e a norma."),
+        ("Vi occupate anche dell'installazione?","Sì, progettiamo, produciamo e installiamo. Un unico interlocutore dall'inizio alla fine."),
+        ("Servono autorizzazioni?","Per alcune insegne sì: ti aiutiamo a capire cosa serve nella tua zona.")]),
+ "siti-web-reggio-calabria": dict(
+   eyebrow="Siti Web · Reggio Calabria",
+   h1="Siti web ed e-commerce a Reggio <em>Calabria</em>",
+   lead="Siti veloci, curati e pensati per farti trovare e contattare. Dai siti vetrina agli e-commerce.",
+   realizziamo=["Siti vetrina aziendali","E-commerce e negozi online","Landing page e pagine promo","Menu digitali con QR","Ottimizzazione velocità e mobile","Manutenzione e aggiornamenti"],
+   perchi=["Attività senza sito","Chi ha un sito datato","Chi vuole vendere online","Professionisti e aziende"],
+   faq=[("Quanto costa un sito?","Dipende da dimensioni e funzioni. Partiamo dalle tue esigenze e ti diamo un preventivo chiaro."),
+        ("Il sito sarà adatto ai telefoni?","Sì, tutti i nostri siti sono ottimizzati per smartphone e per la velocità."),
+        ("Vi occupate anche dei testi e delle foto?","Possiamo occuparci di testi, grafica e shooting: hai un unico referente.")]),
+ "social-media-reggio-calabria": dict(
+   eyebrow="Social Media · Reggio Calabria",
+   h1="Gestione social media a Reggio <em>Calabria</em>",
+   lead="Pagine curate, contenuti che funzionano e campagne mirate per farti trovare dai clienti giusti.",
+   realizziamo=["Gestione pagine (Instagram, Facebook, TikTok)","Piano editoriale e contenuti","Grafiche e video per i social","Shooting foto e video","Campagne Meta e Google Ads","Report e analisi dei risultati"],
+   perchi=["Negozi e ristoranti","Attività locali","Chi vuole più clienti","Chi non ha tempo di gestire i social"],
+   faq=[("Create voi i contenuti?","Sì: grafica, testi, foto e video. Concordiamo insieme il tono e l'obiettivo."),
+        ("Fate anche le campagne a pagamento?","Sì, gestiamo campagne su Meta e Google con budget concordato e reportistica."),
+        ("Serve un impegno lungo?","Lavoriamo di solito con continuità mensile, ma partiamo dai tuoi obiettivi.")]),
+ "abbigliamento-personalizzato": dict(
+   eyebrow="Abbigliamento e Gadget",
+   h1="Abbigliamento personalizzato e <em>gadget</em>",
+   lead="Divise, t-shirt, cappellini e gadget con il tuo logo: per il team, per gli eventi e per la promozione.",
+   realizziamo=["T-shirt, polo e felpe personalizzate","Divise da lavoro","Cappellini e accessori","Gadget promozionali","Stampa e ricamo del logo","Piccole e grandi quantità"],
+   perchi=["Aziende e team","Eventi e fiere","Negozi e locali","Associazioni e sportivi"],
+   faq=[("Quantità minime?","Lavoriamo sia piccole tirature sia grandi quantità: dicci cosa ti serve."),
+        ("Stampa o ricamo?","Entrambi: consigliamo la tecnica migliore in base al capo e al logo."),
+        ("Preparate voi la grafica del logo?","Sì, se serve sistemiamo o creiamo il file adatto alla personalizzazione.")]),
+}
+for slug,cfg in SERVICES.items():
+    pages[slug] = wrap(service_page(**cfg))
 
 # ---- scrivi payload e report ----
 for pid, content in pages.items():
