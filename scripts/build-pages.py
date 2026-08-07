@@ -55,6 +55,12 @@ CSS = """<style>
 #ik-page .faq details[open] summary::after{content:'\2013'}
 #ik-page .faq p{color:var(--muted);font-size:15px;margin-top:10px;max-width:72ch}
 @media(max-width:820px){#ik-page .checklist{columns:1}}
+#ik-page .ledform{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:end;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px}
+#ik-page .ledform label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:#1E2235}
+#ik-page .ledform select{padding:.75rem .9rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;background:#fff;color:#1E2235}
+#ik-page .ledform .btn{grid-column:1/-1;justify-content:center;background:#25D366;color:#083b1c}
+#ik-page .ledform .btn:hover{background:#38e07a}
+@media(max-width:820px){#ik-page .ledform{grid-template-columns:1fr}}
 @media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
 #ik-page section{padding:64px 0}
 #ik-page .alt{background:var(--paper)}
@@ -202,6 +208,16 @@ pills = "".join(f'<span class="pill">{p}</span>' for p in
 body = (hero("LEDWALL &amp; Digital Signage","Schermi led che si vedono <em>da lontano</em>.",
              "Schermi LED professionali per negozi, aziende, eventi e spazi pubblici. Disponibili in vendita e in noleggio operativo Grenke.",
              img="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-hero.jpg")
+        + ('<section class="alt"><div class="wrap"><h2>Configura il tuo <em>LEDwall</em></h2>'
+           '<p class="sec-lead">Rispondi a tre domande: ti prepariamo un preventivo su misura.</p>'
+           '<div class="ledform">'
+           '<label>Dove vuoi installarlo?<select id="lf-dove"><option>Vetrina / Negozio</option><option>Esterno</option><option>Indoor</option><option>Evento</option><option>Farmacia</option><option>Centro commerciale</option><option>Altro</option></select></label>'
+           '<label>Hai gia le misure?<select id="lf-mis"><option>Si, ho le misure</option><option>No, mi serve un sopralluogo</option></select></label>'
+           '<label>Soluzione preferita?<select id="lf-sol"><option>Acquisto</option><option>Noleggio operativo</option><option>Finanziamento</option></select></label>'
+           '<a id="lf-cta" class="btn" href="https://wa.me/393206116711" target="_blank" rel="noopener">Richiedi il preventivo su WhatsApp</a>'
+           '</div></div>'
+           "<script>(function(){function u(){var d=document.getElementById('lf-dove'),m=document.getElementById('lf-mis'),s=document.getElementById('lf-sol'),c=document.getElementById('lf-cta');if(!d||!c)return;var t='Ciao Idea Marketing, vorrei un preventivo per un LEDwall. Installazione: '+d.value+'. Misure: '+m.value+'. Formula: '+s.value+'.';c.setAttribute('href','https://wa.me/393206116711?text='+encodeURIComponent(t));}['lf-dove','lf-mis','lf-sol'].forEach(function(i){var e=document.getElementById(i);if(e)e.addEventListener('change',u);});u();})();</script>"
+           '</section>')
         + f'<section><div class="wrap"><h2>Perché scegliere un LEDWALL?</h2><p class="sec-lead">Uno strumento che lavora per te ogni giorno.</p><div class="cards3">{cardset(why)}</div><div class="pills">{pills}</div></div></section>'
         + f'<section class="alt"><div class="wrap"><h2>I nostri prodotti</h2><p class="sec-lead">La soluzione giusta per ogni ambiente.</p><div class="cards3">{cardset(prod)}</div></div></section>'
         + '<section style="padding:0"><img class="imgband" src="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-tile.jpg" alt="Schermo led installato" loading="lazy"></section>'
