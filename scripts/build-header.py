@@ -33,7 +33,7 @@ CSS = r'''<style id="ideamkt-extras">
 .ik-topbar__tel{font-weight:600}
 .ik-topbar__place{opacity:.6;font-size:13px}
 @media (max-width:780px){.ik-topbar__inner{justify-content:center;padding:9px 16px;gap:18px}.ik-topbar__email,.ik-topbar__place{display:none}}
-.ik-cta-btn{display:inline-flex;align-items:center;background:var(--ik-gold);color:#1E2235!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;margin-left:6px;font-family:'Manrope',sans-serif}
+.ik-cta-btn{display:inline-flex;align-items:center;background:var(--ik-gold);color:#1E2235!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;margin-left:6px;font-family:'Inter',sans-serif}
 .ik-cta-btn:hover{background:#d8ba73}
 @media (max-width:600px){.ik-cta-btn{display:none}}
 .ik-fab{position:fixed;right:24px;bottom:24px;z-index:9999}
