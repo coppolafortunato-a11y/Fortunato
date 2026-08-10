@@ -237,7 +237,7 @@ distintivo = [
  ("Rapporto diretto","Seguiamo il cliente prima, durante e dopo la realizzazione del progetto, con un contatto semplice e diretto."),
 ]
 dist_html = "".join('<div class="card"><h3>%s</h3><p>%s</p></div>' % (t,d) for t,d in distintivo)
-stats = [("15+","anni di esperienza"),("200+","clienti che ci hanno scelto"),("500+","progetti realizzati"),("1","un solo partner per la tua comunicazione")]
+stats = [("15+","anni di esperienza"),("800+","clienti che ci hanno scelto"),("1.000+","lavori realizzati"),("1","un solo partner per la tua comunicazione")]
 stat_html = "".join(f'<div><p class="n">{n}</p><p class="l">{l}</p></div>' for n,l in stats)
 body = (hero("Chi siamo","Idee e soluzioni che fanno crescere la tua <em>attività</em>.",
              "Idea Marketing è un'agenzia di comunicazione con sede a Reggio Calabria, fondata e guidata da Fortunato Coppola. Da oltre 15 anni trasformiamo idee ed esigenze in progetti concreti.",
