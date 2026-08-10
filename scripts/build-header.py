@@ -33,9 +33,10 @@ CSS = r'''<style id="ideamkt-extras">
 .ik-topbar__tel{font-weight:600}
 .ik-topbar__place{opacity:.6;font-size:13px}
 @media (max-width:780px){.ik-topbar__inner{justify-content:center;padding:9px 16px;gap:18px}.ik-topbar__email,.ik-topbar__place{display:none}}
-.ik-cta-btn{display:inline-flex;align-items:center;background:var(--ik-gold);color:#1E2235!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;margin-left:6px;font-family:'Inter',sans-serif}
+.ik-cta-btn{display:none;align-items:center;background:var(--ik-gold);color:#1E2235!important;font-weight:600;font-size:14px;padding:9px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;margin-left:6px;font-family:'Inter',sans-serif}
 .ik-cta-btn:hover{background:#d8ba73}
-@media (max-width:600px){.ik-cta-btn{display:none}}
+.page-id-12 .ik-cta-btn{display:inline-flex}
+@media (max-width:600px){.page-id-12 .ik-cta-btn{display:none}}
 .ik-fab{position:fixed;right:24px;bottom:24px;z-index:9999}
 .ik-fab input{position:absolute;opacity:0;width:0;height:0}
 .ik-fab__items{position:absolute;right:4px;bottom:70px;display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
@@ -74,7 +75,7 @@ topbar = ('<div class="ik-topbar"><div class="ik-topbar__inner">'
   '<div class="ik-topbar__left">'
   '<a class="ik-topbar__tel" href="tel:+393206116711">' + TEL_SVG + '320 611 6711</a>'
   '<a class="ik-topbar__email" href="mailto:coppola.fortunato@gmail.com">' + MAIL_SVG + 'coppola.fortunato@gmail.com</a>'
-  '</div><span class="ik-topbar__place">Reggio Calabria — Via Campoli 34</span>'
+  '</div><span class="ik-topbar__place">Reggio Calabria — Via Ravagnese Superiore 200</span>'
   '</div></div>')
 
 fab = ('<div class="ik-fab">'
