@@ -1,109 +1,45 @@
 <!-- wp:html -->
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-#ik-page{--navy:#1E2235;--gold:#C9A961;--paper:#f8f7f4;--rule:#e0ddd6;--muted:#6b6b73;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1E2235;line-height:1.6;width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);overflow-x:hidden}
-#ik-page *{box-sizing:border-box}
-#ik-page em,#ik-page i,#ik-page cite,#ik-page blockquote{font-style:normal}
-#ik-page p{margin:0}
-#ik-page a{color:inherit;text-decoration:none}
-#ik-page .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-#ik-page .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
-#ik-page .hero::after{content:'';position:absolute;right:-140px;top:-140px;width:420px;height:420px;border:1px solid rgba(201,169,97,.16);border-radius:50%}
-#ik-page .hero .wrap{padding:74px 24px;position:relative;z-index:1}
-#ik-page .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
-#ik-page .hero h1{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin:0 0 18px;max-width:22ch}
-#ik-page .hero h1 em{font-style:normal;color:var(--gold)}
-#ik-page .hero .lead{font-size:18px;color:rgba(255,255,255,.7);max-width:58ch;line-height:1.6}
-#ik-page .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
-#ik-page .hero-img{border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.14);aspect-ratio:4/3;box-shadow:0 20px 50px rgba(0,0,0,.3)}
-#ik-page .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
-#ik-page .map-embed{display:block;width:100%;height:380px;border:0;filter:grayscale(.2)}
-#ik-page .imgband{display:block;width:100%;height:clamp(220px,30vw,360px);object-fit:cover}
-#ik-page .cards2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-#ik-page .step{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:26px}
-#ik-page .step .n{font-family:'Archivo',sans-serif;font-size:34px;color:var(--gold);line-height:1;margin-bottom:10px}
-#ik-page .step h3{font-size:17px;font-weight:600;margin:0 0 6px}
-#ik-page .step p{color:var(--muted);font-size:14px}
-#ik-page .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-#ik-page .shot{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid var(--rule);display:block}
-#ik-page .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-#ik-page .shot:hover img{transform:scale(1.05)}
-#ik-page .shot span{position:absolute;left:12px;bottom:11px;background:rgba(30,34,53,.86);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:3px}
-#ik-page .ik-note{background:#fff7e6;border:1px solid #e6cf95;color:#7a5c11;font-size:14px;padding:12px 16px;border-radius:4px;margin-bottom:26px}
-#ik-page .clients-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-#ik-page .clients-row .ph{aspect-ratio:3/1;border:1px dashed var(--rule);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#6b6b73;font-size:14px;font-weight:600;text-align:center;padding:8px}
-@media(max-width:820px){#ik-page .shots{grid-template-columns:1fr}#ik-page .clients-row{grid-template-columns:repeat(2,1fr)}}
-#ik-page .checklist{columns:2;column-gap:32px;list-style:none;padding:0;margin:0}
-#ik-page .checklist li{padding:8px 0 8px 26px;position:relative;color:#3a3d4d;font-size:15px;break-inside:avoid}
-#ik-page .checklist li::before{content:'';position:absolute;left:0;top:12px;width:11px;height:11px;border:2px solid var(--gold);border-radius:50%}
-#ik-page .faq details{border-bottom:1px solid var(--rule);padding:16px 0}
-#ik-page .faq summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
-#ik-page .faq summary::-webkit-details-marker{display:none}
-#ik-page .faq summary::after{content:'+';color:var(--gold);font-size:22px;line-height:1;flex:none}
-#ik-page .faq details[open] summary::after{content:'3'}
-#ik-page .faq p{color:var(--muted);font-size:15px;margin-top:10px;max-width:72ch}
-@media(max-width:820px){#ik-page .checklist{columns:1}}
-#ik-page .ledform{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:end;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:26px}
-#ik-page .ledform label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:#1E2235}
-#ik-page .ledform select{padding:.75rem .9rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;background:#fff;color:#1E2235}
-#ik-page .ledform .btn{grid-column:1/-1;justify-content:center;background:#25D366;color:#083b1c}
-#ik-page .ledform .btn:hover{background:#38e07a}
-@media(max-width:820px){#ik-page .ledform{grid-template-columns:1fr}}
-@media (max-width:820px){#ik-page .cards2{grid-template-columns:1fr}}
-#ik-page section{padding:64px 0}
-#ik-page .alt{background:var(--paper)}
-#ik-page .navy{background:var(--navy);color:#fff}
-#ik-page h2{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0 0 12px}
-#ik-page h2 em{font-style:normal;color:var(--gold)}
-#ik-page .navy h2{color:#fff}
-#ik-page .sec-lead{color:var(--muted);font-size:16px;max-width:62ch;margin-bottom:38px}
-#ik-page .navy .sec-lead{color:rgba(255,255,255,.7)}
-#ik-page .grid2{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
-#ik-page .svc{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:30px 28px;background:#fff;transition:background .2s}
-#ik-page .svc:hover{background:var(--paper)}
-#ik-page .svc .num{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--gold);margin-bottom:16px}
-#ik-page .svc h3{font-size:18px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
-#ik-page .svc>p{color:var(--muted);font-size:14px;margin-bottom:12px}
-#ik-page .svc ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.75}
-#ik-page .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-#ik-page .card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:28px}
-#ik-page .navy .card{background:#262b42;border-color:rgba(255,255,255,.12)}
-#ik-page .card .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
-#ik-page .card h3{font-size:18px;font-weight:600;margin:0 0 8px}
-#ik-page .navy .card h3{color:#fff}
-#ik-page .card p{color:var(--muted);font-size:14px}
-#ik-page .navy .card p{color:rgba(255,255,255,.68)}
-#ik-page .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-#ik-page .stats .n{font-family:'Archivo',sans-serif;font-size:clamp(38px,5vw,52px);color:var(--gold);line-height:1;margin-bottom:8px}
-#ik-page .stats .l{font-size:14px;color:var(--muted);font-weight:600}
-#ik-page .btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;padding:13px 24px;border-radius:3px;background:var(--gold);color:#33270a;transition:transform .18s,background .2s;border:none;cursor:pointer}
-#ik-page .btn:hover{background:#d8ba73;transform:translateY(-2px)}
-#ik-page .btn--ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff}
-#ik-page .btn--ghost:hover{background:rgba(255,255,255,.08)}
-#ik-page .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
-#ik-page .pill{border:1px solid rgba(201,169,97,.42);color:var(--gold);font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:100px}
-#ik-page .navy .pill{color:var(--gold)}
-#ik-page .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-#ik-page .lead-p{font-size:18px;color:#3a3d4d;max-width:64ch;margin-bottom:16px}
-#ik-page .body-p{color:var(--muted);max-width:64ch;margin-bottom:14px}
-#ik-page .founder-grid{display:grid;grid-template-columns:320px 1fr;gap:48px;align-items:center}
-#ik-page .founder-photo{aspect-ratio:4/5;border-radius:6px;overflow:hidden;border:1px solid var(--rule)}
-#ik-page .founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
-#ik-page .founder-photo .ph{width:100%;height:100%;background:repeating-linear-gradient(135deg,#eceae4,#eceae4 10px,#e4e1d9 10px,#e4e1d9 20px);display:flex;align-items:center;justify-content:center;color:#9a978d;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;text-align:center;padding:14px}
-#ik-page .sign{font-family:'Archivo',sans-serif;font-size:22px;color:var(--navy);margin-top:18px}
-#ik-page .founder-block{max-width:780px;border-left:3px solid var(--gold);padding-left:30px}
-#ik-page .founder-block .eyebrow{margin-bottom:12px}
-#ik-page .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start}
-#ik-page .info-row{padding:14px 0;border-bottom:1px solid var(--rule)}
-#ik-page .info-row .k{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
-#ik-page .info-row a{font-weight:600}
-#ik-page form.ik-form{display:flex;flex-direction:column;gap:14px;max-width:520px}
-#ik-page form.ik-form input,#ik-page form.ik-form textarea,#ik-page form.ik-form select{padding:.85rem 1rem;border:1px solid var(--rule);border-radius:4px;font-size:15px;font-family:inherit;width:100%;background:#fff;color:#1E2235}
-#ik-page form.ik-form input:focus,#ik-page form.ik-form textarea:focus,#ik-page form.ik-form select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
-#ik-page form.ik-form button{align-self:flex-start}
-@media (max-width:820px){#ik-page .grid2,#ik-page .cards3,#ik-page .contact-grid,#ik-page .founder-grid,#ik-page .hero-grid{grid-template-columns:1fr}#ik-page .stats{grid-template-columns:repeat(2,1fr)}#ik-page .founder-photo{max-width:280px}#ik-page .hero-img{display:none}}
-</style>
-<div id="ik-page">
-<section class="hero"><div class="wrap"><p class="eyebrow">I nostri lavori</p><h1>I nostri lavori parlano <em>per noi</em>.</h1><p class="lead">Una selezione di ciò che realizziamo per le attività del territorio: insegne, LEDwall, grafica, stampa e allestimenti.</p></div></section><section><div class="wrap"><div class="ik-note">Stiamo caricando le foto dei lavori reali: le immagini qui sotto sono esempi illustrativi delle categorie. A breve i progetti veri di Idea Marketing.</div><div class="shots"><a class="shot" href="/contatti/"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-insegne-2.jpg" alt="Insegna e comunicazione visiva" loading="lazy"><span>Insegne</span></a><a class="shot" href="/contatti/"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-ledwall-tile.jpg" alt="Schermo LED e digital signage" loading="lazy"><span>LEDwall</span></a><a class="shot" href="/contatti/"><img src="https://ideamkt.it/wp-content/uploads/2026/08/ik-grafica-2.jpg" alt="Grafica e materiale stampato" loading="lazy"><span>Grafica</span></a></div></div></section><section class="alt"><div class="wrap"><h2>Hanno scelto Idea Marketing</h2><p class="sec-lead">Alcune delle attività che seguiamo.</p><div class="clients-row"><div class="ph">Torrefazione Due Zero</div><div class="ph">Mamas</div><div class="ph">Pilone by Rare</div><div class="ph">Barber Srl</div></div></div></section><section class="navy cta"><div class="wrap" style="text-align:center"><h2>Ti serve qualcosa di <em>simile</em>?</h2><p class="sec-lead" style="margin:12px auto 26px">Raccontaci il progetto: ti diamo un preventivo, di solito entro 24 ore.</p><div class="actions" style="justify-content:center"><a class="btn" href="/contatti/">Richiedi un preventivo</a></div></div></section>
-</div>
+<div id="ik-lavori"><style id="ik-lavori-css">
+#ik-lavori{--navy:#1E2235;--gold:#C9A961;--paper:#f8f7f4;--ink:#20232f;--line:#e7e3da;font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper)}
+#ik-lavori *{box-sizing:border-box}
+#ik-lavori h1,#ik-lavori h2{font-family:'Archivo','Inter',sans-serif;font-style:normal;font-weight:700}
+#ik-lavori em,#ik-lavori i,#ik-lavori cite{font-style:normal}
+#ik-lavori .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+#ik-lavori .hero{background:var(--navy);color:#fff;padding:66px 0 60px;text-align:center}
+#ik-lavori .hero .eyebrow{color:var(--gold);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin:0 0 14px}
+#ik-lavori .hero h1{font-size:44px;line-height:1.08;margin:0 0 16px}
+#ik-lavori .hero p{max-width:640px;margin:0 auto;color:#c7cbd8;font-size:17px;line-height:1.6}
+#ik-lavori .tabradio{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+#ik-lavori .tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:-28px auto 34px;position:relative;z-index:2}
+#ik-lavori .tab{cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:40px;padding:11px 20px;font-weight:600;font-size:15px;color:var(--ink);box-shadow:0 6px 18px rgba(20,24,40,.06);transition:.15s;display:inline-flex;align-items:center;gap:8px}
+#ik-lavori .tab:hover{border-color:var(--gold)}
+#ik-lavori .tab .n{background:var(--paper);color:#8a8676;font-size:12px;font-weight:700;border-radius:20px;padding:2px 8px}
+#ik-lavori .panel{display:none;padding-bottom:46px}
+#ik-lavori .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#ik-lavori figure.card{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(20,24,40,.06);transition:.18s}
+#ik-lavori figure.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(20,24,40,.12)}
+#ik-lavori .card .im{aspect-ratio:4/3;overflow:hidden;background:#f0eee9}
+#ik-lavori .card .im img{width:100%;height:100%;object-fit:cover;display:block}
+#ik-lavori .card figcaption{padding:14px 16px}
+#ik-lavori .card figcaption strong{display:block;font-family:'Archivo','Inter',sans-serif;font-size:16px;color:var(--navy)}
+#ik-lavori .card figcaption span{display:block;color:#8a8676;font-size:13px;margin-top:2px}
+#ik-lavori .cta{background:var(--navy);color:#fff;text-align:center;padding:54px 24px 58px}
+#ik-lavori .cta h2{font-size:30px;margin:0 0 10px}
+#ik-lavori .cta p{color:#c7cbd8;margin:0 0 24px;font-size:16px}
+#ik-lavori .cta a{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#1E2235;font-weight:600;text-decoration:none;padding:15px 30px;border-radius:5px;font-size:16px}
+#ik-lavori .cta a:hover{background:#d8ba73}
+#ik-lavori #cat-ledwall:checked~.tabs .tab-ledwall{background:var(--navy);color:#fff;border-color:var(--navy)}
+#ik-lavori #cat-ledwall:checked~.panels .panel-ledwall{display:block}
+#ik-lavori #cat-insegne:checked~.tabs .tab-insegne{background:var(--navy);color:#fff;border-color:var(--navy)}
+#ik-lavori #cat-insegne:checked~.panels .panel-insegne{display:block}
+#ik-lavori #cat-menu:checked~.tabs .tab-menu{background:var(--navy);color:#fff;border-color:var(--navy)}
+#ik-lavori #cat-menu:checked~.panels .panel-menu{display:block}
+#ik-lavori #cat-etichette:checked~.tabs .tab-etichette{background:var(--navy);color:#fff;border-color:var(--navy)}
+#ik-lavori #cat-etichette:checked~.panels .panel-etichette{display:block}
+#ik-lavori #cat-stampa:checked~.tabs .tab-stampa{background:var(--navy);color:#fff;border-color:var(--navy)}
+#ik-lavori #cat-stampa:checked~.panels .panel-stampa{display:block}
+
+@media(max-width:820px){#ik-lavori .grid{grid-template-columns:repeat(2,1fr)}#ik-lavori .hero h1{font-size:32px}}
+@media(max-width:520px){#ik-lavori .grid{grid-template-columns:1fr}}
+</style><section class="hero"><div class="wrap"><p class="eyebrow">Portfolio</p><h1>I nostri lavori</h1><p>Una selezione di progetti realizzati per le attivit&agrave; del territorio: insegne, LEDwall, menu, etichette e stampa. Scegli una categoria.</p></div></section><input type="radio" name="ikcat" id="cat-ledwall" class="tabradio" checked><input type="radio" name="ikcat" id="cat-insegne" class="tabradio"><input type="radio" name="ikcat" id="cat-menu" class="tabradio"><input type="radio" name="ikcat" id="cat-etichette" class="tabradio"><input type="radio" name="ikcat" id="cat-stampa" class="tabradio"><div class="tabs"><label for="cat-ledwall" class="tab tab-ledwall">LEDwall <span class="n">4</span></label><label for="cat-insegne" class="tab tab-insegne">Insegne &amp; Vetrine <span class="n">6</span></label><label for="cat-menu" class="tab tab-menu">Menu <span class="n">3</span></label><label for="cat-etichette" class="tab tab-etichette">Etichette &amp; Packaging <span class="n">4</span></label><label for="cat-stampa" class="tab tab-stampa">Stampa &amp; Allestimenti <span class="n">2</span></label></div><div class="panels wrap"><section class="panel panel-ledwall"><div class="grid"><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/ledwall-passion-pizza.jpg" alt="Passion Pizza - LEDwall pubblicitario" width="1400" height="1050"></div><figcaption><strong>Passion Pizza</strong><span>LEDwall pubblicitario</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/ledwall-noleggio.jpg" alt="Idea Marketing - LEDwall a noleggio" width="1400" height="1050"></div><figcaption><strong>Idea Marketing</strong><span>LEDwall a noleggio</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/ledwall-evento.jpg" alt="Evento cliente - Schermo installato" width="1400" height="1050"></div><figcaption><strong>Evento cliente</strong><span>Schermo installato</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/ledwall-fusion.jpg" alt="Fusion Restaurant - Grafica per LEDwall" width="1400" height="1050"></div><figcaption><strong>Fusion Restaurant</strong><span>Grafica per LEDwall</span></figcaption></figure></div></section><section class="panel panel-insegne"><div class="grid"><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-la-frutteria.jpg" alt="La Frutteria - Insegna esterna" width="1400" height="1050"></div><figcaption><strong>La Frutteria</strong><span>Insegna esterna</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-terra-mia.jpg" alt="Terra Mia - Insegna ristorante-pizzeria" width="1400" height="1050"></div><figcaption><strong>Terra Mia</strong><span>Insegna ristorante-pizzeria</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-stilo-infissi.jpg" alt="Stilo Infissi - Insegna e brand" width="1400" height="1050"></div><figcaption><strong>Stilo Infissi</strong><span>Insegna e brand</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-house-of-kipp.jpg" alt="House of Kipp - Insegna luminosa" width="1400" height="1050"></div><figcaption><strong>House of Kipp</strong><span>Insegna luminosa</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-zio-sam-scaled.jpg" alt="Zio Sam - Insegna decorata" width="1400" height="1050"></div><figcaption><strong>Zio Sam</strong><span>Insegna decorata</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/insegna-centro-riparo.jpg" alt="Centro Riparo - Punto vendita (foto reale)" width="1400" height="1050"></div><figcaption><strong>Centro Riparo</strong><span>Punto vendita (foto reale)</span></figcaption></figure></div></section><section class="panel panel-menu"><div class="grid"><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill.jpg" alt="Windy Hill - Menu pizzeria" width="1400" height="1050"></div><figcaption><strong>Windy Hill</strong><span>Menu pizzeria</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull.jpg" alt="Bad Bull - Menu burger" width="1400" height="1050"></div><figcaption><strong>Bad Bull</strong><span>Menu burger</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos.jpg" alt="Kairos - Menu gelateria" width="1400" height="1050"></div><figcaption><strong>Kairos</strong><span>Menu gelateria</span></figcaption></figure></div></section><section class="panel panel-etichette"><div class="grid"><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/etichetta-calabrian-sauce.jpg" alt="Calabrian Sauce - Etichetta conserve" width="1400" height="1050"></div><figcaption><strong>Calabrian Sauce</strong><span>Etichetta conserve</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/etichetta-creazzo-luigia.jpg" alt="Creazzo Luigia - Etichetta gastronomia" width="1400" height="1050"></div><figcaption><strong>Creazzo Luigia</strong><span>Etichetta gastronomia</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/etichetta-ideafrutta.jpg" alt="Ideafrutta - Marchio e etichetta" width="1400" height="1050"></div><figcaption><strong>Ideafrutta</strong><span>Marchio e etichetta</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/etichetta-lustro.jpg" alt="Lustro - Etichetta vino" width="1400" height="1050"></div><figcaption><strong>Lustro</strong><span>Etichetta vino</span></figcaption></figure></div></section><section class="panel panel-stampa"><div class="grid"><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/stampa-air-and-fire-scaled.jpg" alt="Air &amp; Fire - Espositore roll-up" width="1400" height="1050"></div><figcaption><strong>Air &amp; Fire</strong><span>Espositore roll-up</span></figcaption></figure><figure class="card"><div class="im"><img loading="lazy" src="https://ideamkt.it/wp-content/uploads/2026/08/stampa-ng-citrus.jpg" alt="NG Citrus - Merchandising e packaging" width="1400" height="1050"></div><figcaption><strong>NG Citrus</strong><span>Merchandising e packaging</span></figcaption></figure></div></section></div><div class="cta"><h2>Ti piace quello che facciamo?</h2><p>Raccontaci la tua idea: ti diamo un preventivo senza impegno.</p><a href="/contatti/">Richiedi un preventivo</a></div></div>
 <!-- /wp:html -->

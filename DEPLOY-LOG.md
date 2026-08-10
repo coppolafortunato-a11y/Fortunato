@@ -68,3 +68,30 @@ del backup corrispondente.
   togliere il blocco `wp:html` dall'header.
 - Da aggiungere quando disponibili: loghi immagine dei clienti, foto reali
   dei lavori, recensioni Google vere, orari e link social.
+
+## Aggiornamento — pagina "I nostri lavori" (portfolio) — 2026-08-10
+
+Portfolio reale costruito **solo con lavori estratti dagli archivi Google Drive**
+del cliente (nessuno stock, nessun contenuto inventato). Pubblicato sulla pagina
+`/lavori/` (ID 92), template `page-no-title`. Home invariata.
+
+**Struttura:** tab per tipologia cliccabili (CSS-only, radio hack), LEDwall in cima:
+LEDwall (4) · Insegne & Vetrine (6) · Menu (3) · Etichette & Packaging (4) · Stampa & Allestimenti (2) = **19 lavori**.
+
+**Immagini:** ottimizzate a max 1400px / qualità 82 (`scripts/optimize-lavori.py`),
+caricate nella Media Library WP con title/alt SEO (`scripts/upload-media.sh`, id 134–152),
+mappa in `wp-pages/lavori-media-map.json`. Sorgenti in `assets/lavori/`.
+
+**Design:** coerente col sito (navy #1E2235 / oro #C9A961 / Archivo+Inter), card con hover,
+griglia responsive (3→2→1 col), CTA "Richiedi un preventivo" a fondo pagina.
+
+**Scartati** (qualità/coerenza): "Vetrina-1/3" (erano foto stock), loghi su bianco
+(CVS, Kairos, Petroil), slide di testo deboli (Fortunato Romeo/Posta Express),
+etichette poco leggibili (Fragomani).
+
+**In sospeso:** 4 foto reali di LEDwall installati (Sagra della Cipolla, Hotel La Bussola,
+Il Trenino, Bagno Mareservice) non scaricabili via API (file 8–12 MB, oltre il limite del
+tool). Da aggiungere in cima ai LEDwall appena disponibili in versione più leggera.
+
+Builder pagina: `scripts/build-lavori-final.py` → `wp-pages/lavori.html`.
+Anteprima: `scripts/build-lavori-preview.py`. Backup pre-modifica salvato prima del POST.
