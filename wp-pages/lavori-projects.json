@@ -86,30 +86,6 @@
   ]
  },
  {
-  "category": "Menu",
-  "client": "Windy Hill",
-  "title": "Menu pizzeria",
-  "photos": [
-   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill.jpg"
-  ]
- },
- {
-  "category": "Menu",
-  "client": "Bad Bull",
-  "title": "Menu burger",
-  "photos": [
-   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull.jpg"
-  ]
- },
- {
-  "category": "Menu",
-  "client": "Kairos",
-  "title": "Menu gelateria",
-  "photos": [
-   "https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos.jpg"
-  ]
- },
- {
   "category": "Etichette",
   "client": "Calabrian Sauce",
   "title": "Etichetta conserve",
@@ -142,6 +118,48 @@
   ]
  },
  {
+  "category": "Menu",
+  "client": "Windy Hill",
+  "title": "Menu ristorante-pizzeria",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-01.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-02.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-03.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-04.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-05.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-06.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-07.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-windy-hill-08.jpg"
+  ]
+ },
+ {
+  "category": "Menu",
+  "client": "Bad Bull",
+  "title": "Menu burger",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-01.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-02.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-03.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-04.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-05.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-06.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-07.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-08.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-bad-bull-09.jpg"
+  ]
+ },
+ {
+  "category": "Menu",
+  "client": "Kairos",
+  "title": "Menu gelateria",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos-01-scaled.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos-02-scaled.jpg",
+   "https://ideamkt.it/wp-content/uploads/2026/08/menu-kairos-03-scaled.jpg"
+  ]
+ },
+ {
   "category": "Stampa",
   "client": "Air & Fire",
   "title": "Espositore roll-up",
@@ -155,6 +173,30 @@
   "title": "Merchandising e packaging",
   "photos": [
    "https://ideamkt.it/wp-content/uploads/2026/08/stampa-ng-citrus.jpg"
+  ]
+ },
+ {
+  "category": "Stampa",
+  "client": "Plugin Gin",
+  "title": "Roll-up espositore",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/stampa-plugin-gin-scaled.jpg"
+  ]
+ },
+ {
+  "category": "Stampa",
+  "client": "Pinacoteca",
+  "title": "Insegna",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/stampa-pinacoteca.jpg"
+  ]
+ },
+ {
+  "category": "Stampa",
+  "client": "GF Barber Shop",
+  "title": "Espositore da terra",
+  "photos": [
+   "https://ideamkt.it/wp-content/uploads/2026/08/stampa-gf-barber.jpg"
   ]
  }
 ]
