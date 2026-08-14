@@ -122,16 +122,24 @@ def cmd_pages(_):
 
 def cmd_insights(_):
     pid, ptok = page_id_and_token()
-    metrics = "page_impressions,page_post_engagements,page_fans,page_views_total"
-    r = api(f"{pid}/insights",
-            {"metric": metrics, "period": "days_28", "access_token": ptok})
-    print(f"Statistiche pagina {pid} (ultimi 28 giorni):\n")
-    for m in r.get("data", []):
-        vals = m.get("values", [])
+    # dati base della pagina (sempre validi)
+    base = api(pid, {"fields": "name,fan_count,followers_count,were_here_count",
+                     "access_token": ptok})
+    print(f"Statistiche pagina '{base.get('name', pid)}':\n")
+    print(f"  • Follower: {base.get('followers_count', '—')}")
+    print(f"  • Mi piace (fan): {base.get('fan_count', '—')}")
+    print(f"  • Persone 'sono state qui': {base.get('were_here_count', '—')}")
+    # metriche insight ancora valide su Graph v21 (molte vecchie sono dismesse)
+    print("\n  Ultimi 28 giorni:")
+    for metric, label in (("page_views_total", "Visualizzazioni pagina"),
+                          ("page_post_engagements", "Interazioni sui post"),
+                          ("page_daily_follows_unique", "Nuovi follower")):
+        r = api(f"{pid}/insights",
+                {"metric": metric, "period": "days_28", "access_token": ptok})
+        data = r.get("data", [])
+        vals = data[0].get("values", []) if data else []
         last = vals[-1]["value"] if vals else "—"
-        print(f"  • {m.get('title', m['name'])}: {last}")
-    if not r.get("data"):
-        print("  (nessun dato: pagina nuova o permesso read_insights mancante)")
+        print(f"  • {label}: {last}")
 
 
 def cmd_campaigns(_):
