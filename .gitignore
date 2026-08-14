@@ -12,3 +12,7 @@ backup-*.json
 # Sistema
 .DS_Store
 *.log
+
+# Cache Python
+__pycache__/
+*.pyc
