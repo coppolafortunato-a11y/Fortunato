@@ -16,3 +16,4 @@ backup-*.json
 # Liste contatti reali: mai su git (il modello sì)
 marketing/lista-contatti*.csv
 !marketing/lista-contatti-template.csv
+marketing/scheda-cliente-ledwall-*.csv

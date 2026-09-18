@@ -7,6 +7,8 @@ Materiale per le campagne, non per il sito.
 | `remarketing-lead.md` | Il piano: segmenti, calendario 6 settimane, budget, tracciamento, GDPR. **Parti da qui.** |
 | `messaggi-pronti.md` | Testi da copiare per WhatsApp, email, telefonate e inserzioni Meta. |
 | `lista-contatti-template.csv` | Modello del foglio contatti, con una riga di esempio da cancellare. |
+| `ledwall-riattivazione.md` | Campagna LEDwall settembre→dicembre: accessi, censimento Drive, gli 8 stati della trattativa e l'idea di messaggio per ognuno. |
+| `scheda-cliente-ledwall.csv` | Scheda di lavoro per la riattivazione LEDwall, una riga per cliente. |
 
 ## Come si usa il CSV
 

@@ -1,0 +1,2 @@
+cliente,referente,telefono,email,citta,tipo_attivita,prodotto_proposto,misura,prezzo_proposto,rata_proposta,data_preventivo,canale,ultimo_messaggio_data,ultimo_messaggio_da,dove_si_e_fermata,stato,fonte_dato,offerta_da_proporre,simulazione_disponibile,messaggio_inviato_il,risposta,esito,note
+Esempio Srl,Mario Rossi,+393331234567,info@esempio.it,Reggio Calabria,pizzeria,LEDwall monofacciale,100x100,4641,99.90,2026-03-12,whatsapp-ufficio,2026-03-20,noi,preventivo mandato e mai risposto,A,chat+drive,classico + promo dicembre,si,,,,pratica mai aperta
