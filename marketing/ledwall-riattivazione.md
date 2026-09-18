@@ -123,14 +123,15 @@ Struttura consigliata: **tre livelli**, così ogni stato ha dove atterrare.
 | **Classico** | stati A, B, C, E | la configurazione che avevate già discusso, con la promo di fine anno |
 | **Novità** | stati B, G | **totem LED** (ingresso, hotel, sale d'attesa) e pacchetto contenuti/grafiche |
 
-Dal foglio `PROMO offerte SETTEMBRE 2025 ledwall` i riferimenti di rata già usati in
-passato vanno da **59,90 €/mese** (50x50 mono) a **99,90 €/mese** (100x100 mono) fino
-a **179,90 €/mese** (100x150 bifacciale), con i prezzi di acquisto corrispondenti.
+Le rate da usare nei messaggi stanno in **`marketing/listino-rate-ledwall.md`**:
+misura + rata al mese, da 59,90 € (50x50 mono) a 179,90 € (100x150 bifacciale).
+Lì c'è anche la **scala delle rate**, cioè lo scalino da proporre a chi si era
+fermato sul prezzo — si scende di misura, non si sconta.
 
-⚠️ **Da confermare tu prima di usarli**: quel foglio è di settembre 2025 e contiene
-anche dati riservati (costi di acquisto e provvigioni) che **non vanno mai in un
-messaggio al cliente e non li ho copiati in questi file**. Prima di partire serve
-il listino promo **valido oggi** — con le rate aggiornate e le condizioni Grenke 2026.
+⚠️ **Da confermare tu prima di usarle**: quelle rate sono di settembre 2025. Il resto
+del foglio (costi di acquisto, margini, provvigioni) **non va mai in un messaggio al
+cliente e non l'ho copiato in questi file**. Servono le rate valide oggi e le
+condizioni Grenke 2026.
 
 **Cosa mi serve da te per chiudere l'offerta:** rate e prezzi validi da qui a
 dicembre · prezzo e misure del totem · cosa contiene il pacchetto contenuti ·
