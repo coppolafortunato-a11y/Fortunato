@@ -12,3 +12,7 @@ backup-*.json
 # Sistema
 .DS_Store
 *.log
+
+# Liste contatti reali: mai su git (il modello sì)
+marketing/lista-contatti*.csv
+!marketing/lista-contatti-template.csv

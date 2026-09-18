@@ -21,6 +21,7 @@ Titolare: Idea Marketing di Coppola Fortunato — Reggio Calabria.
 | `scripts/upload-mu-plugin.sh` | Obiettivo 2 — carica il mu-plugin via FTP. |
 | `scripts/check-permalinks.sh` | Obiettivo 3.4 — elenca gli slug reali per verificare gli href. |
 | `.env.example` | Modello di configurazione da copiare in `.env`. |
+| `marketing/` | Piano di remarketing sui contatti già acquisiti, messaggi pronti, modello lista contatti. |
 
 ## 1. Prerequisiti — credenziali
 
