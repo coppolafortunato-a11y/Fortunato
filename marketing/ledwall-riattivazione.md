@@ -52,6 +52,43 @@ fatte ai clienti — ottime da riallegare nel messaggio di ripresa), `LISTINI LE
 
 ---
 
+## 2-bis. Analisi dei 3 fogli lead — fatta
+
+Letti tutti e tre i fogli delle campagne Meta. **114 contatti utili, 96 da lavorare,
+18 da escludere.** Il dettaglio nome per nome sta nel foglio Drive
+**"RIATTIVAZIONE LEAD LEDWALL — settembre 2026"**, ordinato per priorità
+(qui restano solo i numeri: i dati personali non entrano nel repository).
+
+| Priorità | Quanti | Chi sono |
+|---------|--------|----------|
+| **1** | **10** | **Mai contattati, apr-mag 2026** — moduli Ledwall 2026 e Totem. Due hanno già scritto la misura che vogliono |
+| **2** | **7** | **Mai contattati, dic 2025 - gen 2026** — tutti con l'ora in cui volevano essere richiamati |
+| **3** | **5** | Interessati **con la misura già decisa** e mai chiusi |
+| **4** | **16** | **Rinvii scaduti**: "richiamare", "chiamare a fine agosto", "richiama lui" |
+| **5** | **5** | Appuntamenti e sopralluoghi fissati, esito non registrato |
+| **6** | **26** | Preventivo o listino mandato, nessun esito scritto |
+| **7** | **3** | Fermi sul prezzo (2) e una pratica non passata (1) |
+| **8** | **7** | Contattati più volte senza risposta |
+| **9-10** | **18** | Interessati con esito ignoto, da capire a voce |
+| escludere | **13** | KO dichiarato, hanno già comprato altrove, non interessati |
+| escludere | **5** | Numeri inesistenti o telefono spento |
+
+### Le tre cose che saltano all'occhio
+
+1. **17 persone hanno alzato la mano e non le ha mai chiamate nessuno.** Le
+   annotazioni si fermano a luglio 2025: tutto quello che è arrivato dopo —
+   dicembre, gennaio, e le campagne Totem e Ledwall 2026 di aprile-maggio — è
+   rimasto fermo. Sono i più recenti e i più facili: **da qui si parte lunedì.**
+2. **16 rinvii mai onorati.** Gente che aveva detto "richiamami" e non è stata
+   richiamata. Con loro non serve vendere, serve scusarsi e riprendere.
+3. **26 preventivi mandati senza esito registrato.** Nel foglio c'è scritto cosa è
+   stato mandato, non come è finita — ed è esattamente il buco che colmano le chat.
+
+### Cosa il foglio NON dice
+Le note raccontano **cosa è stato fatto** ("mandato preventivo"), quasi mai **come è
+finita**. Per questo servono ancora le chat di WhatsApp e di Squad: senza, i 26 della
+priorità 6 restano indistinguibili tra "mi ha detto no" e "si è solo perso".
+
 ## 3. Gli 8 esiti — come classifico ogni cliente
 
 Ogni nome finisce in **uno** di questi stati. Lo stato decide il messaggio (§4).
