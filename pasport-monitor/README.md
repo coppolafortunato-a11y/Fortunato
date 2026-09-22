@@ -24,9 +24,22 @@ scelta giusta nel merito: dallo stesso IP da cui poi prenoterai.
 
 ---
 
-## Installazione — un comando solo
+## Installazione — doppio clic
 
-Sul computer che resterà acceso:
+Sul computer che resterà acceso, scarica ed esegui il file adatto:
+
+- **Windows** → [`AVVIA-MONITOR-WINDOWS.bat`](https://raw.githubusercontent.com/coppolafortunato-a11y/Fortunato/claude/brave-wozniak-p0mqp3/pasport-monitor/install/AVVIA-MONITOR-WINDOWS.bat)
+- **Mac** → [`AVVIA-MONITOR-MAC.command`](https://raw.githubusercontent.com/coppolafortunato-a11y/Fortunato/claude/brave-wozniak-p0mqp3/pasport-monitor/install/AVVIA-MONITOR-MAC.command)
+
+Scarica, doppio clic, e fa tutto da solo: scarica il progetto, installa i
+componenti e lancia la configurazione guidata. L'unico prerequisito è
+**Node.js** ([nodejs.org](https://nodejs.org), pulsante **LTS**) — se manca,
+il file te lo dice e si ferma.
+
+Su Mac, se al primo doppio clic compare «impossibile aprire perché proviene da
+uno sviluppatore non identificato»: clic destro sul file → **Apri** → **Apri**.
+
+### Oppure da terminale
 
 ```bash
 npm install
