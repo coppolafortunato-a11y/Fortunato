@@ -16,9 +16,16 @@ async function main() {
 
   log.info('='.repeat(64));
   log.info(`MONITOR AVVIATO — PID ${process.pid}`);
-  log.info(`Intervallo: ${config.intervalMinutes} min | Durata: ${config.durationDays} giorni`);
+  log.info(`Intervallo: ${config.intervalMinutes} min (+ variazione casuale) | Durata: ${config.durationDays} giorni`);
+  const pool = config.onlyCenters.length
+    ? config.CENTERS.filter((c) => config.onlyCenters.includes(c.id))
+    : config.CENTERS;
+  if (config.rotate) {
+    const perCenter = Math.round((config.intervalMinutes * pool.length) / config.centersPerCycle);
+    log.info(`Rotazione: ${config.centersPerCycle} centro per ciclo — ogni centro viene visto ogni ~${perCenter} min`);
+  }
   log.info(`Arresto previsto: ${stopAt.toISOString()} (${stopAt.toLocaleString('it-IT')})`);
-  log.info(`Centri: ${config.CENTERS.map((c) => c.name).join(', ')}`);
+  log.info(`Centri: ${pool.map((c) => c.name).join(', ')}`);
   log.info(`Notifiche Telegram: ${config.telegram.token && config.telegram.chatId ? 'ATTIVE' : 'NON configurate'}`);
   log.info('='.repeat(64));
 
@@ -46,7 +53,9 @@ async function main() {
 
     // L'attesa parte dalla fine del ciclo: mai più di un giro ogni 15 minuti.
     const elapsed = Date.now() - cycleStart;
-    const wait = Math.max(config.intervalMinutes * 60000 - elapsed, 60000);
+    const [jMin, jMax] = config.jitterMs;
+    const jitter = Math.floor(jMin + Math.random() * (jMax - jMin));
+    const wait = Math.max(config.intervalMinutes * 60000 - elapsed, 60000) + jitter;
     const next = new Date(Date.now() + wait);
     if (next.getTime() >= stopAt.getTime()) break;
     log.info(`Ciclo #${cycle} concluso in ${Math.round(elapsed / 1000)}s. Prossimo: ${next.toLocaleTimeString('it-IT')}`);

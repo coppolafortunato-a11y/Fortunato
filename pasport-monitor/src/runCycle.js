@@ -14,12 +14,27 @@ const { formatDateIt } = require('./text');
  */
 async function runCycle({ notifications = true } = {}) {
   const current = state.load();
+  current.cycleCount = (current.cycleCount || 0) + 1;
+
+  const pool = config.onlyCenters.length
+    ? config.CENTERS.filter((c) => config.onlyCenters.includes(c.id))
+    : config.CENTERS;
+
+  const todo = state.pickCenters(current, pool);
+  if (todo.length === 0) {
+    const resume = Math.min(...pool.map((c) => current.centers[c.id]?.skipUntilCycle || 0));
+    log.info(`Tutti i centri sono in pausa dopo un blocco: riprendo al ciclo ${resume}.`);
+    state.save(current);
+    return [];
+  }
+  log.info(`Ciclo ${current.cycleCount} — controllo: ${todo.map((c) => c.name).join(', ')}`);
+
   const { browser, context } = await launch();
   const summary = [];
 
   try {
-    for (let i = 0; i < config.CENTERS.length; i++) {
-      const center = config.CENTERS[i];
+    for (let i = 0; i < todo.length; i++) {
+      const center = todo[i];
       const previous = { ...current.centers[center.id] };
       const result = await checkCenter(context, center);
 
@@ -36,6 +51,14 @@ async function runCycle({ notifications = true } = {}) {
 
       const entry = state.merge(current, center.id, result);
       summary.push({ center, result, entry });
+
+      if (result.blocked) {
+        log.info(
+          `${center.name}: il sito ha rifiutato la richiesta. ` +
+          `Lo rimetto in coda fra ${entry.skipUntilCycle - current.cycleCount} cicli ` +
+          `(blocco n° ${entry.blockStreak}).`
+        );
+      }
 
       if (result.status === 'ERROR') {
         if (notifications && entry.errorStreak >= config.errorAlertThreshold) {
@@ -57,7 +80,7 @@ async function runCycle({ notifications = true } = {}) {
 
       state.save(current);
 
-      if (i < config.CENTERS.length - 1) await randomDelay(config.delayBetweenCentersMs);
+      if (i < todo.length - 1) await randomDelay(config.delayBetweenCentersMs);
     }
   } finally {
     await context.close().catch(() => {});
@@ -67,8 +90,9 @@ async function runCycle({ notifications = true } = {}) {
   return summary;
 }
 
-/** Riga di log leggibile: "FULL", "ERRORE: ...", oppure l'elenco delle date. */
+/** Riga di log leggibile: "FULL", "BLOCCATO", "ERRORE: ...", o l'elenco delle date. */
 function describe(result) {
+  if (result.blocked) return `BLOCCATO DAL SITO (${result.error})`;
   if (result.status === 'ERROR') return `ERRORE: ${result.error}`;
   if (result.status === 'FULL' || result.dates.length === 0) return 'FULL';
   return result.dates

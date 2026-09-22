@@ -11,7 +11,11 @@ const config = require('./config');
  *                          lastStatus: "FULL", errorStreak: 0 } } }
  */
 function emptyCenter() {
-  return { dates: [], times: {}, lastStatus: null, errorStreak: 0, lastCheck: null };
+  return {
+    dates: [], times: {}, lastStatus: null, errorStreak: 0, lastCheck: null,
+    blockStreak: 0,        // blocchi consecutivi subiti da questo centro
+    skipUntilCycle: 0,     // ciclo prima del quale non lo ricontrolliamo
+  };
 }
 
 function load() {
@@ -29,6 +33,8 @@ function load() {
 
 function normalize(state) {
   state.centers = state.centers || {};
+  state.cycleCount = state.cycleCount || 0;
+  state.rotationIndex = state.rotationIndex || 0;
   for (const c of config.CENTERS) {
     state.centers[c.id] = Object.assign(emptyCenter(), state.centers[c.id]);
   }
@@ -81,8 +87,40 @@ function merge(state, centerId, current) {
   entry.lastStatus = current.status;
   entry.lastCheck = new Date().toISOString();
   entry.errorStreak = current.status === 'ERROR' ? (entry.errorStreak || 0) + 1 : 0;
+
+  if (current.blocked) {
+    // Il sito ci sta chiedendo di rallentare: raddoppiamo la pausa ogni volta.
+    entry.blockStreak = (entry.blockStreak || 0) + 1;
+    const wait = Math.min(2 ** entry.blockStreak, config.backoffMaxCycles);
+    entry.skipUntilCycle = (state.cycleCount || 0) + wait;
+  } else if (current.status !== 'ERROR') {
+    entry.blockStreak = 0;
+    entry.skipUntilCycle = 0;
+  }
+
   state.centers[centerId] = entry;
   return entry;
 }
 
-module.exports = { load, save, diff, merge, emptyCenter };
+/**
+ * Sceglie i centri da controllare in questo ciclo: uno per volta a rotazione,
+ * saltando quelli in pausa dopo un blocco. Se sono tutti in pausa, il ciclo
+ * non controlla nulla — è il comportamento voluto.
+ */
+function pickCenters(state, allCenters) {
+  const eligible = allCenters.filter(
+    (c) => (state.centers[c.id]?.skipUntilCycle || 0) <= state.cycleCount
+  );
+  if (eligible.length === 0) return [];
+  if (!config.rotate) return eligible;
+
+  const picked = [];
+  const howMany = Math.min(config.centersPerCycle, eligible.length);
+  for (let i = 0; i < howMany; i++) {
+    picked.push(eligible[(state.rotationIndex + i) % eligible.length]);
+  }
+  state.rotationIndex = (state.rotationIndex + howMany) % Math.max(eligible.length, 1);
+  return picked;
+}
+
+module.exports = { load, save, diff, merge, emptyCenter, pickCenters };

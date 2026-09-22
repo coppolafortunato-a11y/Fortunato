@@ -3,3 +3,4 @@ node_modules/
 logs/
 screenshots/
 data/state.json.tmp
+data/whatsapp-profile/

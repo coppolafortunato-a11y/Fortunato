@@ -75,11 +75,44 @@ sai già. Da lì in poi ricevi solo le novità.
 | `npm run install-service` | Installa il servizio persistente (systemd / launchd) |
 | `npm test` | Test automatici della logica (usa un sito di prova locale) |
 | `npm run chat-id` | Mostra il chat_id Telegram |
-| `npm run test-telegram` | Invia una notifica di prova |
+| `npm run test-notifiche` | Invia una prova su tutti i canali (Telegram, email, WhatsApp) |
+| `npm run whatsapp-login` | Collega WhatsApp Web al monitor (una volta sola) |
 
 Centri validi per `inspect`: `krakow`, `warszawa`, `wroclaw`, `gdansk`, `milan`.
 
 ---
+
+## Chi viene avvisato
+
+Tre canali, configurabili indipendentemente:
+
+| Canale | Chi | Come |
+|---|---|---|
+| **Telegram** | te | bot personale |
+| **Email** | te + chi vuoi | SMTP (con Gmail serve una "password per le app") |
+| **WhatsApp** | chi vuoi | WhatsApp Web già collegato su questo computer |
+
+WhatsApp va collegato una volta sola con `npm run whatsapp-login`: si apre una
+finestra col QR da inquadrare col telefono. La sessione resta salvata in
+`data/whatsapp-profile/` — cartella **esclusa da git**, perché contiene un
+accesso al tuo account.
+
+L'email contiene anche la spiegazione di cosa fare, per chi non segue i dettagli
+tecnici. Telegram e WhatsApp ricevono la versione corta, leggibile dalla notifica.
+
+## Quante richieste fa al sito
+
+Il sito **blocca chi lo interroga troppo** (verificato il 22/09/2026: dopo due
+centri controllati di fila ha iniziato a rispondere 403). Il monitor quindi:
+
+- controlla **un solo centro per ciclo**, a rotazione — con 5 centri e un ciclo
+  ogni 15 minuti, ogni centro viene visto ogni ~75 minuti;
+- aggiunge una **variazione casuale** all'attesa, per non avere un ritmo regolare;
+- quando un sito risponde 403, mette quel centro **a riposo per 2, 4, 8, 16 cicli**,
+  raddoppiando a ogni blocco.
+
+Per concentrarsi su pochi centri e ridurre ancora il carico:
+`ONLY_CENTERS=milan,gdansk` in `.env`.
 
 ## Quando arriva una notifica
 
@@ -145,7 +178,7 @@ cambiato, aggiorna `SERVICE_LABEL` in `src/config.js`.
 **«Bloccato da protezione anti-bot»** — stai uscendo da un IP che Cloudflare non
 gradisce (VPN, datacenter). Disattiva la VPN e usa la connessione di casa.
 
-**Nessuna notifica** — `npm run test-telegram`. Se fallisce, controlla di aver scritto
+**Nessuna notifica** — `npm run test-notifiche`. Se fallisce, controlla di aver scritto
 `/start` al bot e che `TELEGRAM_CHAT_ID` sia il numero restituito da `npm run chat-id`.
 
 **Vedere cosa fa il browser** — metti `HEADLESS=false` in `.env` e lancia `npm run check`.

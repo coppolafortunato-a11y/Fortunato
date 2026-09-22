@@ -20,12 +20,15 @@ const TIME_FIELD_LABELS = ['обрати час', 'оберіть час', 'ви
  */
 async function checkCenter(context, center, { screenshotOnFind = true } = {}) {
   const page = await context.newPage();
-  const out = { status: 'ERROR', dates: [], times: {}, error: null, screenshot: null };
+  const out = { status: 'ERROR', dates: [], times: {}, error: null, screenshot: null, blocked: false };
 
   try {
     const response = await page.goto(center.url, { waitUntil: 'domcontentloaded' });
     if (response && response.status() >= 400) {
-      throw new Error(`HTTP ${response.status()} dalla pagina`);
+      const err = new Error(`HTTP ${response.status()} dalla pagina`);
+      // 403 e 429 sono il sito che ci dice di rallentare, non un guasto.
+      err.blocked = response.status() === 403 || response.status() === 429;
+      throw err;
     }
 
     await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
@@ -66,6 +69,7 @@ async function checkCenter(context, center, { screenshotOnFind = true } = {}) {
     return out;
   } catch (err) {
     out.error = err.message;
+    out.blocked = Boolean(err.blocked);
     out.screenshot = await capture(page, center, 'error').catch(() => null);
     return out;
   } finally {
@@ -85,12 +89,20 @@ async function detectBlocking(page) {
     'доступ заборонено',
   ];
   const hit = markers.find((m) => text.includes(m) || title.includes(m));
-  if (hit) throw new Error(`Bloccato da protezione anti-bot ("${hit}") — nessun tentativo di aggiramento`);
+  if (hit) {
+    const err = new Error(`Bloccato da protezione anti-bot ("${hit}") — nessun tentativo di aggiramento`);
+    err.blocked = true;
+    throw err;
+  }
 
   const hasCaptcha = await page
     .locator('iframe[src*="recaptcha"], iframe[src*="hcaptcha"], iframe[src*="turnstile"], .g-recaptcha')
     .count();
-  if (hasCaptcha > 0) throw new Error('CAPTCHA presente in pagina — controllo interrotto');
+  if (hasCaptcha > 0) {
+    const err = new Error('CAPTCHA presente in pagina — controllo interrotto');
+    err.blocked = true;
+    throw err;
+  }
 }
 
 /**

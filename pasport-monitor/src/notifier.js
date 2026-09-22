@@ -5,21 +5,54 @@ const config = require('./config');
 const { formatDateIt } = require('./text');
 
 /**
- * Invia una notifica su tutti i canali configurati.
- * Un canale che fallisce non blocca gli altri né il monitor.
+ * Invia una notifica su tutti i canali configurati: Telegram, email, WhatsApp.
+ * Un canale che fallisce non blocca gli altri né il monitor: meglio una
+ * notifica su due che nessuna.
+ *
+ * `messages` può essere una stringa (stesso testo ovunque) oppure
+ * { short, full } — `short` per Telegram e WhatsApp, `full` per l'email.
  */
-async function notify(text, { screenshot = null } = {}) {
-  const results = [];
+async function notify(messages, { screenshot = null, subject = null } = {}) {
+  const short = typeof messages === 'string' ? messages : messages.short;
+  const full = typeof messages === 'string' ? messages : (messages.full || messages.short);
+  const tasks = [];
+
   if (config.telegram.token && config.telegram.chatId) {
-    results.push(await sendTelegram(text, screenshot).catch((e) => ({ ok: false, channel: 'telegram', error: e.message })));
+    tasks.push(wrap('telegram', sendTelegram(short, screenshot)));
   }
   if (config.email.enabled && config.email.host && config.email.to) {
-    results.push(await sendEmail(text).catch((e) => ({ ok: false, channel: 'email', error: e.message })));
+    tasks.push(wrap('email', sendEmail(full, subject || firstLine(short))));
   }
-  if (results.length === 0) {
+  if (tasks.length === 0 && config.whatsapp.length === 0) {
     console.warn('ATTENZIONE: nessun canale di notifica configurato — vedi .env');
+    return [];
+  }
+
+  const results = await Promise.all(tasks);
+
+  // WhatsApp Web riusa una sola finestra per tutti i destinatari, quindi
+  // viene dopo gli altri canali: è il più lento, non deve ritardarli.
+  if (config.whatsapp.length) {
+    const { sendToAll } = require('./whatsapp-web');
+    try {
+      results.push(...(await sendToAll(config.whatsapp, short)));
+    } catch (err) {
+      console.error(`Notifica WhatsApp non riuscita: ${err.message}`);
+      results.push({ ok: false, channel: 'whatsapp', error: err.message });
+    }
   }
   return results;
+}
+
+/** Non lascia mai fallire l'intero invio per colpa di un singolo canale. */
+async function wrap(channel, promise) {
+  try {
+    await promise;
+    return { ok: true, channel };
+  } catch (err) {
+    console.error(`Notifica ${channel} non riuscita: ${err.message}`);
+    return { ok: false, channel, error: err.message };
+  }
 }
 
 async function sendTelegram(text, screenshot) {
@@ -31,30 +64,20 @@ async function sendTelegram(text, screenshot) {
     form.append('caption', truncate(text, 1024));
     form.append('photo', new Blob([fs.readFileSync(screenshot)]), 'screenshot.png');
     const res = await fetch(`${base}/sendPhoto`, { method: 'POST', body: form });
-    if (res.ok) return { ok: true, channel: 'telegram' };
-    // Se l'invio della foto fallisce ripieghiamo sul solo testo.
+    if (res.ok) return;
+    // Se la foto non passa, ripieghiamo sul solo testo.
   }
 
   const res = await fetch(`${base}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: config.telegram.chatId,
-      text: truncate(text, 4096),
-      disable_web_page_preview: false,
-    }),
+    body: JSON.stringify({ chat_id: config.telegram.chatId, text: truncate(text, 4096) }),
   });
-  if (!res.ok) throw new Error(`Telegram HTTP ${res.status}: ${truncate(await res.text(), 200)}`);
-  return { ok: true, channel: 'telegram' };
+  if (!res.ok) throw new Error(`HTTP ${res.status}: ${truncate(await res.text(), 200)}`);
 }
 
-async function sendEmail(text) {
-  let nodemailer;
-  try {
-    nodemailer = require('nodemailer');
-  } catch {
-    throw new Error('nodemailer non installato: esegui `npm install nodemailer`');
-  }
+async function sendEmail(text, subject) {
+  const nodemailer = require('nodemailer');
   const transport = nodemailer.createTransport({
     host: config.email.host,
     port: config.email.port,
@@ -64,10 +87,9 @@ async function sendEmail(text) {
   await transport.sendMail({
     from: config.email.user || `monitor@${config.email.host}`,
     to: config.email.to,
-    subject: text.split('\n')[0].slice(0, 120),
+    subject: truncate(subject, 120),
     text,
   });
-  return { ok: true, channel: 'email' };
 }
 
 function truncate(s, n) {
@@ -75,48 +97,88 @@ function truncate(s, n) {
   return str.length > n ? str.slice(0, n - 1) + '…' : str;
 }
 
-/** Messaggio di disponibilità, nel formato richiesto. */
-function buildAvailabilityMessage(center, changes, current) {
-  const lines = ['🚨 APPUNTAMENTO TROVATO', '', `Centro: ${center.name}`];
+function firstLine(s) {
+  return String(s).split('\n')[0];
+}
 
-  const dates = changes.newDates.length
-    ? changes.newDates
-    : Object.keys(changes.newTimes);
+/**
+ * Messaggio di disponibilità.
+ * `short` va su Telegram e WhatsApp: deve stare in una notifica sul telefono.
+ * `full` va per email: contiene la spiegazione per chi non segue i dettagli.
+ */
+function buildAvailabilityMessage(center, changes, current) {
+  const dates = changes.newDates.length ? changes.newDates : Object.keys(changes.newTimes);
+  const righe = [];
 
   for (const date of dates) {
     const times = (current.times && current.times[date]) || [];
     const priority = date < config.priorityBefore ? '  ⭐ PRIORITARIO' : '';
-    lines.push(`Data: ${formatDateIt(date)}${priority}`);
-    if (times.length) {
-      lines.push(`Orari: ${times.join(', ')}`);
-    } else {
-      lines.push('Orari: (non letti — controlla sul sito)');
-    }
+    righe.push(`Data: ${formatDateIt(date)}${priority}`);
+    righe.push(times.length ? `Orari: ${times.join(', ')}` : 'Orari: (controlla sul sito)');
   }
 
   if (changes.reopened && dates.length === 0) {
-    lines.push('Stato: disponibilità RIAPERTA dopo un periodo senza posti');
-    lines.push(`Date attuali: ${current.dates.map(formatDateIt).join(', ') || '—'}`);
+    righe.push('Stato: disponibilità RIAPERTA dopo un periodo senza posti');
+    righe.push(`Date attuali: ${current.dates.map(formatDateIt).join(', ') || '—'}`);
   }
 
-  lines.push('', 'Servizio: Passaporto e/o ID-card', '', 'PRENOTA SUBITO:', center.url);
-  return lines.join('\n');
+  const short = [
+    '🚨 APPUNTAMENTO TROVATO',
+    '',
+    `Centro: ${center.name}`,
+    ...righe,
+    '',
+    'Servizio: Passaporto e/o ID-card',
+    '',
+    'PRENOTA SUBITO:',
+    center.url,
+  ].join('\n');
+
+  const full = [
+    '🚨 APPUNTAMENTO DISPONIBILE — PRENOTA SUBITO',
+    '',
+    `Centro:    ${center.name}`,
+    ...righe.map((r) => '  ' + r),
+    '  Servizio:  Закордонний паспорт та (або) ID-картка',
+    '             (passaporto estero e/o carta d\'identità)',
+    '',
+    'PRENOTA QUI:',
+    center.url,
+    '',
+    '─'.repeat(58),
+    'COSA FARE, IN BREVE',
+    '',
+    '1. Apri subito il link qui sopra: i posti spariscono in pochi minuti.',
+    '2. Nel campo "Послуга" scegli «Закордонний паспорт та (або) ID-картка».',
+    '3. Scegli la data e l\'ora indicate sopra.',
+    '4. Inserisci i dati richiesti e conferma la prenotazione.',
+    '',
+    'Serve: nome e cognome come sul documento, data di nascita,',
+    'e un numero di telefono per la conferma.',
+    '',
+    '─'.repeat(58),
+    'Questo messaggio arriva da un programma che controlla automaticamente',
+    'i centri "Паспортний сервіс ДП Документ" e avvisa appena si libera un',
+    'posto. Ti scrive solo quando c\'è una novità vera, mai due volte per la',
+    'stessa disponibilità.',
+  ].join('\n');
+
+  return { short, full, subject: `🚨 Appuntamento disponibile — ${center.name}` };
 }
 
 /** Alert tecnico dopo N errori consecutivi sullo stesso centro. */
 function buildErrorMessage(center, streak, error) {
-  return [
+  const short = [
     '⚠️ PROBLEMA TECNICO MONITOR',
     '',
     `Centro: ${center.name}`,
     `Controlli falliti consecutivi: ${streak}`,
     `Errore: ${error}`,
     '',
-    'Il monitor continua a provare. Se persiste, il sito potrebbe aver',
-    'cambiato struttura o bloccato l\'automazione.',
-    '',
+    'Il monitor continua a provare.',
     center.url,
   ].join('\n');
+  return { short, full: short, subject: `⚠️ Monitor appuntamenti — problema su ${center.name}` };
 }
 
 module.exports = { notify, buildAvailabilityMessage, buildErrorMessage };

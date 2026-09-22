@@ -15,6 +15,7 @@ const config = require('../src/config');
 const SCENARIOS = { krakow: 'full', warszawa: 'full', wroclaw: 'full', gdansk: 'available', milan: 'available' };
 for (const c of config.CENTERS) c.url = `http://127.0.0.1:8732/${SCENARIOS[c.id]}`;
 config.delayBetweenCentersMs = [200, 400];
+config.rotate = false;   // in questo test vogliamo tutti e 5 i centri in un ciclo
 config.paths.state = path.join(os.tmpdir(), 'pasport-monitor-test-state.json');
 
 const notifier = require('../src/notifier');

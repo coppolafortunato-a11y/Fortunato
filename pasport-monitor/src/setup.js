@@ -117,6 +117,53 @@ async function main() {
     await configureTelegram(env);
   }
 
+  // ── 4b. Email ────────────────────────────────────────────────────────
+  step('4b', 'Notifiche via email (facoltative)');
+  const vuoleEmail = await ask('  Vuoi ricevere gli avvisi anche per email? [s/N] ');
+  if (/^s/i.test(vuoleEmail)) {
+    console.log(`
+  Con Gmail serve una "password per le app", non quella normale:
+  Account Google → Sicurezza → Verifica in due passaggi → Password per le app
+`);
+    env.SMTP_HOST = (await ask(`  Server SMTP [${env.SMTP_HOST || 'smtp.gmail.com'}]: `)) || env.SMTP_HOST || 'smtp.gmail.com';
+    env.SMTP_PORT = (await ask(`  Porta [${env.SMTP_PORT || '587'}]: `)) || env.SMTP_PORT || '587';
+    env.SMTP_USER = (await ask('  Tuo indirizzo email (mittente): ')) || env.SMTP_USER || '';
+    env.SMTP_PASS = (await ask('  Password per le app: ')) || env.SMTP_PASS || '';
+    env.EMAIL_TO = (await ask('  Destinatari, separati da virgola: ')) || env.EMAIL_TO || '';
+    env.EMAIL_ENABLED = env.SMTP_USER && env.EMAIL_TO ? 'true' : 'false';
+    writeEnv(env);
+    ok(env.EMAIL_ENABLED === 'true' ? `Email attive → ${env.EMAIL_TO}` : 'Email non configurate.');
+  } else {
+    env.EMAIL_ENABLED = env.EMAIL_ENABLED || 'false';
+  }
+
+  // ── 4c. WhatsApp ─────────────────────────────────────────────────────
+  step('4c', 'Notifiche via WhatsApp (facoltative)');
+  const vuoleWa = await ask('  Vuoi avvisare qualcuno su WhatsApp? [s/N] ');
+  if (/^s/i.test(vuoleWa)) {
+    console.log(`
+  Serve WhatsApp Web collegato a questo computer: si apre una finestra
+  con un QR da inquadrare col telefono (una volta sola).
+`);
+    const dest = await ask('  Destinatari, formato Nome:+39numero, separati da virgola:\n  ');
+    if (dest) {
+      env.WHATSAPP_RECIPIENTS = dest;
+      writeEnv(env);
+      process.env.WHATSAPP_RECIPIENTS = dest;
+      const collega = await ask('  Apro ora la finestra per collegare WhatsApp Web? [S/n] ');
+      if (!/^n/i.test(collega)) {
+        try {
+          execFileSync(process.execPath, [path.join(__dirname, 'whatsapp-login.js')], {
+            stdio: 'inherit', cwd: config.ROOT,
+          });
+          ok('WhatsApp Web collegato.');
+        } catch {
+          warn('Collegamento non riuscito. Riprova più tardi con: npm run whatsapp-login');
+        }
+      }
+    }
+  }
+
   // ── 5. Impostazioni ──────────────────────────────────────────────────
   step(5, 'Impostazioni del monitoraggio');
   env.INTERVAL_MINUTES = env.INTERVAL_MINUTES || '15';
@@ -124,8 +171,12 @@ async function main() {
   env.PRIORITY_BEFORE = env.PRIORITY_BEFORE || '2026-10-15';
   env.ERROR_ALERT_THRESHOLD = env.ERROR_ALERT_THRESHOLD || '3';
   env.HEADLESS = env.HEADLESS || 'true';
+  env.ROTATE = env.ROTATE || 'true';
+  env.CENTERS_PER_CYCLE = env.CENTERS_PER_CYCLE || '1';
   writeEnv(env);
   ok(`Controllo ogni ${env.INTERVAL_MINUTES} minuti, per ${env.DURATION_DAYS} giorni.`);
+  ok('Un centro per ciclo a rotazione: ogni centro viene visto ogni ~75 minuti.');
+  console.log('     (il sito blocca chi lo interroga troppo spesso, quindi si va piano)');
   ok(`Impostazioni salvate in ${path.join(config.ROOT, '.env')}`);
 
   // ── 6. Primo controllo reale ─────────────────────────────────────────
@@ -169,7 +220,11 @@ ${'═'.repeat(62)}
   Log             : ${config.paths.logFile}
   Stato salvato   : ${config.paths.state}
   Screenshot      : ${config.paths.screenshotDir}
-  Notifiche       : Telegram${env.EMAIL_ENABLED === 'true' ? ' + email' : ''}
+  Notifiche       : ${[
+    env.TELEGRAM_CHAT_ID ? 'Telegram' : null,
+    env.EMAIL_ENABLED === 'true' ? `email (${env.EMAIL_TO})` : null,
+    env.WHATSAPP_RECIPIENTS ? `WhatsApp (${env.WHATSAPP_RECIPIENTS})` : null,
+  ].filter(Boolean).join(', ') || 'nessuna'}
   Frequenza       : ogni ${env.INTERVAL_MINUTES} minuti
   Arresto previsto: ${stop.toLocaleString('it-IT')}
 
