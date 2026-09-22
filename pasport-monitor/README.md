@@ -24,48 +24,29 @@ scelta giusta nel merito: dallo stesso IP da cui poi prenoterai.
 
 ---
 
-## Installazione (una volta sola)
+## Installazione — un comando solo
+
+Sul computer che resterà acceso:
 
 ```bash
-cd pasport-monitor
 npm install
-npx playwright install chromium     # scarica il browser (~150 MB)
+npm run setup
 ```
 
-Serve Node.js 18 o superiore (`node --version`).
+`npm run setup` fa tutto da solo e ti guida passo passo:
 
-### Telegram
+1. controlla Node.js e scarica il browser Chromium;
+2. **verifica subito che i siti rispondano da questa connessione** (se c'è una VPN attiva te lo dice);
+3. ti fa creare il bot Telegram e trova da solo il tuo `chat_id`, poi ti manda un messaggio di prova;
+4. esegue il primo controllo reale dei 5 centri e ti mostra la situazione attuale;
+5. installa il monitor come servizio permanente (systemd / launchd / Task Scheduler);
+6. stampa dove sono i log e quando il monitor si fermerà.
 
-1. Su Telegram apri **@BotFather** → `/newbot` → scegli un nome → ricevi il **token**.
-2. Apri il tuo nuovo bot e scrivigli `/start`.
-3. Configura:
+Serve Node.js 18 o superiore — se non ce l'hai, scaricalo da [nodejs.org](https://nodejs.org) (versione **LTS**).
 
-```bash
-cp .env.example .env
-# incolla il token in TELEGRAM_BOT_TOKEN, poi:
-npm run chat-id          # stampa il tuo chat_id -> incollalo in TELEGRAM_CHAT_ID
-npm run test-telegram    # deve arrivarti un messaggio di prova
-```
-
----
-
-## Primo avvio
-
-```bash
-npm run inspect krakow   # 1. verifica che il form venga letto correttamente
-npm run baseline         # 2. primo controllo SENZA notifiche: registra la situazione attuale
-npm run check            # 3. controllo normale: da qui in poi notifica le novità
-npm run install-service  # 4. avvia il monitor in modo persistente
-```
-
-Su Windows, al posto dell'ultimo comando:
-
-```powershell
-.\install\install-windows.ps1
-```
-
-`npm run baseline` è importante: memorizza gli orari già presenti su Danzica e Milano,
-così il primo controllo vero non ti manda una notifica per appuntamenti che conosci già.
+Il primo controllo viene fatto **senza notifiche**: registra gli appuntamenti già
+noti (Danzica 22/10, Milano 15/10) così non ti arriva un avviso per qualcosa che
+sai già. Da lì in poi ricevi solo le novità.
 
 ---
 
@@ -73,6 +54,7 @@ così il primo controllo vero non ti manda una notifica per appuntamenti che con
 
 | Comando | Cosa fa |
 |---|---|
+| `npm run setup` | Installazione guidata completa (da fare una volta) |
 | `npm run check` | Un controllo sui 5 centri, con notifiche |
 | `npm run baseline` | Un controllo **senza** notifiche (per fissare lo stato iniziale) |
 | `npm run inspect <centro>` | Stampa la struttura del form + screenshot + HTML |

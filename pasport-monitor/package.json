@@ -11,7 +11,8 @@
     "chat-id": "node src/test-telegram.js --chat-id",
     "test-telegram": "node src/test-telegram.js",
     "test": "node test/run-tests.js",
-    "install-service": "bash install/install.sh"
+    "install-service": "bash install/install.sh",
+    "setup": "node src/setup.js"
   },
   "keywords": [],
   "author": "",
