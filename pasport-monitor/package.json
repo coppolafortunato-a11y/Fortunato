@@ -13,7 +13,9 @@
     "install-service": "bash install/install.sh",
     "setup": "node src/setup.js",
     "whatsapp-login": "node src/whatsapp-login.js",
-    "test-notifiche": "node src/test-notifiche.js"
+    "test-notifiche": "node src/test-notifiche.js",
+    "whatsapp-verifica": "node src/whatsapp-verifica.js",
+    "chrome-collegabile": "powershell -ExecutionPolicy Bypass -File install/crea-scorciatoia-chrome.ps1"
   },
   "keywords": [],
   "author": "",

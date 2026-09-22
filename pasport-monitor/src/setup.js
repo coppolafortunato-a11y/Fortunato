@@ -148,17 +148,45 @@ async function main() {
     const dest = await ask('  Destinatari, formato Nome:+39numero, separati da virgola:\n  ');
     if (dest) {
       env.WHATSAPP_RECIPIENTS = dest;
+
+      console.log(`
+  Come mandare i messaggi?
+    1) Usando il TUO Chrome, già aperto e già loggato — nessun QR da fare.
+       Dovrai aprire Chrome da un collegamento apposta e lasciarlo aperto.
+    2) Con una finestra separata, da collegare col QR una volta sola.
+       Non dipende dal tuo Chrome, ma conta come dispositivo collegato.
+`);
+      const scelta = await ask('  Scegli [1/2, predefinito 1]: ');
+      env.WHATSAPP_MODE = scelta.trim() === '2' ? 'profilo' : 'chrome';
+      env.CHROME_DEBUG_PORT = env.CHROME_DEBUG_PORT || '9222';
       writeEnv(env);
       process.env.WHATSAPP_RECIPIENTS = dest;
-      const collega = await ask('  Apro ora la finestra per collegare WhatsApp Web? [S/n] ');
-      if (!/^n/i.test(collega)) {
-        try {
-          execFileSync(process.execPath, [path.join(__dirname, 'whatsapp-login.js')], {
-            stdio: 'inherit', cwd: config.ROOT,
-          });
-          ok('WhatsApp Web collegato.');
-        } catch {
-          warn('Collegamento non riuscito. Riprova più tardi con: npm run whatsapp-login');
+      process.env.WHATSAPP_MODE = env.WHATSAPP_MODE;
+
+      if (env.WHATSAPP_MODE === 'chrome') {
+        if (process.platform === 'win32') {
+          try {
+            execSync('powershell -ExecutionPolicy Bypass -File install\\crea-scorciatoia-chrome.ps1', {
+              stdio: 'inherit', cwd: config.ROOT,
+            });
+          } catch {
+            warn('Scorciatoia non creata. Riprova con: npm run chrome-collegabile');
+          }
+        }
+        console.log('  Da ora apri Chrome dal collegamento "Chrome collegabile",');
+        console.log('  lascia aperta una scheda su web.whatsapp.com, poi verifica con:');
+        console.log('     npm run whatsapp-verifica');
+      } else {
+        const collega = await ask('  Apro ora la finestra per collegare WhatsApp Web? [S/n] ');
+        if (!/^n/i.test(collega)) {
+          try {
+            execFileSync(process.execPath, [path.join(__dirname, 'whatsapp-login.js')], {
+              stdio: 'inherit', cwd: config.ROOT,
+            });
+            ok('WhatsApp Web collegato.');
+          } catch {
+            warn('Collegamento non riuscito. Riprova più tardi con: npm run whatsapp-login');
+          }
         }
       }
     }

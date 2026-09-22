@@ -21,6 +21,43 @@ const config = require('./config');
 const PROFILE_DIR = path.join(config.ROOT, 'data', 'whatsapp-profile');
 const WA = 'https://web.whatsapp.com';
 
+/**
+ * Due modi di arrivare a WhatsApp Web:
+ *
+ *  'chrome'  — si collega al Chrome che l'utente ha già aperto e già loggato.
+ *              Nessun QR da scansionare, ma Chrome dev'essere avviato con
+ *              --remote-debugging-port (vedi install/chrome-collegabile).
+ *  'profilo' — finestra separata con memoria propria, da collegare una volta
+ *              col QR. Funziona sempre, anche senza toccare il Chrome di casa.
+ */
+const MODE = config.whatsappMode;
+
+/**
+ * Si aggancia al Chrome già aperto dell'utente tramite la porta di debug.
+ * Restituisce { context, opened } — `opened` sono le schede aperte da noi,
+ * le uniche che ci permettiamo di chiudere: le altre sono dell'utente.
+ */
+async function connectToUserChrome() {
+  const endpoint = `http://127.0.0.1:${config.chromeDebugPort}`;
+  let browser;
+  try {
+    browser = await chromium.connectOverCDP(endpoint, { timeout: 15000 });
+  } catch (err) {
+    throw new Error(
+      `Non riesco a collegarmi al tuo Chrome su ${endpoint}. ` +
+      'Chrome dev\'essere aperto e avviato con la porta di debug: usa il ' +
+      'collegamento "Chrome collegabile" creato dall\'installazione, oppure ' +
+      'passa a WHATSAPP_MODE=profilo in .env.'
+    );
+  }
+  const context = browser.contexts()[0];
+  if (!context) {
+    await browser.close().catch(() => {});
+    throw new Error('Chrome è raggiungibile ma non ha nessuna finestra aperta.');
+  }
+  return { browser, context };
+}
+
 /** Apre il profilo persistente: headless per l'invio, visibile per il login. */
 async function openContext({ headless }) {
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
@@ -94,15 +131,40 @@ async function login() {
  */
 async function sendToAll(recipients, text) {
   if (recipients.length === 0) return [];
-  const context = await openContext({ headless: config.headless });
-  const page = context.pages()[0] || (await context.newPage());
+
+  const usaChromeUtente = MODE === 'chrome';
+  let browser = null;
+  let context;
+  let page;
+  let pageIsOurs = false;
+
+  if (usaChromeUtente) {
+    ({ browser, context } = await connectToUserChrome());
+    // Se una scheda WhatsApp Web è già aperta, riusiamo quella.
+    page = context.pages().find((p) => p.url().includes('web.whatsapp.com'));
+    if (!page) {
+      page = await context.newPage();
+      pageIsOurs = true;
+    }
+  } else {
+    context = await openContext({ headless: config.headless });
+    page = context.pages()[0] || (await context.newPage());
+    pageIsOurs = true;
+  }
+
   const results = [];
 
   try {
-    await page.goto(WA, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    if (!page.url().includes('web.whatsapp.com')) {
+      await page.goto(WA, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    }
     const state = await waitForState(page, 60000);
     if (state === 'login') {
-      throw new Error('WhatsApp Web non è collegato: esegui `npm run whatsapp-login`.');
+      throw new Error(
+        usaChromeUtente
+          ? 'WhatsApp Web chiede il login nel tuo Chrome: aprilo e accedi, poi riprova.'
+          : 'WhatsApp Web non è collegato: esegui `npm run whatsapp-login`.'
+      );
     }
     if (state !== 'ready') {
       throw new Error('WhatsApp Web non si è caricato in tempo.');
@@ -124,7 +186,14 @@ async function sendToAll(recipients, text) {
       }
     }
   } finally {
-    await context.close().catch(() => {});
+    // Nel Chrome dell'utente chiudiamo solo ciò che abbiamo aperto noi,
+    // e ci limitiamo a scollegarci: la sua finestra resta com'era.
+    if (usaChromeUtente) {
+      if (pageIsOurs) await page.close().catch(() => {});
+      await browser.close().catch(() => {});
+    } else {
+      await context.close().catch(() => {});
+    }
   }
   return results;
 }

@@ -111,6 +111,13 @@ const config = {
    * Formato: Nome:+39xxxxxxxxxx, più destinatari separati da virgola.
    */
   whatsapp: parseWhatsapp(process.env.WHATSAPP_RECIPIENTS),
+
+  /**
+   * 'chrome'  = usa il Chrome già aperto e già loggato dell'utente
+   * 'profilo' = finestra separata, da collegare col QR una volta sola
+   */
+  whatsappMode: process.env.WHATSAPP_MODE === 'profilo' ? 'profilo' : 'chrome',
+  chromeDebugPort: num(process.env.CHROME_DEBUG_PORT, 9222),
 };
 
 function parseWhatsapp(raw) {

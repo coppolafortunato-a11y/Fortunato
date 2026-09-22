@@ -77,7 +77,9 @@ sai già. Da lì in poi ricevi solo le novità.
 | `npm test` | Test automatici della logica (usa un sito di prova locale) |
 | `npm run chat-id` | Mostra il chat_id Telegram |
 | `npm run test-notifiche` | Invia una prova su tutti i canali (Telegram, email, WhatsApp) |
-| `npm run whatsapp-login` | Collega WhatsApp Web al monitor (una volta sola) |
+| `npm run whatsapp-verifica` | Controlla che WhatsApp sia pronto, senza inviare nulla |
+| `npm run chrome-collegabile` | Crea il collegamento "Chrome collegabile" (Windows) |
+| `npm run whatsapp-login` | Collega la finestra separata col QR (modalità `profilo`) |
 
 Centri validi per `inspect`: `krakow`, `warszawa`, `wroclaw`, `gdansk`, `milan`.
 
@@ -93,10 +95,22 @@ Tre canali, configurabili indipendentemente:
 | **Email** | te + chi vuoi | SMTP (con Gmail serve una "password per le app") |
 | **WhatsApp** | chi vuoi | WhatsApp Web già collegato su questo computer |
 
-WhatsApp va collegato una volta sola con `npm run whatsapp-login`: si apre una
-finestra col QR da inquadrare col telefono. La sessione resta salvata in
-`data/whatsapp-profile/` — cartella **esclusa da git**, perché contiene un
-accesso al tuo account.
+WhatsApp può funzionare in due modi, scelti con `WHATSAPP_MODE` in `.env`:
+
+**`chrome` (predefinito)** — usa il Chrome che hai già aperto e già collegato a
+WhatsApp Web. Nessun QR, nessun dispositivo in più. In cambio Chrome va avviato
+dal collegamento **"Chrome collegabile"** (`npm run chrome-collegabile` lo crea
+sul Desktop) e lasciato aperto, con una scheda su `web.whatsapp.com`.
+Verifica che sia tutto a posto con `npm run whatsapp-verifica`.
+
+**`profilo`** — finestra separata con memoria propria, da collegare col QR una
+volta sola (`npm run whatsapp-login`). Non dipende dal tuo Chrome e funziona
+anche a Chrome chiuso, ma occupa uno dei 4 dispositivi collegabili. La sessione
+resta in `data/whatsapp-profile/`, cartella **esclusa da git** perché contiene
+un accesso al tuo account.
+
+La porta di debug ascolta solo su `127.0.0.1`: raggiungibile da quel computer,
+non dalla rete.
 
 L'email contiene anche la spiegazione di cosa fare, per chi non segue i dettagli
 tecnici. Telegram e WhatsApp ricevono la versione corta, leggibile dalla notifica.
