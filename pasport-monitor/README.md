@@ -4,7 +4,8 @@ Controlla ogni 15 minuti, per 10 giorni, se compare un appuntamento per il servi
 **«Закордонний паспорт та (або) ID-картка»** in 5 centri, e avvisa su Telegram appena
 trova qualcosa di **nuovo**.
 
-Centri monitorati: Cracovia, Varsavia, Wrocław, Danzica, Milano/Rozzano.
+Centri monitorati di serie: **Cracovia, Varsavia, Wrocław, Danzica**.
+Milano/Rozzano è configurato ma disattivato — si riattiva con una riga in `.env`.
 
 Il programma **legge soltanto**: non prenota, non inserisce numeri di telefono, non
 clicca «Продовжити», non avvia Diia.Signature né BankID. Se un sito mostra un CAPTCHA
@@ -111,8 +112,9 @@ centri controllati di fila ha iniziato a rispondere 403). Il monitor quindi:
 - quando un sito risponde 403, mette quel centro **a riposo per 2, 4, 8, 16 cicli**,
   raddoppiando a ogni blocco.
 
-Per concentrarsi su pochi centri e ridurre ancora il carico:
-`ONLY_CENTERS=milan,gdansk` in `.env`.
+Di serie controlla i **quattro centri in Polonia** (Cracovia, Varsavia, Wrocław,
+Danzica): con un ciclo ogni 15 minuti, ognuno viene visto **ogni ora**.
+Per aggiungere Milano: `ONLY_CENTERS=krakow,warszawa,wroclaw,gdansk,milan` in `.env`.
 
 ## Quando arriva una notifica
 

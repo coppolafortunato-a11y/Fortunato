@@ -173,9 +173,16 @@ async function main() {
   env.HEADLESS = env.HEADLESS || 'true';
   env.ROTATE = env.ROTATE || 'true';
   env.CENTERS_PER_CYCLE = env.CENTERS_PER_CYCLE || '1';
+  env.ONLY_CENTERS = env.ONLY_CENTERS === undefined ? 'krakow,warszawa,wroclaw,gdansk' : env.ONLY_CENTERS;
   writeEnv(env);
   ok(`Controllo ogni ${env.INTERVAL_MINUTES} minuti, per ${env.DURATION_DAYS} giorni.`);
-  ok('Un centro per ciclo a rotazione: ogni centro viene visto ogni ~75 minuti.');
+  const attivi = env.ONLY_CENTERS
+    ? env.ONLY_CENTERS.split(',').map((s) => s.trim()).filter(Boolean)
+    : config.CENTERS.map((c) => c.id);
+  const nomi = config.CENTERS.filter((c) => attivi.includes(c.id)).map((c) => c.name);
+  const ogni = Math.round(Number(env.INTERVAL_MINUTES) * attivi.length);
+  ok(`Centri monitorati: ${nomi.join(', ')}`);
+  ok(`Un centro per ciclo a rotazione: ognuno viene visto ogni ~${ogni} minuti.`);
   console.log('     (il sito blocca chi lo interroga troppo spesso, quindi si va piano)');
   ok(`Impostazioni salvate in ${path.join(config.ROOT, '.env')}`);
 
