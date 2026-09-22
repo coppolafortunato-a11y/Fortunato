@@ -1,0 +1,11 @@
+{
+  "_note": "Stato iniziale dal controllo manuale del 22/09/2026. Le date qui elencate NON generano notifiche: sono già note. Esegui `npm run baseline` prima di avviare il monitor, per registrare anche gli orari esatti ed evitare una notifica iniziale superflua.",
+  "seededAt": "2026-09-22",
+  "centers": {
+    "krakow":   { "dates": [], "times": {}, "lastStatus": "FULL", "errorStreak": 0, "lastCheck": null },
+    "warszawa": { "dates": [], "times": {}, "lastStatus": "FULL", "errorStreak": 0, "lastCheck": null },
+    "wroclaw":  { "dates": [], "times": {}, "lastStatus": "FULL", "errorStreak": 0, "lastCheck": null },
+    "gdansk":   { "dates": ["2026-10-22"], "times": { "2026-10-22": [] }, "lastStatus": "AVAILABLE", "errorStreak": 0, "lastCheck": null },
+    "milan":    { "dates": ["2026-10-15"], "times": { "2026-10-15": [] }, "lastStatus": "AVAILABLE", "errorStreak": 0, "lastCheck": null }
+  }
+}

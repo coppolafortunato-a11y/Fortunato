@@ -1,0 +1,26 @@
+{
+  "name": "pasport-monitor",
+  "version": "1.0.0",
+  "description": "Monitor disponibilita appuntamenti Passaportny servis DP Dokument (5 centri)",
+  "main": "src/monitor.js",
+  "scripts": {
+    "start": "node src/monitor.js",
+    "check": "node src/check.js",
+    "baseline": "node src/check.js --no-notify",
+    "inspect": "node src/inspect.js",
+    "chat-id": "node src/test-telegram.js --chat-id",
+    "test-telegram": "node src/test-telegram.js",
+    "test": "node test/run-tests.js",
+    "install-service": "bash install/install.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.56.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
