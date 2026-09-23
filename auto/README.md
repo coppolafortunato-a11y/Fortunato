@@ -24,7 +24,17 @@ quello che il cliente approva nella demo è quello che vedrà online.
 ## 1. Mostrare la demo al cliente
 
 Apri `demo/index.html` con un doppio clic (funziona anche offline, senza server).
-Pagine disponibili: home, catalogo con filtri, 9 schede veicolo di esempio.
+Pagine: home, catalogo con filtri, 9 schede veicolo, noleggio, servizi, crediti foto.
+
+Per consegnarla al cliente:
+
+```bash
+bash scripts/crea-zip-demo.sh      # produce demo-new-elettrocar.zip
+```
+
+Lui scompatta la cartella e apre `demo/index.html`. Niente hosting, niente
+installazioni: si può mostrare anche dal telefono con un'app che apre gli zip,
+ma sul computer si vede meglio.
 
 Per cambiare i dati della demo (nome concessionaria, auto, prezzi):
 
