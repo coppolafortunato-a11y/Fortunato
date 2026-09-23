@@ -59,6 +59,39 @@ python3 scripts/scarica-foto.py                   # ne cerca un'altra al suo pos
 
 ---
 
+## 1-bis. Mettere la demo online su ideamkt.it
+
+Più comodo dello zip: il cliente apre un indirizzo dal telefono.
+
+```bash
+bash auto/scripts/pubblica-demo.sh
+# -> https://ideamkt.it/demo/new-elettrocar/
+```
+
+Lo script rigenera la demo e carica i file via FTP usando `FTP_HOST`,
+`FTP_USER` e `FTP_PASS` del `.env` nella radice del repository (gli stessi
+degli altri script). Va lanciato dal tuo computer: le credenziali non stanno
+nel repository.
+
+Varianti:
+
+```bash
+bash auto/scripts/pubblica-demo.sh public_html/demo/prova
+bash auto/scripts/pubblica-demo.sh public_html "https://demo.ideamkt.it"
+```
+
+Per il **sottodominio** (`demo.ideamkt.it`): crealo prima da cPanel → Sottodomini,
+annota la cartella che ti propone (di solito `public_html/demo`) e passala allo
+script come primo argomento.
+
+Senza FTP: da cPanel → Gestione file, carica la cartella `auto/demo` dentro
+`public_html/demo/new-elettrocar` (o fai l'upload dello zip e scompattalo lì).
+
+Le pagine della demo hanno il meta `noindex`, quindi non finiscono su Google.
+Quando non serve più, cancella la cartella.
+
+---
+
 ## 2. Installare il plugin su WordPress
 
 1. Crea lo zip del plugin:
