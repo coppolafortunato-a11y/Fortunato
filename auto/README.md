@@ -13,6 +13,8 @@ Due parti:
 | `plugin/concessionaria-auto/` | Il plugin WordPress: è il prodotto vero. |
 | `demo/` | Anteprima statica (HTML) da mostrare al cliente **senza installare niente**. |
 | `scripts/build-demo.py` | Rigenera la demo dai dati di `demo/auto.json`. |
+| `scripts/scarica-foto.py` | Scarica foto dimostrative con licenza libera (Openverse). |
+| `scripts/scarta-foto.py` | Toglie le foto sbagliate e rinumera le altre. |
 
 Demo e sito vero usano **gli stessi CSS e JS** (`plugin/concessionaria-auto/assets/`):
 quello che il cliente approva nella demo è quello che vedrà online.
@@ -31,9 +33,19 @@ Per cambiare i dati della demo (nome concessionaria, auto, prezzi):
 python3 scripts/build-demo.py
 ```
 
-Le foto sono segnaposto grafici generati dallo script. Per una demo con le foto
-vere basta sostituire i file in `demo/img/` mantenendo i nomi
-(`<slug>-1.svg` → puoi usare anche `.jpg` cambiando l'estensione nel generatore).
+Le foto dell'anteprima sono immagini con licenza libera scaricate da Openverse
+(`python3 scripts/scarica-foto.py`): servono solo a far vedere l'effetto, e autori
+e licenze sono elencati nella pagina *Crediti foto* della demo. **Vanno sostituite
+con le foto dei veicoli realmente in salone prima di andare online.**
+
+Per mettere le foto vere basta salvarle in `demo/img/` con il nome
+`<slug>-1.jpg`, `<slug>-2.jpg`… : il generatore usa il `.jpg` se c'è, altrimenti
+disegna il segnaposto. Se una foto scaricata non va bene:
+
+```bash
+python3 scripts/scarta-foto.py nome-file.jpg      # la toglie e la ricorda
+python3 scripts/scarica-foto.py                   # ne cerca un'altra al suo posto
+```
 
 ---
 

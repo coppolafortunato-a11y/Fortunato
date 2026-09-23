@@ -111,6 +111,24 @@ def scrivi_segnaposto():
 # Pezzi di pagina
 # --------------------------------------------------------------------------
 
+def foto(slug, n, prefix=""):
+    """Percorso dell'immagine n del veicolo: foto scaricata se c'è, sennò segnaposto."""
+    if (IMG / f"{slug}-{n}.jpg").exists():
+        return f"{prefix}img/{slug}-{n}.jpg"
+    return f"{prefix}img/{slug}-{n}.svg"
+
+
+def quante_foto(slug, massimo=3):
+    return [n for n in range(1, massimo + 1)
+            if (IMG / f"{slug}-{n}.jpg").exists() or (IMG / f"{slug}-{n}.svg").exists()]
+
+
+def iniziali():
+    """Logo provvisorio: le iniziali del nome, finché non arriva quello vero."""
+    parole = [p for p in AZIENDA["nome"].split() if p[:1].isalpha()]
+    return "".join(p[0] for p in parole[:2]).upper()
+
+
 def testa(titolo, descrizione, css_prefix, attiva):
     voci = [("Home", "index.html"), ("Auto usate", "catalogo.html"),
             ("Noleggio", "noleggio.html"), ("Servizi", "servizi.html"),
@@ -148,7 +166,7 @@ def testa(titolo, descrizione, css_prefix, attiva):
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="{css_prefix}index.html">
-      <span class="brand__mark">AU</span>
+      <span class="brand__mark">{iniziali()}</span>
       <span>{e(AZIENDA['nome'])}</span>
     </a>
     <button class="nav-toggle" data-nav-toggle aria-controls="nav-principale" aria-expanded="false">☰ Menu</button>
@@ -184,7 +202,8 @@ def coda(css_prefix):
         <p><a href="{css_prefix}catalogo.html">Auto usate</a><br>
         <a href="{css_prefix}noleggio.html">Noleggio</a><br>
         <a href="{css_prefix}servizi.html">Officina ed elettrauto</a><br>
-        <a href="{css_prefix}index.html#contatti">Contatti</a></p>
+        <a href="{css_prefix}index.html#contatti">Contatti</a><br>
+        <a href="{css_prefix}crediti-foto.html">Crediti foto</a></p>
       </div>
     </div>
     <div class="site-footer__bottom">
@@ -218,7 +237,7 @@ def card(auto, prefix=""):
         data-alimentazione="{e(auto['alimentazione'])}" data-cambio="{e(auto['cambio'])}"
         data-stato="{auto['stato']}">
         <div class="auto-card__media">
-          <a href="{href}"><img src="{prefix}img/{auto['slug']}-1.svg" alt="{e(auto['titolo'])}" loading="lazy"></a>
+          <a href="{href}"><img src="{foto(auto['slug'], 1, prefix)}" alt="{e(auto['titolo'])}" loading="lazy"></a>
           <div class="auto-card__badges">{badges}</div>
         </div>
         <div class="auto-card__body">
@@ -465,9 +484,9 @@ def pagina_catalogo():
 def pagina_scheda(auto):
     etichetta, classe = STATI[auto["stato"]]
     thumbs = "\n".join(
-        f"""          <button type="button" data-gallery-thumb data-full="../img/{auto['slug']}-{n}.svg">
-            <img src="../img/{auto['slug']}-{n}.svg" alt="" loading="lazy">
-          </button>""" for n in (1, 2, 3)
+        f"""          <button type="button" data-gallery-thumb data-full="{foto(auto['slug'], n, '../')}">
+            <img src="{foto(auto['slug'], n, '../')}" alt="" loading="lazy">
+          </button>""" for n in quante_foto(auto['slug'])
     )
 
     dati = [
@@ -503,7 +522,7 @@ def pagina_scheda(auto):
     <div class="scheda__main">
       <div class="gallery" data-gallery>
         <div class="gallery__main">
-          <img src="../img/{auto['slug']}-1.svg" alt="{e(auto['titolo'])}" data-gallery-main>
+          <img src="{foto(auto['slug'], 1, '../')}" alt="{e(auto['titolo'])}" data-gallery-main>
           <button type="button" class="gallery__nav gallery__nav--prev" data-gallery-prev aria-label="Foto precedente">‹</button>
           <button type="button" class="gallery__nav gallery__nav--next" data-gallery-next aria-label="Foto successiva">›</button>
         </div>
@@ -583,7 +602,7 @@ def card_noleggio(veicolo):
 
     return f"""      <article class="auto-card" data-noleggio data-categoria="{veicolo['categoria']}">
         <div class="auto-card__media">
-          <img src="{PREFISSO_IMG}img/{veicolo['slug']}-1.svg" alt="{e(veicolo['titolo'])}" loading="lazy">
+          <img src="{foto(veicolo['slug'], 1, PREFISSO_IMG)}" alt="{e(veicolo['titolo'])}" loading="lazy">
           <div class="auto-card__badges">{badge}</div>
         </div>
         <div class="auto-card__body">
@@ -769,6 +788,45 @@ def copia_assets():
         (destinazione / nome).write_text((origine / nome).read_text(encoding="utf-8"), encoding="utf-8")
 
 
+def pagina_crediti():
+    percorso = IMG / "crediti.json"
+    crediti = json.loads(percorso.read_text(encoding="utf-8")) if percorso.exists() else {}
+    righe = "\n".join(
+        f"""        <tr><td>{e(nome)}</td><td>{e(dato['titolo'])}</td>"""
+        f"""<td>{e(dato['autore'])}</td><td>{e(dato['licenza'].upper())}</td>"""
+        f"""<td><a href="{e(dato['origine'])}" target="_blank" rel="noopener">originale</a></td></tr>"""
+        for nome, dato in sorted(crediti.items())
+    )
+
+    return testa(
+        f"Crediti fotografici | {AZIENDA['nome']}",
+        "Autori e licenze delle foto usate nell'anteprima dimostrativa.",
+        "", "",
+    ) + f"""
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">Anteprima</p>
+    <h1>Crediti fotografici</h1>
+    <p style="max-width:70ch;color:var(--muted)">Le foto di questa anteprima vengono da archivi con licenza libera
+    (Openverse) e servono solo a far vedere l'effetto del sito. Nel sito definitivo vanno sostituite con le foto
+    dei veicoli realmente in salone: a quel punto questa pagina non serve più.</p>
+    <div style="overflow-x:auto;margin-top:26px">
+      <table style="width:100%;border-collapse:collapse;font-size:.92rem">
+        <thead><tr style="text-align:left;border-bottom:2px solid var(--line)">
+          <th style="padding:10px 12px">File</th><th style="padding:10px 12px">Titolo</th>
+          <th style="padding:10px 12px">Autore</th><th style="padding:10px 12px">Licenza</th>
+          <th style="padding:10px 12px">Fonte</th>
+        </tr></thead>
+        <tbody>
+{righe}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+""".replace("<td>", '<td style="padding:9px 12px;border-bottom:1px solid var(--line)">') + coda("")
+
+
 def main():
     copia_assets()
     scrivi_segnaposto()
@@ -777,6 +835,7 @@ def main():
     (DEMO / "catalogo.html").write_text(pagina_catalogo(), encoding="utf-8")
     (DEMO / "servizi.html").write_text(pagina_servizi(), encoding="utf-8")
     (DEMO / "noleggio.html").write_text(pagina_noleggio(), encoding="utf-8")
+    (DEMO / "crediti-foto.html").write_text(pagina_crediti(), encoding="utf-8")
     for auto in AUTO:
         (SCHEDE / f"{auto['slug']}.html").write_text(pagina_scheda(auto), encoding="utf-8")
     print(f"Demo generata: {len(AUTO)} schede auto, {len(NOLEGGIO)} veicoli a noleggio, "

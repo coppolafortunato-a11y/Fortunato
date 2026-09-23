@@ -1,6 +1,6 @@
 {
   "concessionaria": {
-    "nome": "Nome Concessionaria",
+    "nome": "New Elettrocar",
     "citta": "Reggio Calabria",
     "indirizzo": "Via da definire 00, 89100 Reggio Calabria (RC)",
     "telefono": "320 611 6711",
@@ -39,7 +39,8 @@
         "Volante regolabile",
         "Fendinebbia",
         "Cerchi in lega 15\""
-      ]
+      ],
+      "foto_query": "Fiat Panda"
     },
     {
       "slug": "volkswagen-golf-1-6-tdi-business",
@@ -70,7 +71,8 @@
         "Sensori anteriori e posteriori",
         "Apple CarPlay",
         "Fari LED"
-      ]
+      ],
+      "foto_query": "Volkswagen Golf"
     },
     {
       "slug": "toyota-yaris-1-5-hybrid-active",
@@ -101,7 +103,8 @@
         "Retrovisori elettrici",
         "Start&Stop",
         "Bluetooth"
-      ]
+      ],
+      "foto_query": "Toyota Yaris"
     },
     {
       "slug": "jeep-renegade-1-6-mjt-limited",
@@ -132,7 +135,8 @@
         "Sedili riscaldati",
         "Telecamera posteriore",
         "Keyless entry"
-      ]
+      ],
+      "foto_query": "Jeep Renegade"
     },
     {
       "slug": "renault-clio-1-5-dci-zen",
@@ -162,7 +166,8 @@
         "Sensori di parcheggio",
         "Radio touch",
         "Volante multifunzione"
-      ]
+      ],
+      "foto_query": "Renault Clio"
     },
     {
       "slug": "audi-a3-sportback-2-0-tdi-s-line",
@@ -193,7 +198,8 @@
         "Cerchi in lega 18\"",
         "Climatizzatore bizona",
         "Sensori di parcheggio"
-      ]
+      ],
+      "foto_query": "Audi A3"
     },
     {
       "slug": "lancia-ypsilon-1-2-gpl-gold",
@@ -222,7 +228,8 @@
         "Radio Bluetooth",
         "Specchietti elettrici",
         "Chiusura centralizzata"
-      ]
+      ],
+      "foto_query": "Lancia Ypsilon"
     },
     {
       "slug": "smart-fortwo-eq-passion",
@@ -252,7 +259,8 @@
         "Telecamera posteriore",
         "Cerchi in lega",
         "Navigatore"
-      ]
+      ],
+      "foto_query": "Smart Fortwo"
     },
     {
       "slug": "ford-fiesta-1-1-titanium",
@@ -281,7 +289,8 @@
         "Sensori di parcheggio",
         "Apple CarPlay",
         "Cerchi in lega 16\""
-      ]
+      ],
+      "foto_query": "Ford Fiesta"
     }
   ],
   "servizi": [
@@ -376,7 +385,8 @@
         "Km inclusi 150 al giorno",
         "Assistenza stradale"
       ],
-      "descrizione": "Comoda in città e facile da parcheggiare. La più richiesta come auto sostitutiva."
+      "descrizione": "Comoda in città e facile da parcheggiare. La più richiesta come auto sostitutiva.",
+      "foto_query": "Fiat Panda"
     },
     {
       "slug": "noleggio-citroen-c3",
@@ -395,7 +405,8 @@
         "Km inclusi 200 al giorno",
         "Climatizzatore"
       ],
-      "descrizione": "Consumi bassi, adatta anche ai viaggi fuori città."
+      "descrizione": "Consumi bassi, adatta anche ai viaggi fuori città.",
+      "foto_query": "Citroen C3"
     },
     {
       "slug": "noleggio-fiat-500x",
@@ -414,7 +425,8 @@
         "Km inclusi 200 al giorno",
         "Navigatore"
       ],
-      "descrizione": "SUV compatto con cambio automatico, comodo per famiglia e bagagli."
+      "descrizione": "SUV compatto con cambio automatico, comodo per famiglia e bagagli.",
+      "foto_query": "Fiat 500X"
     },
     {
       "slug": "noleggio-fiat-ducato-9-posti",
@@ -433,11 +445,12 @@
         "Km inclusi 200 al giorno",
         "Patente B sufficiente"
       ],
-      "descrizione": "Per gite, trasferte di squadra o trasloco. Disponibile anche in versione furgone chiuso."
+      "descrizione": "Per gite, trasferte di squadra o trasloco. Disponibile anche in versione furgone chiuso.",
+      "foto_query": "Fiat Ducato"
     },
     {
       "slug": "noleggio-mercedes-classe-e",
-      "titolo": "Mercedes Classe E nera",
+      "titolo": "Mercedes Classe E",
       "categoria": "cerimonie",
       "prezzo": 250,
       "prezzo_nota": "a cerimonia",
@@ -453,11 +466,12 @@
         "Lucidatura prima del servizio",
         "Percorso concordato con gli sposi"
       ],
-      "descrizione": "Berlina elegante, la scelta classica per gli sposi. Interni in pelle chiara."
+      "descrizione": "Berlina elegante, la scelta classica per gli sposi. Interni in pelle chiara.",
+      "foto_query": "Mercedes-Benz E-Class"
     },
     {
       "slug": "noleggio-fiat-500-depoca",
-      "titolo": "Fiat 500 d'epoca bianca",
+      "titolo": "Fiat 500 d'epoca",
       "categoria": "cerimonie",
       "prezzo": 180,
       "prezzo_nota": "a cerimonia",
@@ -472,7 +486,8 @@
         "Addobbo con nastri e fiori",
         "Ideale per il servizio fotografico"
       ],
-      "descrizione": "L'auto d'epoca che finisce in tutte le foto. Perfetta per l'arrivo della sposa."
+      "descrizione": "L'auto d'epoca che finisce in tutte le foto. Perfetta per l'arrivo della sposa.",
+      "foto_query": "Fiat 500 classic"
     }
   ]
 }
