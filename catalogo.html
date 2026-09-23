@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto usate a Reggio Calabria — New Elettrocar</title>
+<meta name="description" content="Tutte le auto usate disponibili: filtra per marca, prezzo, chilometri, alimentazione e cambio.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/auto.css">
+<style>
+  .demo-note{background:#fff8e1;border-bottom:1px solid #f0e0a8;color:#6b5a11;font-size:.85rem;text-align:center;padding:8px 16px}
+  .demo-note b{color:#4a3d06}
+</style>
+</head>
+<body class="auto-site">
+<p class="demo-note"><b>Anteprima dimostrativa</b> — foto e dati di esempio. Nel sito vero li inserisce la concessionaria dalla propria bacheca.</p>
+<div class="topbar">
+  <div class="wrap">
+    <span>📍 Via Aldo Moro, Trav. II n. 16, 89129 Reggio Calabria (RC)</span>
+    <span>🕘 Lun–Ven 8:00–13:00 / 14:30–19:30 · Sab 8:30–12:30</span>
+    <span>📞 <a href="tel:+390965922380">0965 922380</a></span>
+  </div>
+</div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">NE</span>
+      <span>New Elettrocar</span>
+    </a>
+    <button class="nav-toggle" data-nav-toggle aria-controls="nav-principale" aria-expanded="false">☰ Menu</button>
+    <nav class="nav" id="nav-principale">
+      <a href="index.html">Home</a>
+      <a href="catalogo.html" aria-current="page">Auto usate</a>
+      <a href="noleggio.html">Noleggio</a>
+      <a href="servizi.html">Servizi</a>
+      <a href="index.html#contatti">Contatti</a>
+      <a class="btn btn--primary btn--sm" href="https://wa.me/393473538307?text=Salve%2C%20vorrei%20informazioni%20sulle%20auto%20disponibili." target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="index.html">Home</a> › Auto usate</p>
+  <h1>Auto usate disponibili</h1>
+  <p style="color:var(--muted);max-width:60ch;margin-top:-.4em">Filtra e trova l'auto adatta a te. I filtri lavorano subito, senza ricaricare la pagina.</p>
+</div>
+
+<div class="wrap" style="margin-top:22px">
+    <form class="filters" data-auto-filtri method="get" action="catalogo.html">
+      <div class="filters__grid">
+        <div class="field"><label for="q">Marca o modello</label>
+          <input type="search" id="q" name="q" placeholder="Es. Panda, Golf, Audi"></div>
+        <div class="field"><label for="marca">Marca</label>
+          <select id="marca" name="marca"><option value="">Tutte</option><option value="Audi">Audi</option><option value="Fiat">Fiat</option><option value="Ford">Ford</option><option value="Jeep">Jeep</option><option value="Lancia">Lancia</option><option value="Renault">Renault</option><option value="Smart">Smart</option><option value="Toyota">Toyota</option><option value="Volkswagen">Volkswagen</option></select></div>
+        <div class="field"><label for="prezzo_max">Prezzo massimo</label>
+          <select id="prezzo_max" name="prezzo_max"><option value="">Qualsiasi</option><option value="5000">fino a 5.000 €</option><option value="8000">fino a 8.000 €</option><option value="10000">fino a 10.000 €</option><option value="15000">fino a 15.000 €</option><option value="20000">fino a 20.000 €</option><option value="30000">fino a 30.000 €</option></select></div>
+        <div class="field"><label for="alimentazione">Alimentazione</label>
+          <select id="alimentazione" name="alimentazione"><option value="">Tutte</option><option value="Benzina">Benzina</option><option value="Diesel">Diesel</option><option value="GPL">GPL</option><option value="Metano">Metano</option><option value="Ibrida">Ibrida</option><option value="Elettrica">Elettrica</option></select></div>
+        <div class="field"><label for="cambio">Cambio</label>
+          <select id="cambio" name="cambio"><option value="">Tutti</option><option value="Manuale">Manuale</option><option value="Automatico">Automatico</option><option value="Semiautomatico">Semiautomatico</option></select></div>
+        <div class="field"><label for="km_max">Km massimi</label>
+          <select id="km_max" name="km_max"><option value="">Qualsiasi</option><option value="30000">fino a 30.000 km</option><option value="60000">fino a 60.000 km</option><option value="100000">fino a 100.000 km</option><option value="150000">fino a 150.000 km</option><option value="200000">fino a 200.000 km</option></select></div>
+        <div class="field"><label for="anno_min">Dall'anno</label>
+          <select id="anno_min" name="anno_min"><option value="">Qualsiasi</option><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option></select></div>
+        <div class="field"><label for="ordina">Ordina per</label>
+          <select id="ordina" name="ordina">
+            <option value="">Più recenti</option>
+            <option value="prezzo_asc">Prezzo crescente</option>
+            <option value="prezzo_desc">Prezzo decrescente</option>
+            <option value="km_asc">Meno chilometri</option>
+            <option value="anno_desc">Immatricolazione recente</option>
+          </select></div>
+      </div>
+      <div class="filters__actions">
+        <p class="filters__count" data-auto-count></p>
+        <button type="reset" class="btn btn--ghost btn--sm">Azzera i filtri</button>
+      </div>
+    </form>
+</div>
+
+<section class="section" style="padding-top:28px">
+  <div class="wrap">
+    <div class="auto-grid" data-auto-grid>
+      <article class="auto-card" data-auto
+        data-nome="Fiat Panda 1.2 Easy" data-marca="Fiat"
+        data-allestimento="Easy 5 porte" data-prezzo="8900"
+        data-km="68000" data-anno="2019"
+        data-alimentazione="Benzina" data-cambio="Manuale"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/fiat-panda-1-2-easy.html"><img src="img/fiat-panda-1-2-easy-1.jpg" alt="Fiat Panda 1.2 Easy" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/fiat-panda-1-2-easy.html">Fiat Panda 1.2 Easy</a></h3>
+          <p class="auto-card__sub">Easy 5 porte</p>
+          <ul class="specs"><li>68.000 km</li><li>06/2019</li><li>Benzina</li><li>Manuale</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">8.900 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/fiat-panda-1-2-easy.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Volkswagen Golf 1.6 TDI Business" data-marca="Volkswagen"
+        data-allestimento="Business BlueMotion" data-prezzo="12400"
+        data-km="118000" data-anno="2018"
+        data-alimentazione="Diesel" data-cambio="Manuale"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/volkswagen-golf-1-6-tdi-business.html"><img src="img/volkswagen-golf-1-6-tdi-business-1.jpg" alt="Volkswagen Golf 1.6 TDI Business" loading="lazy"></a>
+          <div class="auto-card__badges"></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/volkswagen-golf-1-6-tdi-business.html">Volkswagen Golf 1.6 TDI Business</a></h3>
+          <p class="auto-card__sub">Business BlueMotion</p>
+          <ul class="specs"><li>118.000 km</li><li>03/2018</li><li>Diesel</li><li>Manuale</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">12.400 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/volkswagen-golf-1-6-tdi-business.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Toyota Yaris 1.5 Hybrid Active" data-marca="Toyota"
+        data-allestimento="Active 5 porte" data-prezzo="14900"
+        data-km="54000" data-anno="2020"
+        data-alimentazione="Ibrida" data-cambio="Automatico"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/toyota-yaris-1-5-hybrid-active.html"><img src="img/toyota-yaris-1-5-hybrid-active-1.jpg" alt="Toyota Yaris 1.5 Hybrid Active" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/toyota-yaris-1-5-hybrid-active.html">Toyota Yaris 1.5 Hybrid Active</a></h3>
+          <p class="auto-card__sub">Active 5 porte</p>
+          <ul class="specs"><li>54.000 km</li><li>05/2020</li><li>Ibrida</li><li>Automatico</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">14.900 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/toyota-yaris-1-5-hybrid-active.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Jeep Renegade 1.6 Mjt Limited" data-marca="Jeep"
+        data-allestimento="Limited DDCT" data-prezzo="17500"
+        data-km="87000" data-anno="2019"
+        data-alimentazione="Diesel" data-cambio="Automatico"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/jeep-renegade-1-6-mjt-limited.html"><img src="img/jeep-renegade-1-6-mjt-limited-1.jpg" alt="Jeep Renegade 1.6 Mjt Limited" loading="lazy"></a>
+          <div class="auto-card__badges"></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/jeep-renegade-1-6-mjt-limited.html">Jeep Renegade 1.6 Mjt Limited</a></h3>
+          <p class="auto-card__sub">Limited DDCT</p>
+          <ul class="specs"><li>87.000 km</li><li>11/2019</li><li>Diesel</li><li>Automatico</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">17.500 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/jeep-renegade-1-6-mjt-limited.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Renault Clio 1.5 dCi Zen" data-marca="Renault"
+        data-allestimento="Zen Energy" data-prezzo="8300"
+        data-km="96000" data-anno="2017"
+        data-alimentazione="Diesel" data-cambio="Manuale"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/renault-clio-1-5-dci-zen.html"><img src="img/renault-clio-1-5-dci-zen-1.jpg" alt="Renault Clio 1.5 dCi Zen" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/renault-clio-1-5-dci-zen.html">Renault Clio 1.5 dCi Zen</a></h3>
+          <p class="auto-card__sub">Zen Energy</p>
+          <ul class="specs"><li>96.000 km</li><li>09/2017</li><li>Diesel</li><li>Manuale</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">8.300 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/renault-clio-1-5-dci-zen.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Audi A3 Sportback 2.0 TDI S line" data-marca="Audi"
+        data-allestimento="S line S tronic" data-prezzo="13900"
+        data-km="149000" data-anno="2016"
+        data-alimentazione="Diesel" data-cambio="Semiautomatico"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/audi-a3-sportback-2-0-tdi-s-line.html"><img src="img/audi-a3-sportback-2-0-tdi-s-line-1.jpg" alt="Audi A3 Sportback 2.0 TDI S line" loading="lazy"></a>
+          <div class="auto-card__badges"></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/audi-a3-sportback-2-0-tdi-s-line.html">Audi A3 Sportback 2.0 TDI S line</a></h3>
+          <p class="auto-card__sub">S line S tronic</p>
+          <ul class="specs"><li>149.000 km</li><li>07/2016</li><li>Diesel</li><li>Semiautomatico</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">13.900 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/audi-a3-sportback-2-0-tdi-s-line.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Lancia Ypsilon 1.2 GPL Gold" data-marca="Lancia"
+        data-allestimento="Gold ecochic" data-prezzo="6700"
+        data-km="112000" data-anno="2016"
+        data-alimentazione="GPL" data-cambio="Manuale"
+        data-stato="disponibile">
+        <div class="auto-card__media">
+          <a href="auto/lancia-ypsilon-1-2-gpl-gold.html"><img src="img/lancia-ypsilon-1-2-gpl-gold-1.jpg" alt="Lancia Ypsilon 1.2 GPL Gold" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/lancia-ypsilon-1-2-gpl-gold.html">Lancia Ypsilon 1.2 GPL Gold</a></h3>
+          <p class="auto-card__sub">Gold ecochic</p>
+          <ul class="specs"><li>112.000 km</li><li>04/2016</li><li>GPL</li><li>Manuale</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">6.700 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/lancia-ypsilon-1-2-gpl-gold.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card" data-auto
+        data-nome="Smart Fortwo EQ Passion" data-marca="Smart"
+        data-allestimento="EQ Passion" data-prezzo="11900"
+        data-km="28000" data-anno="2021"
+        data-alimentazione="Elettrica" data-cambio="Automatico"
+        data-stato="prenotata">
+        <div class="auto-card__media">
+          <a href="auto/smart-fortwo-eq-passion.html"><img src="img/smart-fortwo-eq-passion-1.jpg" alt="Smart Fortwo EQ Passion" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge badge--muted">Prenotata</span><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/smart-fortwo-eq-passion.html">Smart Fortwo EQ Passion</a></h3>
+          <p class="auto-card__sub">EQ Passion</p>
+          <ul class="specs"><li>28.000 km</li><li>06/2021</li><li>Elettrica</li><li>Automatico</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">11.900 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/smart-fortwo-eq-passion.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+      <article class="auto-card auto-card--venduta" data-auto
+        data-nome="Ford Fiesta 1.1 Titanium" data-marca="Ford"
+        data-allestimento="Titanium 5 porte" data-prezzo="12200"
+        data-km="39000" data-anno="2021"
+        data-alimentazione="Benzina" data-cambio="Manuale"
+        data-stato="venduta">
+        <div class="auto-card__media">
+          <a href="auto/ford-fiesta-1-1-titanium.html"><img src="img/ford-fiesta-1-1-titanium-1.jpg" alt="Ford Fiesta 1.1 Titanium" loading="lazy"></a>
+          <div class="auto-card__badges"><span class="badge badge--muted">Venduta</span><span class="badge">Neopatentati</span></div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title"><a href="auto/ford-fiesta-1-1-titanium.html">Ford Fiesta 1.1 Titanium</a></h3>
+          <p class="auto-card__sub">Titanium 5 porte</p>
+          <ul class="specs"><li>39.000 km</li><li>02/2021</li><li>Benzina</li><li>Manuale</li></ul>
+          <div class="auto-card__foot">
+            <p class="price">12.200 €</p>
+            <a class="btn btn--dark btn--sm" href="auto/ford-fiesta-1-1-titanium.html">Dettagli</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="empty-state" data-auto-empty hidden style="margin-top:28px">Nessuna auto corrisponde ai filtri scelti. Prova ad allargare la ricerca o scrivici: cerchiamo noi l'auto che ti serve.</p>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <h4>New Elettrocar</h4>
+        <p>Vendita auto usate, officina meccanica, elettrauto, noleggio e auto per cerimonie a Reggio Calabria.</p>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <p>Via Aldo Moro, Trav. II n. 16, 89129 Reggio Calabria (RC)<br>
+        <a href="tel:+390965922380">0965 922380</a><br>
+        <a href="tel:+393473538307">347 3538307</a></p>
+      </div>
+      <div>
+        <h4>Orari</h4>
+        <p>Lun–Ven 8:00–13:00 / 14:30–19:30 · Sab 8:30–12:30</p>
+      </div>
+      <div>
+        <h4>Pagine</h4>
+        <p><a href="catalogo.html">Auto usate</a><br>
+        <a href="noleggio.html">Noleggio</a><br>
+        <a href="servizi.html">Officina ed elettrauto</a><br>
+        <a href="index.html#contatti">Contatti</a><br>
+        <a href="crediti-foto.html">Crediti foto</a></p>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span></span>
+      <span>Sito realizzato da Idea Marketing</span>
+    </div>
+  </div>
+</footer>
+<a class="wa-float" href="https://wa.me/393473538307?text=Salve%2C%20vorrei%20informazioni%20sulle%20auto%20disponibili." target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">✆</a>
+<script src="assets/auto.js"></script>
+</body>
+</html>

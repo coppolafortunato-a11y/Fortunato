@@ -1,0 +1,20 @@
+# Secrets — mai committare (vedi briefing "Vincoli")
+.env
+.env.*
+!.env.example
+
+# Artefatti di deploy generati dagli script
+payload.json
+menu-payload.json
+part-payload.json
+backup-*.json
+
+# Sistema
+.DS_Store
+*.log
+
+# zip del plugin generato da scripts/crea-zip.sh
+auto/concessionaria-auto.zip
+
+# zip della demo generato da scripts/crea-zip-demo.sh
+auto/demo-new-elettrocar.zip
