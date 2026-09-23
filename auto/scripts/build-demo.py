@@ -123,6 +123,20 @@ def quante_foto(slug, massimo=3):
             if (IMG / f"{slug}-{n}.jpg").exists() or (IMG / f"{slug}-{n}.svg").exists()]
 
 
+def telefono_link(numero):
+    return "tel:+39" + numero.replace(" ", "")
+
+
+def recapiti_footer():
+    """Telefono, cellulare ed e-mail, saltando quelli che non abbiamo."""
+    righe = [f'<a href="{telefono_link(AZIENDA["telefono"])}">{e(AZIENDA["telefono"])}</a>']
+    if AZIENDA.get("cellulare"):
+        righe.append(f'<a href="{telefono_link(AZIENDA["cellulare"])}">{e(AZIENDA["cellulare"])}</a>')
+    if AZIENDA.get("email"):
+        righe.append(f'<a href="mailto:{e(AZIENDA["email"])}">{e(AZIENDA["email"])}</a>')
+    return "<br>\n        ".join(righe)
+
+
 def iniziali():
     """Logo provvisorio: le iniziali del nome, finché non arriva quello vero."""
     parole = [p for p in AZIENDA["nome"].split() if p[:1].isalpha()]
@@ -190,8 +204,7 @@ def coda(css_prefix):
       <div>
         <h4>Contatti</h4>
         <p>{e(AZIENDA['indirizzo'])}<br>
-        <a href="tel:+39{AZIENDA['telefono'].replace(' ', '')}">{e(AZIENDA['telefono'])}</a><br>
-        <a href="mailto:{e(AZIENDA['email'])}">{e(AZIENDA['email'])}</a></p>
+        {recapiti_footer()}</p>
       </div>
       <div>
         <h4>Orari</h4>
@@ -207,7 +220,7 @@ def coda(css_prefix):
       </div>
     </div>
     <div class="site-footer__bottom">
-      <span>P.IVA {e(AZIENDA['piva'])}</span>
+      <span>{("P.IVA " + e(AZIENDA["piva"])) if AZIENDA.get("piva") else ""}</span>
       <span>Sito realizzato da Idea Marketing</span>
     </div>
   </div>
@@ -346,7 +359,7 @@ def pagina_home():
     <p>Vendiamo auto usate garantite e le teniamo in forma nella nostra officina. E quando ti serve un'auto per qualche giorno — o per il giorno del matrimonio — ce l'abbiamo pronta.</p>
     <div class="hero__actions">
       <a class="btn btn--primary" href="catalogo.html">Vedi le {disponibili} auto in vendita</a>
-      <a class="btn btn--ghost" href="servizi.html" style="color:#fff;border-color:rgba(255,255,255,.35)">Officina ed elettrauto</a>
+      <a class="btn btn--ghost-chiaro" href="servizi.html">Officina ed elettrauto</a>
       <a class="btn btn--wa" href="{wa_link('Salve, vorrei informazioni.')}" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
     </div>
     <div class="hero__stats">
@@ -444,8 +457,7 @@ def pagina_home():
       <div class="card">
         <div class="card__icon">📞</div>
         <h3>Parla con noi</h3>
-        <p><a href="tel:+39{AZIENDA['telefono'].replace(' ', '')}">{e(AZIENDA['telefono'])}</a><br>
-        <a href="mailto:{e(AZIENDA['email'])}">{e(AZIENDA['email'])}</a></p>
+        <p>{recapiti_footer()}</p>
       </div>
     </div>
   </div>
@@ -640,7 +652,7 @@ def pagina_servizi():
 
     elenco = "\n".join(sezioni)
     indice = "\n".join(
-        f'      <a class="btn btn--ghost btn--sm" href="#{s["slug"]}">{s["icona"]} {e(s["titolo"])}</a>'
+        f'      <a class="btn btn--ghost-chiaro btn--sm" href="#{s["slug"]}">{s["icona"]} {e(s["titolo"])}</a>'
         for s in SERVIZI
     )
 
@@ -710,7 +722,7 @@ def pagina_noleggio():
     <p>Utilitarie, SUV e furgoni da 9 posti a tariffa giornaliera, auto sostitutiva mentre la tua è in officina, e auto con autista per matrimoni e cerimonie.</p>
     <div class="hero__actions">
       <a class="btn btn--primary" href="#flotta">Vedi la flotta</a>
-      <a class="btn btn--ghost" href="#cerimonie" style="color:#fff;border-color:rgba(255,255,255,.35)">Auto per matrimoni</a>
+      <a class="btn btn--ghost-chiaro" href="#cerimonie">Auto per matrimoni</a>
     </div>
   </div>
 </section>

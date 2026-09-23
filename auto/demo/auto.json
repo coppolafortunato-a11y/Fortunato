@@ -2,12 +2,13 @@
   "concessionaria": {
     "nome": "New Elettrocar",
     "citta": "Reggio Calabria",
-    "indirizzo": "Via da definire 00, 89100 Reggio Calabria (RC)",
-    "telefono": "320 611 6711",
-    "whatsapp": "393206116711",
-    "email": "coppola.fortunato@gmail.com",
-    "orari": "Lun–Ven 9:00–13:00 / 16:00–19:30 · Sab 9:00–13:00",
-    "piva": "00000000000"
+    "indirizzo": "Via Aldo Moro, Trav. II n. 16, 89129 Reggio Calabria (RC)",
+    "telefono": "0965 922380",
+    "whatsapp": "393473538307",
+    "email": "",
+    "orari": "Lun–Ven 8:00–13:00 / 14:30–19:30 · Sab 8:30–12:30",
+    "piva": "",
+    "cellulare": "347 3538307"
   },
   "auto": [
     {
@@ -313,16 +314,16 @@
       "slug": "elettrauto",
       "icona": "⚡",
       "titolo": "Elettrauto",
-      "sommario": "Impianti elettrici, batterie e climatizzazione: risolviamo i guasti che la diagnosi generica non trova.",
+      "sommario": "Il nostro mestiere: impianti elettrici, antifurti e climatizzazione. Centro autorizzato Vodafone Automotive.",
       "punti": [
-        "Batterie: prova, ricarica e sostituzione",
+        "Antifurti e satellitari — centro autorizzato Vodafone Automotive",
+        "Sensori di parcheggio e telecamere",
+        "Climatizzatore: ricarica e riparazione del compressore",
+        "Batterie: prova, sostituzione e vendita",
         "Ricerca guasti sull'impianto elettrico",
-        "Ricarica e sanificazione del climatizzatore",
-        "Diagnosi e riprogrammazione centraline",
-        "Autoradio, telecamere e sensori di parcheggio",
-        "Antifurti e ricarica veicoli ibridi"
+        "Lampade, spazzole tergicristallo e piccola manutenzione"
       ],
-      "cta": "Salve, ho un problema elettrico sull'auto, posso portarla?"
+      "cta": "Salve, avrei bisogno dell'elettrauto. Posso passare?"
     },
     {
       "slug": "vendita",

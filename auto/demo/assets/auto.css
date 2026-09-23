@@ -39,6 +39,9 @@ h3{font-size:1.15rem}
 .btn--dark{background:var(--ink);color:#fff}
 .btn--ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn--ghost:hover{border-color:var(--ink)}
+/* versione del pulsante contornato per i fondi scuri */
+.btn--ghost-chiaro{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn--ghost-chiaro:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .btn--wa{background:#25d366;color:#0b2e18}
 .btn--wa:hover{background:#1eb757}
 .btn--block{width:100%}
