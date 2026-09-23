@@ -20,6 +20,14 @@ DATI = json.loads((DEMO / "auto.json").read_text(encoding="utf-8"))
 
 AZIENDA = DATI["concessionaria"]
 AUTO = DATI["auto"]
+SERVIZI = DATI.get("servizi", [])
+NOLEGGIO = DATI.get("noleggio", [])
+
+CATEGORIE_NOLEGGIO = {
+    "breve": "Noleggio giornaliero",
+    "furgoni": "Furgoni e 9 posti",
+    "cerimonie": "Cerimonie e matrimoni",
+}
 
 STATI = {
     "disponibile": ("Disponibile", "badge--ok"),
@@ -33,6 +41,8 @@ TINTE = ["#1f2a37", "#2b3a4a", "#3a2f2f", "#26343a", "#332b3d", "#2f3b2f",
          "#3b3326", "#243043", "#3a2a33"]
 
 VISTE = ["Vista esterna", "Interni", "Posteriore"]
+
+PREFISSO_IMG = ""
 
 
 def e(testo):
@@ -72,9 +82,10 @@ def scrivi_segnaposto():
         "Q326,131 326,150 L326,166 Q326,173 317,173 L296,173 A28,28 0 0,0 240,173 "
         "L150,173 A28,28 0 0,0 94,173 L69,173 Q60,173 60,166 Z"
     )
-    for i, auto in enumerate(AUTO):
+    for i, auto in enumerate(AUTO + NOLEGGIO):
         tinta = TINTE[i % len(TINTE)]
-        for n, vista in enumerate(VISTE, start=1):
+        viste = VISTE if auto in AUTO else VISTE[:2]
+        for n, vista in enumerate(viste, start=1):
             svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="800" height="600" role="img" aria-label="{e(auto['titolo'])} — segnaposto">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -102,7 +113,8 @@ def scrivi_segnaposto():
 
 def testa(titolo, descrizione, css_prefix, attiva):
     voci = [("Home", "index.html"), ("Auto usate", "catalogo.html"),
-            ("Servizi", "index.html#servizi"), ("Contatti", "index.html#contatti")]
+            ("Noleggio", "noleggio.html"), ("Servizi", "servizi.html"),
+            ("Contatti", "index.html#contatti")]
     righe_nav = []
     for etichetta, href in voci:
         corrente = ' aria-current="page"' if etichetta == attiva else ''
@@ -118,7 +130,7 @@ def testa(titolo, descrizione, css_prefix, attiva):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{css_prefix}../plugin/concessionaria-auto/assets/auto.css">
+<link rel="stylesheet" href="{css_prefix}assets/auto.css">
 <style>
   .demo-note{{background:#fff8e1;border-bottom:1px solid #f0e0a8;color:#6b5a11;font-size:.85rem;text-align:center;padding:8px 16px}}
   .demo-note b{{color:#4a3d06}}
@@ -155,7 +167,7 @@ def coda(css_prefix):
     <div class="site-footer__grid">
       <div>
         <h4>{e(AZIENDA['nome'])}</h4>
-        <p>Vendita auto usate garantite a {e(AZIENDA['citta'])}. Permute, finanziamenti e assistenza dopo la vendita.</p>
+        <p>Vendita auto usate, officina meccanica, elettrauto, noleggio e auto per cerimonie a {e(AZIENDA['citta'])}.</p>
       </div>
       <div>
         <h4>Contatti</h4>
@@ -170,7 +182,8 @@ def coda(css_prefix):
       <div>
         <h4>Pagine</h4>
         <p><a href="{css_prefix}catalogo.html">Auto usate</a><br>
-        <a href="{css_prefix}index.html#servizi">Servizi</a><br>
+        <a href="{css_prefix}noleggio.html">Noleggio</a><br>
+        <a href="{css_prefix}servizi.html">Officina ed elettrauto</a><br>
         <a href="{css_prefix}index.html#contatti">Contatti</a></p>
       </div>
     </div>
@@ -181,7 +194,7 @@ def coda(css_prefix):
   </div>
 </footer>
 <a class="wa-float" href="{wa_link('Salve, vorrei informazioni sulle auto disponibili.')}" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">✆</a>
-<script src="{css_prefix}../plugin/concessionaria-auto/assets/auto.js"></script>
+<script src="{css_prefix}assets/auto.js"></script>
 </body>
 </html>
 """
@@ -290,38 +303,37 @@ def pagina_home():
     cards = "\n".join(card(a) for a in evidenza)
     disponibili = len([a for a in AUTO if a["stato"] != "venduta"])
 
-    servizi = [
-        ("🔧", "Garanzia 12 mesi", "Ogni auto è controllata in officina e consegnata con garanzia e tagliando fatto."),
-        ("🔁", "Ritiro e permuta", "Valutiamo la tua auto usata e la scaliamo dal prezzo di quella nuova."),
-        ("💳", "Finanziamento su misura", "Rate personalizzate con pratica approvata in giornata, anche senza anticipo."),
-        ("📄", "Passaggio di proprietà", "Ci occupiamo noi di tutte le pratiche: tu ritiri l'auto già intestata."),
-    ]
+    destinazione = {"vendita": "catalogo.html", "noleggio": "noleggio.html",
+                    "matrimoni": "noleggio.html#cerimonie"}
     blocchi = "\n".join(
-        f"""      <div class="card">
-        <div class="card__icon">{icona}</div>
-        <h3>{e(titolo)}</h3>
-        <p>{e(testo)}</p>
-      </div>""" for icona, titolo, testo in servizi
+        f"""      <a class="card" href="{destinazione.get(s['slug'], 'servizi.html#' + s['slug'])}" style="text-decoration:none">
+        <div class="card__icon">{s['icona']}</div>
+        <h3>{e(s['titolo'])}</h3>
+        <p>{e(s['sommario'])}</p>
+      </a>""" for s in SERVIZI
     )
+    cerimonie = [n for n in NOLEGGIO if n["categoria"] == "cerimonie"][:2]
+    card_cerimonie = "\n".join(card_noleggio(n) for n in cerimonie)
 
     return testa(
-        f"{AZIENDA['nome']} — auto usate garantite a {AZIENDA['citta']}",
-        f"Auto usate selezionate e garantite a {AZIENDA['citta']}: permute, finanziamenti e passaggio di proprietà inclusi.",
+        f"{AZIENDA['nome']} — auto usate, officina, elettrauto e noleggio a {AZIENDA['citta']}",
+        f"Vendita auto usate garantite, officina meccanica, elettrauto, noleggio e auto per matrimoni a {AZIENDA['citta']}.",
         "", "Home",
     ) + f"""
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Auto usate garantite · {e(AZIENDA['citta'])}</p>
-    <h1>L'auto giusta, controllata e pronta da guidare.</h1>
-    <p>Ogni veicolo passa da un controllo di 60 punti prima di entrare in salone. Permuta il tuo usato, scegli la rata e ritira l'auto già intestata.</p>
+    <p class="eyebrow">Vendita · Officina · Elettrauto · Noleggio · Cerimonie</p>
+    <h1>La tua auto, dall'acquisto al tagliando.</h1>
+    <p>Vendiamo auto usate garantite e le teniamo in forma nella nostra officina. E quando ti serve un'auto per qualche giorno — o per il giorno del matrimonio — ce l'abbiamo pronta.</p>
     <div class="hero__actions">
-      <a class="btn btn--primary" href="catalogo.html">Vedi le {disponibili} auto disponibili</a>
-      <a class="btn btn--wa" href="{wa_link('Salve, vorrei informazioni sulle auto disponibili.')}" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+      <a class="btn btn--primary" href="catalogo.html">Vedi le {disponibili} auto in vendita</a>
+      <a class="btn btn--ghost" href="servizi.html" style="color:#fff;border-color:rgba(255,255,255,.35)">Officina ed elettrauto</a>
+      <a class="btn btn--wa" href="{wa_link('Salve, vorrei informazioni.')}" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
     </div>
     <div class="hero__stats">
       <div><b>{disponibili}</b><span>auto pronte in salone</span></div>
-      <div><b>12 mesi</b><span>di garanzia inclusa</span></div>
-      <div><b>24h</b><span>per la risposta al finanziamento</span></div>
+      <div><b>12 mesi</b><span>di garanzia sulle auto vendute</span></div>
+      <div><b>da 29 €</b><span>al giorno per il noleggio</span></div>
     </div>
   </div>
 </section>
@@ -351,12 +363,29 @@ def pagina_home():
     <div class="section__head">
       <div>
         <p class="eyebrow">Servizi</p>
-        <h2>Non vendiamo solo l'auto</h2>
-        <p>Dalla valutazione dell'usato al passaggio di proprietà: un interlocutore unico.</p>
+        <h2>Tutto quello che facciamo</h2>
+        <p>Officina, elettrauto, vendita, noleggio e cerimonie: un interlocutore unico per la tua auto.</p>
       </div>
+      <a class="btn btn--ghost" href="servizi.html">Tutti i servizi</a>
     </div>
     <div class="cards">
 {blocchi}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cerimonie">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Matrimoni e cerimonie</p>
+        <h2>L'auto giusta per il giorno più importante</h2>
+        <p>Berline eleganti e auto d'epoca, con autista e addobbo floreale incluso.</p>
+      </div>
+      <a class="btn btn--ghost" href="noleggio.html#cerimonie">Vedi le auto per cerimonie</a>
+    </div>
+    <div class="auto-grid">
+{card_cerimonie}
     </div>
   </div>
 </section>
@@ -543,14 +572,215 @@ def pagina_scheda(auto):
 """ + coda("../")
 
 
+def card_noleggio(veicolo):
+    """Card di un veicolo a noleggio: il prezzo è a giornata o a cerimonia."""
+    badge = '<span class="badge badge--accent">Con autista</span>' if veicolo.get("autista") else ""
+    specs = [f"{veicolo['posti']} posti", veicolo["cambio"], veicolo["alimentazione"]]
+    if veicolo.get("bagagli") and veicolo["bagagli"] != "—":
+        specs.append(veicolo["bagagli"])
+    voci = "".join(f"<li>{e(s)}</li>" for s in specs)
+    messaggio = f"Salve, vorrei informazioni sul noleggio di: {veicolo['titolo']}."
+
+    return f"""      <article class="auto-card" data-noleggio data-categoria="{veicolo['categoria']}">
+        <div class="auto-card__media">
+          <img src="{PREFISSO_IMG}img/{veicolo['slug']}-1.svg" alt="{e(veicolo['titolo'])}" loading="lazy">
+          <div class="auto-card__badges">{badge}</div>
+        </div>
+        <div class="auto-card__body">
+          <h3 class="auto-card__title">{e(veicolo['titolo'])}</h3>
+          <p class="auto-card__sub">{e(CATEGORIE_NOLEGGIO.get(veicolo['categoria'], ''))}</p>
+          <ul class="specs">{voci}</ul>
+          <div class="auto-card__foot">
+            <p class="price">{euro(veicolo['prezzo'])}<small>{e(veicolo['prezzo_nota'])}</small></p>
+            <a class="btn btn--wa btn--sm" href="{wa_link(messaggio)}" target="_blank" rel="noopener">Disponibilità</a>
+          </div>
+        </div>
+      </article>"""
+
+
+def pagina_servizi():
+    sezioni = []
+    for i, s in enumerate(SERVIZI):
+        punti = "\n".join(f"          <li>{e(v)}</li>" for v in s["punti"])
+        sfondo = ' section--surface' if i % 2 else ''
+        sezioni.append(f"""<section class="section{sfondo}" id="{s['slug']}">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">{s['icona']} Servizio</p>
+        <h2>{e(s['titolo'])}</h2>
+        <p>{e(s['sommario'])}</p>
+      </div>
+      <a class="btn btn--wa" href="{wa_link(s['cta'])}" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+    </div>
+    <ul class="optionals">
+{punti}
+    </ul>
+  </div>
+</section>""")
+
+    elenco = "\n".join(sezioni)
+    indice = "\n".join(
+        f'      <a class="btn btn--ghost btn--sm" href="#{s["slug"]}">{s["icona"]} {e(s["titolo"])}</a>'
+        for s in SERVIZI
+    )
+
+    return testa(
+        f"Servizi — officina, elettrauto, noleggio | {AZIENDA['nome']}",
+        "Officina meccanica, elettrauto, vendita auto usate, noleggio e auto per matrimoni: tutti i servizi in un'unica officina.",
+        "", "Servizi",
+    ) + f"""
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">I nostri servizi</p>
+    <h1>Un'officina sola, per tutto quello che serve alla tua auto.</h1>
+    <p>Meccanica, elettrauto, vendita, noleggio e cerimonie: stesso interlocutore, stessa officina, nessun rimpallo.</p>
+    <div class="hero__actions">
+{indice}
+    </div>
+  </div>
+</section>
+
+{elenco}
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Prenota un intervento</h2>
+        <p>Dicci di che si tratta e ti diamo giorno, ora e preventivo. Se serve, ti diamo l'auto sostitutiva.</p>
+      </div>
+      <a class="btn btn--wa" href="{wa_link('Salve, vorrei prenotare un intervento in officina.')}" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+    </div>
+  </div>
+</section>
+""" + coda("")
+
+
+def pagina_noleggio():
+    brevi = [n for n in NOLEGGIO if n["categoria"] in ("breve", "furgoni")]
+    cerimonie = [n for n in NOLEGGIO if n["categoria"] == "cerimonie"]
+    griglia_brevi = "\n".join(card_noleggio(n) for n in brevi)
+    griglia_cerimonie = "\n".join(card_noleggio(n) for n in cerimonie)
+
+    incluso_cerimonie = next((n["incluso"] for n in cerimonie), [])
+    voci_incluse = "\n".join(f"          <li>{e(v)}</li>" for v in incluso_cerimonie)
+
+    passi = [
+        ("1", "Dicci le date", "Scrivici su WhatsApp giorni e tipo di auto che ti serve."),
+        ("2", "Ti confermiamo", "Verifichiamo la disponibilità e ti mandiamo il preventivo chiaro, tutto incluso."),
+        ("3", "Ritiri l'auto", "Patente, documento e carta: l'auto è pronta, pulita e con il pieno concordato."),
+    ]
+    blocchi_passi = "\n".join(
+        f"""      <div class="card">
+        <div class="card__icon">{n}</div>
+        <h3>{e(titolo)}</h3>
+        <p>{e(testo)}</p>
+      </div>""" for n, titolo, testo in passi
+    )
+
+    return testa(
+        f"Noleggio auto, furgoni e auto per matrimoni | {AZIENDA['nome']}",
+        f"Noleggio auto a giornata, furgoni 9 posti e auto con autista per matrimoni e cerimonie a {AZIENDA['citta']}.",
+        "", "Noleggio",
+    ) + f"""
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Noleggio</p>
+    <h1>Un'auto quando ti serve, anche solo per un giorno.</h1>
+    <p>Utilitarie, SUV e furgoni da 9 posti a tariffa giornaliera, auto sostitutiva mentre la tua è in officina, e auto con autista per matrimoni e cerimonie.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#flotta">Vedi la flotta</a>
+      <a class="btn btn--ghost" href="#cerimonie" style="color:#fff;border-color:rgba(255,255,255,.35)">Auto per matrimoni</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flotta">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Flotta</p>
+        <h2>Auto e furgoni a noleggio</h2>
+        <p>Prezzi indicativi al giorno, assicurazione inclusa. Per più giorni la tariffa scende.</p>
+      </div>
+    </div>
+    <div class="auto-grid">
+{griglia_brevi}
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Come funziona</p>
+        <h2>Tre passaggi, nessuna sorpresa</h2>
+      </div>
+    </div>
+    <div class="cards">
+{blocchi_passi}
+    </div>
+    <p style="color:var(--muted);margin-top:22px">Servono patente in corso di validità da almeno un anno, documento d'identità e carta di credito o debito intestata al conducente.</p>
+  </div>
+</section>
+
+<section class="section" id="cerimonie">
+  <div class="wrap">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow">Matrimoni e cerimonie</p>
+        <h2>Auto con autista per il giorno del sì</h2>
+        <p>Auto lucidata, addobbo floreale e autista in abito scuro. Sopralluogo del percorso prima del giorno.</p>
+      </div>
+      <a class="btn btn--wa" href="{wa_link('Salve, vorrei informazioni sull auto per il matrimonio.')}" target="_blank" rel="noopener">Chiedi la disponibilità</a>
+    </div>
+    <div class="auto-grid">
+{griglia_cerimonie}
+    </div>
+    <h3 style="margin-top:34px">Nel servizio è compreso</h3>
+    <ul class="optionals">
+{voci_incluse}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Hai già la data?</h2>
+        <p>Le auto per cerimonia si prenotano con anticipo: mandaci la data e te la blocchiamo.</p>
+      </div>
+      <a class="btn btn--wa" href="{wa_link('Salve, vorrei bloccare la data per l auto della cerimonia.')}" target="_blank" rel="noopener">Blocca la data</a>
+    </div>
+  </div>
+</section>
+""" + coda("")
+
+
+def copia_assets():
+    """I fogli di stile restano uno solo: qui vengono copiati dal plugin."""
+    origine = RADICE / "plugin" / "concessionaria-auto" / "assets"
+    destinazione = DEMO / "assets"
+    destinazione.mkdir(parents=True, exist_ok=True)
+    for nome in ("auto.css", "auto.js"):
+        (destinazione / nome).write_text((origine / nome).read_text(encoding="utf-8"), encoding="utf-8")
+
+
 def main():
+    copia_assets()
     scrivi_segnaposto()
     SCHEDE.mkdir(parents=True, exist_ok=True)
     (DEMO / "index.html").write_text(pagina_home(), encoding="utf-8")
     (DEMO / "catalogo.html").write_text(pagina_catalogo(), encoding="utf-8")
+    (DEMO / "servizi.html").write_text(pagina_servizi(), encoding="utf-8")
+    (DEMO / "noleggio.html").write_text(pagina_noleggio(), encoding="utf-8")
     for auto in AUTO:
         (SCHEDE / f"{auto['slug']}.html").write_text(pagina_scheda(auto), encoding="utf-8")
-    print(f"Demo generata: {len(AUTO)} schede + home + catalogo in {DEMO}")
+    print(f"Demo generata: {len(AUTO)} schede auto, {len(NOLEGGIO)} veicoli a noleggio, "
+          f"{len(SERVIZI)} servizi — home, catalogo, servizi, noleggio in {DEMO}")
 
 
 if __name__ == "__main__":

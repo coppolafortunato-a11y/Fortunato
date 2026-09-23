@@ -1,8 +1,10 @@
-# Sito auto — catalogo veicoli con gestione autonoma del cliente
+# Sito auto — vendita, officina, elettrauto, noleggio e cerimonie
 
-Kit completo per un sito di vendita auto usate: il concessionario inserisce e
-aggiorna i veicoli dalla **bacheca WordPress**, il sito mostra catalogo con
-filtri, schede veicolo e contatti diretti (WhatsApp, telefono, modulo).
+Kit completo per un'attività che vende auto usate **e** fa assistenza: officina
+meccanica, elettrauto, noleggio auto e furgoni, auto con autista per matrimoni.
+Il cliente inserisce e aggiorna veicoli e flotta dalla **bacheca WordPress**; il
+sito mostra catalogo con filtri, schede veicolo, pagine servizi e contatti
+diretti (WhatsApp, telefono, modulo).
 
 Due parti:
 
@@ -55,6 +57,9 @@ vere basta sostituire i file in `demo/img/` mantenendo i nomi
 |--------|---------------|
 | Auto usate | `[auto_catalogo]` — catalogo completo con i filtri |
 | Home | `[auto_ricerca]` (barra di ricerca) e `[auto_evidenza limite="3"]` (le occasioni) |
+| Noleggio | `[noleggio_catalogo]` — tutta la flotta |
+| Matrimoni e cerimonie | `[noleggio_catalogo categoria="cerimonie"]` |
+| Servizi (officina, elettrauto) | testo e foto normali: sono pagine WordPress, senza shortcode |
 
 Attributi utili:
 
@@ -69,6 +74,7 @@ l'elenco generale `tuosito.it/auto-usate`, quello per marca `tuosito.it/marca/fi
 
 ## 3. Cosa fa il plugin
 
+- Due sezioni in bacheca: **Auto** (vendita) e **Noleggio** (flotta e cerimonie).
 - Tipo di contenuto **Auto** con campi: prezzo, chilometri, immatricolazione,
   alimentazione, cambio, carrozzeria, potenza, cilindrata, porte, posti, colore,
   classe ambientale, garanzia, neopatentati, allestimento, dotazioni, stato.
@@ -81,7 +87,12 @@ l'elenco generale `tuosito.it/auto-usate`, quello per marca `tuosito.it/marca/fi
 - **Scheda veicolo**: galleria con lightbox, tabella dati, dotazioni, prezzo,
   pulsanti WhatsApp e telefono, modulo "richiedi informazioni" (e-mail alla concessionaria).
 - **Dati strutturati schema.org/Car**: Google legge prezzo, km e disponibilità.
+- **Noleggio**: veicoli con prezzo al giorno o a cerimonia, posti, cambio,
+  bagagli, km inclusi, età minima, «con autista» e cosa è incluso. Tre categorie:
+  noleggio giornaliero, furgoni e 9 posti, cerimonie e matrimoni.
 - Le richieste dal modulo hanno nonce e campo trappola anti-spam.
+- La demo in `demo/` è autonoma (CSS e JS copiati dentro): si può zippare e
+  inviare al cliente, o caricare su un indirizzo di prova.
 
 ---
 

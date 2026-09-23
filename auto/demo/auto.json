@@ -32,7 +32,14 @@
       "evidenza": true,
       "stato": "disponibile",
       "descrizione": "Unico proprietario, tagliandi certificati, gomme nuove. Perfetta come prima auto o come seconda auto per la città.",
-      "optional": ["Climatizzatore", "Radio Bluetooth", "Sensori di parcheggio", "Volante regolabile", "Fendinebbia", "Cerchi in lega 15\""]
+      "optional": [
+        "Climatizzatore",
+        "Radio Bluetooth",
+        "Sensori di parcheggio",
+        "Volante regolabile",
+        "Fendinebbia",
+        "Cerchi in lega 15\""
+      ]
     },
     {
       "slug": "volkswagen-golf-1-6-tdi-business",
@@ -56,7 +63,14 @@
       "evidenza": true,
       "stato": "disponibile",
       "descrizione": "Full optional, sempre tagliandata in officina autorizzata. Ideale per chi macina chilometri in autostrada.",
-      "optional": ["Navigatore", "Climatizzatore automatico bizona", "Cruise control adattivo", "Sensori anteriori e posteriori", "Apple CarPlay", "Fari LED"]
+      "optional": [
+        "Navigatore",
+        "Climatizzatore automatico bizona",
+        "Cruise control adattivo",
+        "Sensori anteriori e posteriori",
+        "Apple CarPlay",
+        "Fari LED"
+      ]
     },
     {
       "slug": "toyota-yaris-1-5-hybrid-active",
@@ -80,7 +94,14 @@
       "evidenza": true,
       "stato": "disponibile",
       "descrizione": "Ibrida full: in città viaggia in elettrico e consuma pochissimo. Batteria controllata, certificato ibrido aggiornato.",
-      "optional": ["Telecamera posteriore", "Climatizzatore automatico", "Cruise control", "Retrovisori elettrici", "Start&Stop", "Bluetooth"]
+      "optional": [
+        "Telecamera posteriore",
+        "Climatizzatore automatico",
+        "Cruise control",
+        "Retrovisori elettrici",
+        "Start&Stop",
+        "Bluetooth"
+      ]
     },
     {
       "slug": "jeep-renegade-1-6-mjt-limited",
@@ -104,7 +125,14 @@
       "evidenza": false,
       "stato": "disponibile",
       "descrizione": "Allestimento Limited con interni in pelle e cambio automatico doppia frizione. Un solo proprietario.",
-      "optional": ["Interni in pelle", "Navigatore Uconnect", "Cerchi in lega 18\"", "Sedili riscaldati", "Telecamera posteriore", "Keyless entry"]
+      "optional": [
+        "Interni in pelle",
+        "Navigatore Uconnect",
+        "Cerchi in lega 18\"",
+        "Sedili riscaldati",
+        "Telecamera posteriore",
+        "Keyless entry"
+      ]
     },
     {
       "slug": "renault-clio-1-5-dci-zen",
@@ -128,7 +156,13 @@
       "evidenza": false,
       "stato": "disponibile",
       "descrizione": "Consumi bassissimi, ottima per chi fa tanti chilometri spendendo poco. Cinghia distribuzione sostituita.",
-      "optional": ["Climatizzatore", "Cruise control", "Sensori di parcheggio", "Radio touch", "Volante multifunzione"]
+      "optional": [
+        "Climatizzatore",
+        "Cruise control",
+        "Sensori di parcheggio",
+        "Radio touch",
+        "Volante multifunzione"
+      ]
     },
     {
       "slug": "audi-a3-sportback-2-0-tdi-s-line",
@@ -152,7 +186,14 @@
       "evidenza": false,
       "stato": "disponibile",
       "descrizione": "Allestimento S line completo, interni sportivi, cambio S tronic. Tagliandi Audi documentati.",
-      "optional": ["Pacchetto S line", "Navigatore MMI", "Fari Xenon", "Cerchi in lega 18\"", "Climatizzatore bizona", "Sensori di parcheggio"]
+      "optional": [
+        "Pacchetto S line",
+        "Navigatore MMI",
+        "Fari Xenon",
+        "Cerchi in lega 18\"",
+        "Climatizzatore bizona",
+        "Sensori di parcheggio"
+      ]
     },
     {
       "slug": "lancia-ypsilon-1-2-gpl-gold",
@@ -176,7 +217,12 @@
       "evidenza": false,
       "stato": "disponibile",
       "descrizione": "Impianto GPL di serie con bombola collaudata. Costi di gestione bassissimi.",
-      "optional": ["Climatizzatore", "Radio Bluetooth", "Specchietti elettrici", "Chiusura centralizzata"]
+      "optional": [
+        "Climatizzatore",
+        "Radio Bluetooth",
+        "Specchietti elettrici",
+        "Chiusura centralizzata"
+      ]
     },
     {
       "slug": "smart-fortwo-eq-passion",
@@ -200,7 +246,13 @@
       "evidenza": false,
       "stato": "prenotata",
       "descrizione": "Elettrica, perfetta per il centro città: zero bollo per cinque anni e accesso libero alle ZTL.",
-      "optional": ["Cavo di ricarica", "Climatizzatore", "Telecamera posteriore", "Cerchi in lega", "Navigatore"]
+      "optional": [
+        "Cavo di ricarica",
+        "Climatizzatore",
+        "Telecamera posteriore",
+        "Cerchi in lega",
+        "Navigatore"
+      ]
     },
     {
       "slug": "ford-fiesta-1-1-titanium",
@@ -224,7 +276,203 @@
       "evidenza": false,
       "stato": "venduta",
       "descrizione": "Venduta. La lasciamo online come esempio: in bacheca basta cambiare lo stato in «Venduta» e il sito la mostra così.",
-      "optional": ["Climatizzatore automatico", "Sensori di parcheggio", "Apple CarPlay", "Cerchi in lega 16\""]
+      "optional": [
+        "Climatizzatore automatico",
+        "Sensori di parcheggio",
+        "Apple CarPlay",
+        "Cerchi in lega 16\""
+      ]
+    }
+  ],
+  "servizi": [
+    {
+      "slug": "officina",
+      "icona": "🔧",
+      "titolo": "Officina meccanica",
+      "sommario": "Tagliandi, riparazioni e manutenzione su tutte le marche, con ricambi originali o equivalenti a scelta del cliente.",
+      "punti": [
+        "Tagliando completo e cambio olio",
+        "Freni, frizione e distribuzione",
+        "Sospensioni, ammortizzatori e sterzo",
+        "Diagnosi computerizzata",
+        "Preparazione e accompagnamento alla revisione",
+        "Cambio e riparazione gomme"
+      ],
+      "cta": "Salve, vorrei prenotare un intervento in officina."
+    },
+    {
+      "slug": "elettrauto",
+      "icona": "⚡",
+      "titolo": "Elettrauto",
+      "sommario": "Impianti elettrici, batterie e climatizzazione: risolviamo i guasti che la diagnosi generica non trova.",
+      "punti": [
+        "Batterie: prova, ricarica e sostituzione",
+        "Ricerca guasti sull'impianto elettrico",
+        "Ricarica e sanificazione del climatizzatore",
+        "Diagnosi e riprogrammazione centraline",
+        "Autoradio, telecamere e sensori di parcheggio",
+        "Antifurti e ricarica veicoli ibridi"
+      ],
+      "cta": "Salve, ho un problema elettrico sull'auto, posso portarla?"
+    },
+    {
+      "slug": "vendita",
+      "icona": "🚗",
+      "titolo": "Vendita auto usate",
+      "sommario": "Auto selezionate e controllate in officina prima della consegna, con garanzia e pratiche incluse.",
+      "punti": [
+        "Garanzia 12 mesi su tutte le auto",
+        "Permuta del tuo usato",
+        "Finanziamento con risposta in 24 ore",
+        "Passaggio di proprietà gestito da noi",
+        "Tagliando fatto prima della consegna"
+      ],
+      "cta": "Salve, vorrei informazioni su un'auto in vendita."
+    },
+    {
+      "slug": "noleggio",
+      "icona": "🔑",
+      "titolo": "Noleggio auto e furgoni",
+      "sommario": "A giornata, a settimana o come auto sostitutiva mentre la tua è in officina.",
+      "punti": [
+        "Utilitarie, SUV e furgoni",
+        "Auto sostitutiva durante le riparazioni",
+        "Tariffe giornaliere, weekend e settimanali",
+        "Assicurazione inclusa",
+        "Consegna e ritiro concordati"
+      ],
+      "cta": "Salve, vorrei noleggiare un'auto. Vi scrivo per le date."
+    },
+    {
+      "slug": "matrimoni",
+      "icona": "💍",
+      "titolo": "Auto per matrimoni e cerimonie",
+      "sommario": "Berline e auto d'epoca curate nei dettagli, con autista, per il giorno che conta.",
+      "punti": [
+        "Auto lucidata e addobbata per la cerimonia",
+        "Autista in abito scuro",
+        "Sopralluogo del percorso prima del giorno",
+        "Disponibilità anche per foto e video",
+        "Pacchetto per due auto (sposi e invitati)"
+      ],
+      "cta": "Salve, vorrei informazioni sull'auto per il matrimonio."
+    }
+  ],
+  "noleggio": [
+    {
+      "slug": "noleggio-fiat-panda",
+      "titolo": "Fiat Panda",
+      "categoria": "breve",
+      "prezzo": 29,
+      "prezzo_nota": "al giorno",
+      "posti": 5,
+      "porte": 5,
+      "cambio": "Manuale",
+      "alimentazione": "Benzina",
+      "bagagli": "2 borse",
+      "autista": false,
+      "incluso": [
+        "Assicurazione RCA",
+        "Km inclusi 150 al giorno",
+        "Assistenza stradale"
+      ],
+      "descrizione": "Comoda in città e facile da parcheggiare. La più richiesta come auto sostitutiva."
+    },
+    {
+      "slug": "noleggio-citroen-c3",
+      "titolo": "Citroën C3",
+      "categoria": "breve",
+      "prezzo": 35,
+      "prezzo_nota": "al giorno",
+      "posti": 5,
+      "porte": 5,
+      "cambio": "Manuale",
+      "alimentazione": "Diesel",
+      "bagagli": "2 valigie",
+      "autista": false,
+      "incluso": [
+        "Assicurazione RCA",
+        "Km inclusi 200 al giorno",
+        "Climatizzatore"
+      ],
+      "descrizione": "Consumi bassi, adatta anche ai viaggi fuori città."
+    },
+    {
+      "slug": "noleggio-fiat-500x",
+      "titolo": "Fiat 500X",
+      "categoria": "breve",
+      "prezzo": 49,
+      "prezzo_nota": "al giorno",
+      "posti": 5,
+      "porte": 5,
+      "cambio": "Automatico",
+      "alimentazione": "Benzina",
+      "bagagli": "3 valigie",
+      "autista": false,
+      "incluso": [
+        "Assicurazione RCA e furto",
+        "Km inclusi 200 al giorno",
+        "Navigatore"
+      ],
+      "descrizione": "SUV compatto con cambio automatico, comodo per famiglia e bagagli."
+    },
+    {
+      "slug": "noleggio-fiat-ducato-9-posti",
+      "titolo": "Fiat Ducato 9 posti",
+      "categoria": "furgoni",
+      "prezzo": 79,
+      "prezzo_nota": "al giorno",
+      "posti": 9,
+      "porte": 4,
+      "cambio": "Manuale",
+      "alimentazione": "Diesel",
+      "bagagli": "Vano bagagli ampio",
+      "autista": false,
+      "incluso": [
+        "Assicurazione RCA",
+        "Km inclusi 200 al giorno",
+        "Patente B sufficiente"
+      ],
+      "descrizione": "Per gite, trasferte di squadra o trasloco. Disponibile anche in versione furgone chiuso."
+    },
+    {
+      "slug": "noleggio-mercedes-classe-e",
+      "titolo": "Mercedes Classe E nera",
+      "categoria": "cerimonie",
+      "prezzo": 250,
+      "prezzo_nota": "a cerimonia",
+      "posti": 4,
+      "porte": 4,
+      "cambio": "Automatico",
+      "alimentazione": "Diesel",
+      "bagagli": "—",
+      "autista": true,
+      "incluso": [
+        "Autista in abito scuro",
+        "Addobbo floreale sul cofano",
+        "Lucidatura prima del servizio",
+        "Percorso concordato con gli sposi"
+      ],
+      "descrizione": "Berlina elegante, la scelta classica per gli sposi. Interni in pelle chiara."
+    },
+    {
+      "slug": "noleggio-fiat-500-depoca",
+      "titolo": "Fiat 500 d'epoca bianca",
+      "categoria": "cerimonie",
+      "prezzo": 180,
+      "prezzo_nota": "a cerimonia",
+      "posti": 2,
+      "porte": 2,
+      "cambio": "Manuale",
+      "alimentazione": "Benzina",
+      "bagagli": "—",
+      "autista": true,
+      "incluso": [
+        "Autista",
+        "Addobbo con nastri e fiori",
+        "Ideale per il servizio fotografico"
+      ],
+      "descrizione": "L'auto d'epoca che finisce in tutte le foto. Perfetta per l'arrivo della sposa."
     }
   ]
 }

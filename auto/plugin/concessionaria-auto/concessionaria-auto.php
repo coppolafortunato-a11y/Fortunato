@@ -25,6 +25,7 @@ require_once CAUTO_DIR . 'inc/impostazioni.php';
 require_once CAUTO_DIR . 'inc/shortcodes.php';
 require_once CAUTO_DIR . 'inc/scheda.php';
 require_once CAUTO_DIR . 'inc/contatti.php';
+require_once CAUTO_DIR . 'inc/noleggio.php';
 require_once CAUTO_DIR . 'inc/seo.php';
 
 /**

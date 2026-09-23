@@ -162,7 +162,7 @@ add_action( 'save_post_auto', 'cauto_salva' );
  */
 function cauto_admin_assets( $hook ) {
 	$schermata = get_current_screen();
-	if ( ! $schermata || 'auto' !== $schermata->post_type || ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
+	if ( ! $schermata || ! in_array( $schermata->post_type, array( 'auto', 'noleggio' ), true ) || ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
 		return;
 	}
 

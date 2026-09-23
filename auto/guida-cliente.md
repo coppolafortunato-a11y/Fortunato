@@ -54,3 +54,26 @@ l'auto compare tra le occasioni in prima pagina.
 
 Il menu **Auto → Impostazioni** contiene i recapiti usati da tutto il sito
 (numero WhatsApp, telefono, e-mail): cambiali solo se cambiano davvero.
+
+
+---
+
+# Veicoli a noleggio e auto per cerimonie
+
+Sono in un menu a parte: **Noleggio → Aggiungi veicolo**.
+
+1. **Titolo**: il veicolo come deve comparire, es. `Fiat Panda` o
+   `Mercedes Classe E nera`.
+2. **Dati del noleggio**:
+   - **Tipo di noleggio**: giornaliero, furgoni e 9 posti, oppure cerimonie e matrimoni.
+   - **Prezzo** e **unità di prezzo** (`al giorno`, `a cerimonia`, `a weekend`).
+   - Posti, porte, cambio, alimentazione, bagagli, km inclusi, età minima.
+   - **Disponibile con autista**: spunta per le auto da cerimonia.
+   - **Cosa è incluso**: una voce per riga (assicurazione, addobbo floreale,
+     secondo guidatore…).
+3. Foto: immagine in evidenza + galleria, come per le auto in vendita.
+4. **Pubblica**.
+
+Se un veicolo è fermo o già prenotato per un periodo, spunta
+**Temporaneamente non disponibile**: resta online con l'etichetta, così nessuno
+lo chiede per sbaglio.
