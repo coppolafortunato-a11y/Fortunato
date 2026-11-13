@@ -6,7 +6,10 @@ ma la home pubblica usa solo i dati indicati come "pubblici".
 
 ## Anagrafica (pubblici)
 - Ragione sociale: Idea Marketing di Coppola Fortunato
-- Indirizzo: Via Campoli 34, 89134 Reggio Calabria (RC)
+- Indirizzo (sede legale): Via Campoli 34, 89134 Reggio Calabria (RC)
+  — usato in footer, Contatti, JSON-LD LocalBusiness
+- Sede operativa: Via Ravagnese Superiore 200, Reggio Calabria — mostrata
+  solo nella topbar dal 2026-08-10, **da confermare** (CAP mancante)
 - Telefono / WhatsApp: 320 611 6711  (+39 320 611 6711)
 - Email: coppola.fortunato@gmail.com
 - P.IVA: 02520960804
@@ -36,15 +39,13 @@ Vanno usati con l'etichetta giusta, non sotto categorie fisiche.
 - Pilone by Rare — prenotazioni raddoppiate
 - Barber Srl — +50% prenotazioni online
 
-## Stato home (aggiornato 2026-08-03)
-- "Ci hanno scelto": 4 clienti reali + 2 slot liberi ("Il tuo logo").
-- "Risultati recenti": 3 casi reali con numeri veri (Pilone, Barber, Torrefazione).
-- "Perché sceglierci": 3 punti di forza reali (interlocutore unico, dal 2011,
-  preventivo 24h) al posto delle recensioni finte.
+## Stato home (aggiornato 2026-11-13, dai sorgenti nel repo)
+- Hero commerciale + WhatsApp; numeri 1.000+ clienti / 1.300+ lavori
+  (stessi numeri in Chi Siamo).
+- "Ci hanno scelto": 4 clienti reali in testo + 2 slot "Il tuo logo".
+- "Risultati recenti": casi reali con numeri veri, collegati a /lavori/.
+- "Perché sceglierci": punti di forza reali (interlocutore unico, dal 2011,
+  preventivo in 24 ore) al posto delle recensioni finte.
 
-## Migliorie future (opzionali, quando disponibili)
-- Loghi immagine dei clienti al posto del testo nella riga "Ci hanno scelto".
-- Foto reali dei lavori (insegne, ledwall, allestimenti).
-- Recensioni Google/WhatsApp vere (nome, ruolo, azienda): allora si puo'
-  rimettere una sezione testimonianze con virgolette reali.
-- Orari di apertura e link social (Facebook, Instagram).
+## Cosa manca
+Le informazioni ancora da ricevere sono raccolte in `DA-FORNIRE.md`.
