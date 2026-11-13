@@ -22,10 +22,15 @@
  * Listino d'acquisto in €/kg. Le chiavi sono le parole cercate nella
  * risposta "che tipo di metalli?" (maiuscole/minuscole non contano).
  * Metti le parole più specifiche prima (es. "acciaio inox" prima di "acciaio").
+ *
+ * Un metallo può avere due prezzi: { prezzo: …, pocaQuantita: … }.
+ * "pocaQuantita" vale quando i kg sono sotto SOGLIA_BUONA_QUANTITA_KG.
+ * Rame: 9 €/kg su buone quantità, 8–8,5 su quantità basse (listino Marco Russo,
+ * 31/10/2026; per la stima usiamo 8, il valore prudente).
  * Le voci diverse da rame e ottone sono indicative: aggiornale coi tuoi prezzi.
  */
 const LISTINO = {
-  'rame': 9.0,
+  'rame': { prezzo: 9.0, pocaQuantita: 8.0 },
   'ottone': 4.0,
   'alluminio': 1.2,   // da verificare
   'acciaio inox': 1.0, // da verificare
@@ -34,6 +39,16 @@ const LISTINO = {
   'zinco': 1.8,       // da verificare
   'ferro': 0.25,      // da verificare
 };
+
+/** Sotto questi kg si usa il prezzo "pocaQuantita" (se il metallo ce l'ha). */
+const SOGLIA_BUONA_QUANTITA_KG = 300;
+
+/**
+ * Sotto questi kg l'avviso segnala che il ritiro conviene solo se in zona
+ * (regole ritiri di Marco Russo, 05/11/2026: minimo indicativo 200/300 kg,
+ * 100 kg solo se di zona). Metti 0 per non avere la segnalazione.
+ */
+const SOGLIA_RITIRO_KG = 200;
 
 /** Altri nomi con cui la gente scrive i metalli → voce del listino. */
 const SINONIMI = {
@@ -228,7 +243,7 @@ function trovaMetalli_(testo) {
   function aggiungi(voce) {
     if (LISTINO[voce] === undefined) return;
     if (trovati.some(function (m) { return m.nome === voce; })) return;
-    trovati.push({ nome: voce, prezzo: LISTINO[voce] });
+    trovati.push({ nome: voce, voce: LISTINO[voce] });
   }
   Object.keys(LISTINO).forEach(function (voce) {
     const p = ' ' + pulisci_(voce) + ' ';
@@ -244,16 +259,25 @@ function euro_(n) {
   return '€ ' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+/** Prezzo €/kg di una voce del listino per una certa quantità. */
+function prezzo_(voce, kg) {
+  if (typeof voce === 'number') return voce;
+  if (voce.pocaQuantita !== undefined && kg !== null && kg < SOGLIA_BUONA_QUANTITA_KG) return voce.pocaQuantita;
+  return voce.prezzo;
+}
+
 /** Testo della stima, es. "€ 1.800 (200 kg × 9 €/kg rame)". */
 function stimaValore_(c) {
   const kg = interpretaKg_(c.kg);
   const metalli = trovaMetalli_(c.metallo);
   if (!metalli.length) return 'non disponibile (metallo non nel listino)';
   if (kg === null) return 'non disponibile (kg non indicati)';
+  metalli.forEach(function (m) { m.prezzo = prezzo_(m.voce, kg); });
   const kgTxt = String(Math.round(kg * 10) / 10).replace('.', ',') + ' kg';
   if (metalli.length === 1) {
     const m = metalli[0];
-    return euro_(kg * m.prezzo) + ' (' + kgTxt + ' × ' + String(m.prezzo).replace('.', ',') + ' €/kg ' + m.nome + ')';
+    const poca = typeof m.voce === 'object' && m.prezzo !== m.voce.prezzo ? ', prezzo per poca quantità' : '';
+    return euro_(kg * m.prezzo) + ' (' + kgTxt + ' × ' + String(m.prezzo).replace('.', ',') + ' €/kg ' + m.nome + poca + ')';
   }
   const prezzi = metalli.map(function (m) { return m.prezzo; });
   const min = Math.min.apply(null, prezzi), max = Math.max.apply(null, prezzi);
@@ -278,9 +302,16 @@ function numeroInternazionale_(tel) {
   return PREFISSO_PAESE + n;
 }
 
+/** Avviso se la quantità è sotto la soglia di ritiro (o '' se va bene). */
+function notaRitiro_(c) {
+  const kg = interpretaKg_(c.kg);
+  if (!SOGLIA_RITIRO_KG || kg === null || kg >= SOGLIA_RITIRO_KG) return '';
+  return '⚠️ Sotto ' + SOGLIA_RITIRO_KG + ' kg: ritiro solo se in zona o con altri ritiri vicini';
+}
+
 /** Il testo dell'avviso, pronto da copiare su WhatsApp. */
 function testoAvviso_(c) {
-  return [
+  const righe = [
     '🔔 NUOVO CONTATTO MS METALLI',
     '👤 ' + (c.nome || '—'),
     '📍 ' + (c.citta || '—'),
@@ -289,7 +320,10 @@ function testoAvviso_(c) {
     '⚖️ ' + (c.kg ? c.kg + (/kg/i.test(c.kg) ? '' : ' kg') : '—'),
     '💶 Valore stimato: ' + stimaValore_(c),
     '📞 ' + (c.telefono || '—'),
-  ].join('\n');
+  ];
+  const nota = notaRitiro_(c);
+  if (nota) righe.push(nota);
+  return righe.join('\n');
 }
 
 function linkWhatsApp_(c) {
@@ -313,7 +347,7 @@ function inviaAvviso_(c, prova) {
   const condividi = 'https://wa.me/?text=' + encodeURIComponent(testo);
   const oggetto = (prova ? '[PROVA] ' : '') + '🔔 MS Metalli: ' + (c.nome || 'nuovo contatto') +
     ' — ' + (c.metallo || 'metallo ?') + (c.kg ? ', ' + c.kg + (/kg/i.test(c.kg) ? '' : ' kg') : '') +
-    ' — ' + stimaValore_(c).split(' (')[0];
+    ' — ' + stimaValore_(c).split(' (')[0] + (notaRitiro_(c) ? ' — ⚠️ sotto soglia ritiro' : '');
 
   const corpoTesto = testo + '\n\n' +
     (wa ? 'Scrivi al venditore su WhatsApp: ' + wa + '\n' : '') +
@@ -349,6 +383,6 @@ if (typeof module !== 'undefined') {
   module.exports = {
     leggiContatto_: leggiContatto_, eContattoDiProva_: eContattoDiProva_, eRigaVuota_: eRigaVuota_,
     interpretaKg_: interpretaKg_, trovaMetalli_: trovaMetalli_, stimaValore_: stimaValore_,
-    testoAvviso_: testoAvviso_, linkWhatsApp_: linkWhatsApp_, numeroInternazionale_: numeroInternazionale_,
+    testoAvviso_: testoAvviso_, notaRitiro_: notaRitiro_, linkWhatsApp_: linkWhatsApp_, numeroInternazionale_: numeroInternazionale_,
   };
 }

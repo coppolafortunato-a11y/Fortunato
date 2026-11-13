@@ -55,18 +55,27 @@ Tutto quello che si cambia sta in cima al file, nella sezione **IMPOSTAZIONI**.
 
 ```js
 const LISTINO = {
-  'rame': 9.0,
+  'rame': { prezzo: 9.0, pocaQuantita: 8.0 },
   'ottone': 4.0,
   'alluminio': 1.2,   // da verificare
   ...
 };
 ```
 
-Rame e ottone sono i prezzi che ci hai dato; gli altri sono **indicativi**,
+Un metallo può avere un solo prezzo (`'ottone': 4.0`) oppure due:
+`prezzo` per le buone quantità e `pocaQuantita` sotto
+`SOGLIA_BUONA_QUANTITA_KG` (300 kg). Il rame segue il listino di Marco Russo
+(31/10): 9 €/kg su buone quantità, 8–8,5 su quantità basse; per la stima
+usiamo 8, il valore prudente. Ottone 4 €/kg; gli altri sono **indicativi**,
 aggiornali coi tuoi. Lo script cerca queste parole nella risposta "che tipo di
 metalli?". Se il venditore scrive più metalli (es. "rame e ottone") l'avviso
 mostra una forbice ("tra € 6.000 e € 13.500"). Se il metallo non è nel listino
 o mancano i kg, scrive "stima non disponibile" ma l'avviso parte comunque.
+
+**`SOGLIA_RITIRO_KG`** (200 kg) — sotto questa quantità l'avviso aggiunge
+"⚠️ Sotto 200 kg: ritiro solo se in zona o con altri ritiri vicini" (regole
+ritiri di Marco Russo del 05/11) e lo segnala anche nell'oggetto dell'email.
+Metti `0` per toglierla.
 
 **`SINONIMI`** — altri modi in cui la gente scrive un metallo (es. "allumino"
 → alluminio).
