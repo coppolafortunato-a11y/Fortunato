@@ -1,139 +1,130 @@
-# Sito ideamkt.it — kit di pubblicazione homepage
+# Sito ideamkt.it — sorgenti e kit di pubblicazione
 
-Materiale e automazioni per pubblicare la nuova homepage su **ideamkt.it**
-(WordPress, tema Twenty Twenty-Five) ed aggiungere barra contatti + bottone WhatsApp.
+Sorgenti, builder e script per il sito **ideamkt.it** (WordPress, tema
+Twenty Twenty-Five) di Idea Marketing di Coppola Fortunato — Reggio Calabria.
 
-Titolare: Idea Marketing di Coppola Fortunato — Reggio Calabria.
+Il repository contiene i **sorgenti** delle pagine e l'automazione, non i
+segreti. Lo storico di cosa è stato pubblicato e quando è in
+[`DEPLOY-LOG.md`](DEPLOY-LOG.md); i dati aziendali in [`azienda.md`](azienda.md);
+le informazioni ancora da ricevere da Fortunato in [`DA-FORNIRE.md`](DA-FORNIRE.md).
 
-> **Nota importante.** La pubblicazione tocca il sito **live** e richiede
-> credenziali segrete che, per sicurezza, **non stanno in questo repository**.
-> Gli script qui sotto vanno lanciati da te (o da chi ha le credenziali) dopo
-> aver creato un file `.env` locale. Il repo contiene i sorgenti e l'automazione,
-> non i segreti.
+> **Regola d'oro.** Tutto ciò che sta qui tocca il sito **live** solo quando
+> uno script viene lanciato con le credenziali in `.env`. Nessuna modifica al
+> sito va fatta senza l'ok esplicito di Fortunato, e sempre con backup prima.
+
+## Mappa del sito
+
+| Pagina | Slug | ID WP | Sorgente nel repo | Builder |
+|--------|------|-------|-------------------|---------|
+| Home | `/` | 7 | `home-wordpress.html` | a mano (+ `deploy-home.sh`) |
+| Servizi | `/servizi/` | 10 | `wp-pages/servizi.html` | `scripts/build-pages.py` |
+| LEDWALL & Digital Signage | `/ledwall/` | 12 | `wp-pages/ledwall.html` | `scripts/build-pages.py` |
+| Chi Siamo | `/chi-siamo/` | 14 | `wp-pages/chi-siamo.html` | `scripts/build-pages.py` |
+| Contatti (form) | `/contatti/` | 16 | `wp-pages/contatti.html` | `scripts/build-pages.py` |
+| Preventivi LEDWALL (calcolatore + configuratore) | `/preventivi-ledwall/` | 27 | `wp-pages/preventivi-ledwall.html` | `scripts/build-pages.py` |
+| I nostri lavori (portfolio) | `/lavori/` | 92 | `wp-pages/lavori.html` | `scripts/build-lavori-gallery.py` |
+| Grafica & Branding | `/grafica-branding/` | — | `wp-pages/grafica-branding.html` | `scripts/build-pages.py` |
+| Stampa digitale | `/stampa-digitale-reggio-calabria/` | — | `wp-pages/stampa-digitale-reggio-calabria.html` | `scripts/build-pages.py` |
+| Insegne | `/insegne-reggio-calabria/` | — | `wp-pages/insegne-reggio-calabria.html` | `scripts/build-pages.py` |
+| Siti web | `/siti-web-reggio-calabria/` | — | `wp-pages/siti-web-reggio-calabria.html` | `scripts/build-pages.py` |
+| Social media | `/social-media-reggio-calabria/` | — | `wp-pages/social-media-reggio-calabria.html` | `scripts/build-pages.py` |
+| Abbigliamento e gadget | `/abbigliamento-personalizzato/` | — | `wp-pages/abbigliamento-personalizzato.html` | `scripts/build-pages.py` |
+| Privacy Policy | `/privacy-policy/` | — | *non nel repo* | creata dal pannello |
+| Cookie Policy | `/cookie-policy/` | — | *non nel repo* | creata dal pannello |
+
+Parti comuni del tema (template part):
+
+| Parte | Sorgente | Note |
+|-------|----------|------|
+| Header (topbar, logo, menu, CTA solo su LEDWALL, WhatsApp) | `scripts/build-header.py` | lavora su un JSON scaricato dal sito (`/tmp/hdr.json`) |
+| Footer a colonne + JSON-LD LocalBusiness | `wp-pages/footer.html` | sfondo `#0f1d3f`, link Privacy/Cookie |
+| Alternativa via FTP a topbar + WhatsApp | `mu-plugins/ideamkt-extras.php` | **non attivo**: oggi topbar e WhatsApp vivono nell'header |
+
+Gli ID delle 6 pagine servizio e delle pagine legali non sono stati
+registrati: si leggono con `./scripts/check-permalinks.sh`.
 
 ## Contenuto del repository
 
-| File | A cosa serve |
-|------|--------------|
-| `home-wordpress.html` | Sorgente della nuova homepage (pagina ID 7). |
-| `mu-plugins/ideamkt-extras.php` | Mu-plugin: barra contatti in alto + bottone WhatsApp fisso. |
-| `scripts/deploy-home.sh` | Obiettivo 1 — backup, prepara e pubblica la home sulla pagina 7. |
-| `scripts/upload-mu-plugin.sh` | Obiettivo 2 — carica il mu-plugin via FTP. |
-| `scripts/check-permalinks.sh` | Obiettivo 3.4 — elenca gli slug reali per verificare gli href. |
+| Percorso | A cosa serve |
+|----------|--------------|
+| `home-wordpress.html` | Sorgente della homepage (pagina ID 7). |
+| `home-da-incollare.html` | Stessa home già avvolta nel blocco `wp:html` con fix larghezza, da incollare a mano nell'editor. **Generato**: `python3 scripts/build-home-paste.py`. |
+| `wp-pages/*.html` | Sorgenti generati delle pagine interne e del footer. |
+| `wp-pages/lavori-*.json` | Dati del portfolio: progetti, manifest immagini, mappa id Media Library. |
+| `assets/` | Logo, favicon, foto hero; `assets/lavori/` foto reali ottimizzate del portfolio. |
+| `mu-plugins/ideamkt-extras.php` | Mu-plugin alternativo (topbar + WhatsApp). |
+| `scripts/deploy-home.sh` | Backup + pubblicazione della home sulla pagina 7. |
+| `scripts/build-pages.py` | Genera le pagine interne e le 6 pagine servizio. |
+| `scripts/build-header.py` | Ricostruisce l'header del tema (topbar, CTA, WhatsApp). |
+| `scripts/build-lavori-gallery.py` | Genera `/lavori/` con gallerie sfogliabili (versione attuale). |
+| `scripts/build-lavori-final.py`, `build-lavori-preview.py` | Versioni precedenti del builder portfolio / anteprima locale. |
+| `scripts/optimize-*.py` | Ottimizzano le foto (max 1400px, qualità 82). |
+| `scripts/upload-media.sh` | Carica le foto nella Media Library con title/alt SEO. |
+| `scripts/upload-mu-plugin.sh` | Carica il mu-plugin via FTP. |
+| `scripts/check-permalinks.sh` | Elenca slug e ID reali per verificare i link. |
 | `.env.example` | Modello di configurazione da copiare in `.env`. |
+
+> Nota: `build-pages.py`, `build-header.py` e i builder `build-lavori-*.py` leggono e scrivono file di
+> lavoro in percorsi temporanei della sessione in cui sono stati usati
+> (es. `/tmp/hdr.json`, `page-27.html`, `lavori_projects.json` nello scratchpad). Prima di rilanciarli, scaricare dal
+> sito il contenuto attuale corrispondente e adattare i percorsi.
+
+## Stile
+
+Palette: navy `#1E2235` · oro `#C9A961` · carta `#f8f7f4` · separatori `#e0ddd6`
+· footer `#0f1d3f` · WhatsApp `#25D366`.
+Font: titoli **Archivo**, testo **Inter** (Google Fonts). Nessun corsivo
+(regola globale su `#ik-home` / `#ik-page`), nessuna emoji.
+
+Contenuti: solo dati e lavori reali. Niente foto stock spacciate per lavori,
+niente recensioni o numeri inventati (vedi `azienda.md`).
 
 ## 1. Prerequisiti — credenziali
 
 Crea una **Password applicazione** dedicata (non usare la password di login):
 
 WordPress → Utenti → Profilo → in fondo *"Password applicazione"* → nome
-`claude-code` → **Aggiungi**. Copia subito la stringa (`abcd EFGH ijkl …`),
-non si rivede più.
-
-Poi:
+`claude-code` → **Aggiungi**. Copia subito la stringa, non si rivede più.
 
 ```bash
 cp .env.example .env
 # apri .env e incolla WP_USER, WP_APP_PASSWORD, WP_BASE (e FTP_* se li hai)
-```
-
-Il file `.env` è già in `.gitignore`: non finirà mai su git.
-
-Verifica che l'autenticazione funzioni:
-
-```bash
 set -a; source .env; set +a
 curl -s -u "$WP_USER:$WP_APP_PASSWORD" "$WP_BASE/wp-json/wp/v2/users/me?context=edit" | head -c 300
 ```
 
-Deve rispondere con l'utente e le sue capability. Se risponde
-`rest_not_logged_in`, l'hosting sta togliendo l'header `Authorization`:
-aggiungi in `.htaccess` alla radice del sito la riga
+Se risponde `rest_not_logged_in`, l'hosting toglie l'header `Authorization`:
+aggiungi in `.htaccess` alla radice del sito
+`SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1` e riprova.
 
-```
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-```
-
-e riprova.
-
-## 2. Obiettivo 1 — pubblicare la homepage (pagina ID 7)
+## 2. Pubblicare la homepage (pagina ID 7)
 
 ```bash
-./scripts/deploy-home.sh
-```
-
-Lo script, in un colpo solo:
-
-1. verifica l'autenticazione;
-2. fa il **backup** del contenuto attuale in `backup-home-AAAAMMGG-HHMM.json`
-   (si ferma se il backup è più corto di 1000 byte);
-3. prepara il payload — avvolge tutto nel blocco `<!-- wp:html -->` di Gutenberg
-   e aggiunge il fix a larghezza piena alla regola `#ik-home{…}`;
-4. pubblica sulla pagina 7;
-5. verifica che `ik-home` sia presente nel contenuto salvato.
-
-Opzioni:
-
-```bash
+./scripts/deploy-home.sh             # backup, payload, pubblicazione, verifica
 ./scripts/deploy-home.sh --dry-run   # prepara payload.json senza inviare nulla
 FULLWIDTH=0 ./scripts/deploy-home.sh # se il tema gestisce già la larghezza piena
 ```
 
-Poi apri `https://ideamkt.it` in incognito e controlla l'hero navy con il titolo
-*"Diamo forma alla tua immagine"*.
+Dopo ogni modifica a `home-wordpress.html`, rigenera anche la copia da
+incollare: `python3 scripts/build-home-paste.py`.
 
-## 3. Obiettivo 2 — barra contatti e bottone WhatsApp
+## 3. Pubblicare le altre pagine
 
-Il file `mu-plugins/ideamkt-extras.php` va in `public_html/wp-content/mu-plugins/`.
-I mu-plugin si attivano da soli.
+Le pagine interne si pubblicano con un POST su `/wp-json/wp/v2/pages/<ID>`
+con il contenuto del file in `wp-pages/` (già avvolto in `wp:html`), **sempre
+dopo aver salvato il backup** del contenuto attuale
+(`GET /wp-json/wp/v2/pages/<ID>?context=edit` → `backup-<pagina>-AAAAMMGG.json`).
+Header e footer sono template part del tema (`/wp-json/wp/v2/template-parts`).
 
-Con FTP configurato in `.env`:
+## 4. Rollback
 
-```bash
-./scripts/upload-mu-plugin.sh
-```
+POST sullo stesso endpoint con il `content` del backup corrispondente. I
+backup non sono versionati (vedi `.gitignore`): conservarli in locale.
 
-Senza FTP: carica `mu-plugins/ideamkt-extras.php` a mano da cPanel → Gestione file
-nella cartella `public_html/wp-content/mu-plugins/`.
+## Vincoli
 
-Verifica: barra navy in alto col numero **320 611 6711** e tondo verde WhatsApp
-in basso a destra su ogni pagina.
-
-## 4. Obiettivo 3 — pulizie (manuali, dal pannello WordPress)
-
-Queste vanno fatte a mano perché toccano tema, menu e footer:
-
-1. **Titolo pagina Home** — nel tema a blocchi il titolo "Home" compare sopra
-   l'hero. Toglilo: Aspetto → Editor → Modelli → Pagina, rimuovi il blocco
-   *Titolo articolo* (o crea un modello senza titolo da assegnare alla Home).
-2. **Menu** — rimuovi le voci "Sample Page" e la "Home" duplicata, poi cestina
-   la pagina Sample Page.
-3. **Footer** — sostituisci "My WordPress Blog" con i dati veri:
-   Idea Marketing di Coppola Fortunato, Via Campoli 34, 89134 Reggio Calabria,
-   tel 320 611 6711, P.IVA 02520960804 — sfondo `#0f1d3f`.
-4. **Permalink** — già verificati contro il sito live il 2026-08-03:
-
-   | href nella home | slug reale | esito |
-   |-----------------|------------|-------|
-   | `/contatti/` | contatti (ID 16) | ok |
-   | `/servizi/` | servizi (ID 10) | ok |
-   | `/ledwall/` | ledwall (ID 12) | corretto (era `/ledwall-digital-signage/`, andava in 404) |
-   | `/preventivi-ledwall/` | preventivi-ledwall (ID 27) | ok |
-
-   Per ricontrollarli in futuro:
-
-   ```bash
-   ./scripts/check-permalinks.sh
-   ```
-
-## Vincoli (dal briefing)
-
-- Non toccare pagine diverse dalla ID 7 senza chiedere.
-- Fare sempre il backup prima di sovrascrivere (lo script lo fa).
+- Nessuna modifica al sito live senza l'ok esplicito di Fortunato, una
+  modifica alla volta.
+- Backup sempre prima di sovrascrivere.
 - Non committare `.env`, `payload.json` o i backup (già in `.gitignore`).
 - La password applicazione si revoca da Utenti → Profilo a lavoro finito.
-
-## Palette e font
-
-Navy `#1E2235` · oro `#C9A961` · carta `#f8f7f4` · separatori `#e0ddd6` ·
-footer `#0f1d3f`. Titoli in Instrument Serif, testo in Manrope.

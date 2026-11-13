@@ -95,3 +95,35 @@ tool). Da aggiungere in cima ai LEDwall appena disponibili in versione più legg
 
 Builder pagina: `scripts/build-lavori-final.py` → `wp-pages/lavori.html`.
 Anteprima: `scripts/build-lavori-preview.py`. Backup pre-modifica salvato prima del POST.
+
+## Riepilogo modifiche 2026-08-07 → 2026-08-10 (ricostruito dallo storico git)
+
+Queste modifiche risultano pubblicate nelle sessioni del 7 e del 10 agosto
+ma non erano ancora riportate in questo log.
+
+| Data | Area | Cosa |
+|------|------|------|
+| 08-07 | Home | Hero commerciale "Tutto quello che serve per far vedere la tua azienda", 7 servizi con CTA, barra azioni mobile (Chiama / WhatsApp / Preventivo), messaggio WhatsApp contestuale per pagina |
+| 08-07 | Menu | Home, Servizi (a tendina con 7 voci), LEDWALL, I nostri lavori, Chi Siamo, Contatti |
+| 08-07 | SEO | 6 pagine servizio dedicate con FAQ + schema FAQPage: `/grafica-branding/`, `/stampa-digitale-reggio-calabria/`, `/insegne-reggio-calabria/`, `/siti-web-reggio-calabria/`, `/social-media-reggio-calabria/`, `/abbigliamento-personalizzato/` |
+| 08-07 | Footer | Footer a colonne su `#0f1d3f`, JSON-LD LocalBusiness, link a Privacy e Cookie |
+| 08-07 | Legale | Pagine Privacy Policy e Cookie Policy create come **base da far verificare** (sorgente non salvato nel repo) |
+| 08-07 | Contatti | Form con campo "Di cosa hai bisogno?" e azienda facoltativa |
+| 08-07 | LEDWALL | Configuratore guidato (dove / misure / formula) → preventivo su WhatsApp |
+| 08-10 | Font | Passaggio a Archivo (titoli) + Inter (testo) su tutto il sito, corsivi eliminati |
+| 08-10 | Header | Topbar con sede "Via Ravagnese Superiore 200" (**da confermare**); CTA "Richiedi un preventivo" in header solo su LEDWALL |
+| 08-10 | Numeri | Home e Chi Siamo: 1.000+ clienti, 1.300+ lavori (contati dagli archivi Drive Lavori + Fabio, ~1.150 clienti distinti) |
+| 08-10 | Home | Tolto il pulsante "Richiedi un preventivo" dall'hero, resta WhatsApp |
+| 08-10 | Lavori | Gallerie sfogliabili per cliente: 21 lavori, 53 foto. LEDwall: Officina Gastronomica (8), Belle Gomme (8), Il Trenino del Capo (1). Menu multi-pagina: Windy Hill (8), Bad Bull (9), Kairos (4). Stampa: 5 lavori |
+
+## Allineamento repository — 2026-11-13
+
+Nessuna modifica al sito live. Solo documentazione e sorgenti nel repo:
+
+- `README.md` riscritto: mappa completa delle pagine, builder, font attuali
+  (Archivo + Inter al posto di Instrument Serif + Manrope).
+- `home-da-incollare.html` rigenerato da `home-wordpress.html` (era fermo alla
+  versione del 3 agosto: font vecchi e numeri 200+/500+). Nuovo script
+  `scripts/build-home-paste.py` per tenerlo allineato.
+- `azienda.md` aggiornato con sede operativa e stato attuale.
+- Nuovo `DA-FORNIRE.md`: informazioni che solo Fortunato può dare.
