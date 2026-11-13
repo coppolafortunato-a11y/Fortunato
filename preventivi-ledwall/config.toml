@@ -1,0 +1,86 @@
+# Parametri del calcolo preventivi LEDwall.
+# Tutti gli importi sono in euro, IVA esclusa.
+# Modifica questo file per cambiare listino, sconto e rate: il codice non va toccato.
+
+[listino]
+# Arrotondamento del prezzo pieno: "euro" (all'euro intero) oppure "centesimi".
+arrotondamento = "euro"
+
+# Un prodotto ha "prezzo_mq" (prezzo al metro quadro, si moltiplica per la superficie)
+# oppure "prezzo_fisso" (prezzo a pezzo, le misure vengono ignorate).
+[listino.prodotti.indoor_p25]
+nome = "Indoor P2.5"
+prezzo_mq = 1800
+
+[listino.prodotti.indoor_p4]
+nome = "Indoor P4"
+prezzo_mq = 900
+
+[listino.prodotti.outdoor_p4]
+nome = "Outdoor P4"
+prezzo_mq = 1100
+
+[listino.prodotti.outdoor_p6]
+nome = "Outdoor P6"
+prezzo_mq = 750
+
+[listino.prodotti.outdoor_p10]
+nome = "Outdoor P10"
+prezzo_mq = 500
+
+[listino.prodotti.totem]
+nome = "Totem 55\""
+prezzo_fisso = 2800
+
+[sconto_fine_anno]
+# Percentuale di sconto applicata al prezzo pieno (che sul preventivo va barrato).
+percentuale = 15
+# Periodo di validità, estremi inclusi (AAAA-MM-GG). Fuori da questo periodo
+# il prezzo scontato coincide con il prezzo pieno.
+valido_dal = 2026-11-01
+valido_al = 2026-12-31
+# Arrotondamento del prezzo scontato: "euro" oppure "centesimi".
+arrotondamento = "euro"
+
+# Piani di pagamento. Ogni piano calcola numero di rate e importo della rata
+# partendo dal prezzo scontato (o dal prezzo pieno se lo sconto non è attivo).
+#
+# - Senza "coefficiente": rate a interessi zero. L'importo è prezzo / numero_rate
+#   arrotondato al centesimo; l'ultima rata assorbe i centesimi di differenza,
+#   così la somma delle rate è esattamente il prezzo.
+# - Con "coefficiente": canone di noleggio operativo (es. Grenke).
+#   Canone = prezzo x coefficiente, arrotondato all'euro per eccesso,
+#   come nel calcolatore del sito.
+
+[[rate]]
+codice = "rate3"
+nome = "3 rate senza interessi"
+numero_rate = 3
+
+[[rate]]
+codice = "rate6"
+nome = "6 rate senza interessi"
+numero_rate = 6
+
+[[rate]]
+codice = "rate12"
+nome = "12 rate senza interessi"
+numero_rate = 12
+
+[[rate]]
+codice = "grenke36"
+nome = "Noleggio Grenke 36 mesi"
+numero_rate = 36
+coefficiente = 0.0335
+
+[[rate]]
+codice = "grenke48"
+nome = "Noleggio Grenke 48 mesi"
+numero_rate = 48
+coefficiente = 0.0268
+
+[[rate]]
+codice = "grenke60"
+nome = "Noleggio Grenke 60 mesi"
+numero_rate = 60
+coefficiente = 0.0228
